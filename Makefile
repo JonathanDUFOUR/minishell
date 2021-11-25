@@ -6,68 +6,68 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/11/25 12:05:19 by jodufour         ###   ########.fr        #
+#    Updated: 2021/11/25 14:55:59 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC			=	clang -c -o
-LINK		=	clang -o
-MKDIR		=	mkdir -p
-RM			=	rm -rf
+CC				=	clang -c -o
+LINK			=	clang -o
+MKDIR			=	mkdir -p
+RM				=	rm -rf
 
 ######################################
 #             EXECUTABLE             #
 ######################################
-NAME		=	minishell
+NAME			=	minishell
 
 #######################################
 #             DIRECTORIES             #
 #######################################
-SRC_DIR		=	srcs/
-OBJ_DIR		=	objs/
-INC_DIR		=	
-PRV_DIR		=	private/
+SRC_DIR			=	srcs/
+OBJ_DIR			=	objs/
+INC_DIR			=	
+PRV_DIR			=	private/
 
-FT_IO_DIR	=	libft_io/
+FT_IO_DIR		=	libft_io/
 FT_IO_INC_DIR	=	include/
 FT_IO_INC_DIR	:=	${addprefix ${FT_IO_DIR}, ${FT_IO_INC_DIR}}
 
 #######################################
 #              LIBRARIES              #
 #######################################
-FT_IO_A		=	libft_io.a
-FT_IO_A		:=	${addprefix ${FT_IO_DIR}, ${FT_IO_A}}
+FT_IO_A			=	libft_io.a
+FT_IO_A			:=	${addprefix ${FT_IO_DIR}, ${FT_IO_A}}
 
 ######################################
 #            SOURCE FILES            #
 ######################################
-SRC			=	\
-				main.c
+SRC				=	\
+					main.c
 
 ######################################
 #            OBJECT FILES            #
 ######################################
-OBJ			=	${SRC:.c=.o}
-OBJ			:=	${addprefix ${OBJ_DIR}, ${OBJ}}
+OBJ				=	${SRC:.c=.o}
+OBJ				:=	${addprefix ${OBJ_DIR}, ${OBJ}}
 
-DEP			=	${OBJ:.o=.d}
+DEP				=	${OBJ:.o=.d}
 
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS		=	-Wall -Wextra -Werror
-CFLAGS		+=	-MMD -MP
-CFLAGS		+=	-I${PRV_DIR}
-CFLAGS		+=	-I${FT_IO_INC_DIR}
+CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			+=	-MMD -MP
+CFLAGS			+=	-I${PRV_DIR}
+CFLAGS			+=	-I${FT_IO_INC_DIR}
 
-LDFLAGS		=	-lreadline
-LDFLAGS		+=	-L${FT_IO_DIR} -lft_io
+LDFLAGS			=	-lreadline
+LDFLAGS			+=	-L${FT_IO_DIR} -lft_io
 
 ifeq (${DEBUG}, 1)
-	CFLAGS	+=	-g
+	CFLAGS		+=	-g
 endif
 
 #######################################
