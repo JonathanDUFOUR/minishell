@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/15 19:43:29 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/15 19:43:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <unistd.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+int	ft_putchar_fd(char const c, int const fd)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
-
-#endif
+	return ((int)write(fd, &c, 1));
+}

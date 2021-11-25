@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_atolli.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/09/25 22:37:00 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/14 23:32:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_io.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+t_llint	ft_atolli(char const *str)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	t_llint	output;
+	int		sign;
 
-#endif
+	output = 0;
+	sign = 1;
+	while (ft_isspace(*str))
+		++str;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			sign ^= ~1u;
+	while (ft_isdigit(*str))
+		output = output * 10 + *str++ - '0';
+	return (output * sign);
+}

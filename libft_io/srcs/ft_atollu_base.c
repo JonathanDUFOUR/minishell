@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_atollu_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/19 19:52:16 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/20 07:54:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_io.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+t_lluint	ft_atollu_base(char const *str, char const *base)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	t_lluint	output;
+	int			base_len;
 
-#endif
+	if (!ft_isvalid(base))
+		return (0);
+	output = 0;
+	base_len = ft_indexof(0, base);
+	while (ft_isspace(*str))
+		++str;
+	if (*str == '+')
+		++str;
+	while (*str && ft_indexof(*str, base) != -1)
+		output = output * base_len + ft_indexof(*str++, base);
+	return (output);
+}

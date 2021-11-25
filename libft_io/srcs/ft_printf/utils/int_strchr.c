@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   int_strchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/10 15:22:44 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/15 23:59:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stddef.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*int_strchr(char const *str, char const c)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
-
-#endif
+	while (*str && *str != c)
+		++str;
+	if (*str == c)
+		return ((char *)str);
+	return (NULL);
+}

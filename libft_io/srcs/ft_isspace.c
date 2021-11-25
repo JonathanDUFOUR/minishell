@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:23:06 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/14 23:22:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdbool.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+bool	ft_isspace(int const c)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
-
-#endif
+	return ((c >= 9 && c <= 13) || c == 32);
+}

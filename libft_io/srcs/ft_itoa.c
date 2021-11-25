@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:23:21 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/20 08:45:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdlib.h>
+#include "ft_io.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*ft_itoa(int nb)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	char	*output;
+	t_uint	len;
 
-#endif
+	len = ft_intlen(nb);
+	output = malloc((len + 1) * sizeof(char));
+	if (!output)
+		return (NULL);
+	output += len;
+	*output-- = 0;
+	if (!nb)
+		*output-- = '0';
+	else
+	{
+		while (nb && len--)
+		{
+			*output-- = (-(nb < 0) | 1) * (nb % 10) + '0';
+			nb /= 10;
+		}
+		if (len)
+			*output-- = '-';
+	}
+	return (++output);
+}

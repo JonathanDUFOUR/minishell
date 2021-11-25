@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   manage_text.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/05/09 06:37:06 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/20 07:22:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <unistd.h>
+#include "internal.h"
+#include "type/t_ctx.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*manage_text(char const *format, t_ctx *const ctx)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	char	*next;
 
-#endif
+	next = int_strchr(format, '%');
+	if (next)
+		ctx->fwidth = (int)(next - format);
+	else
+		ctx->fwidth = int_strlen(format);
+	write(1, format, (size_t)ctx->fwidth);
+	ctx->len += ctx->fwidth;
+	format += ctx->fwidth;
+	return ((char *)format);
+}

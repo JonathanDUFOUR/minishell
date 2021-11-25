@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_hhintlen_base.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/14 23:17:57 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/21 17:07:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "type/t_int.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+t_uint	ft_hhintlen_base(t_hhint nb, t_uint const base_len)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	t_hhuint	abs;
+	t_uint		len;
 
-#endif
+	if (base_len < 2)
+		return (0);
+	abs = nb;
+	len = 1;
+	if (nb < 0)
+	{
+		abs = -nb;
+		++len;
+	}
+	while (abs / base_len)
+	{
+		++len;
+		abs /= base_len;
+	}
+	return (len);
+}

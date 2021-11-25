@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   int_wclen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/06/05 15:00:34 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/15 23:59:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <wchar.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+int	int_wclen(wchar_t const wc)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	int	len;
 
-#endif
+	len = 1;
+	if (wc >= 0x80 && ++len && wc >= 0x800 && ++len && wc >= 0x10000)
+		++len;
+	return (len);
+}

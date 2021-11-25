@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_file_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:22:12 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/15 23:52:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <sys/types.h>
+#include <sys/stat.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+ssize_t	ft_file_size(char const *file)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	struct stat	st;
 
-#endif
+	if (!file)
+		return (-1);
+	if (!stat(file, &st))
+		return (st.st_size);
+	else
+		return (-1);
+}

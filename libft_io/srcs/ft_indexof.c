@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_indexof.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:22:26 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/21 13:04:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <unistd.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+ssize_t	ft_indexof(char const c, char const *str)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	ssize_t	i;
 
-#endif
+	i = 0;
+	while (str[i] && c != str[i])
+		i++;
+	if (str[i] == c)
+		return (i);
+	else
+		return (-1);
+}

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   e_style.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/10 15:13:13 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/10 15:13:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef E_STYLE_H
+# define E_STYLE_H
 
-typedef struct s_token	t_token;
-
-struct	s_token
+enum	e_style
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
+	LOWER,
+	UPPER
 };
 
 #endif

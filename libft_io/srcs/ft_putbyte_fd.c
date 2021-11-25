@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_putbyte_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/25 03:01:12 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/15 00:22:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdint.h>
+#include <unistd.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+int	ft_putbyte_fd(uint8_t const byte, int const fd)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	int	i;
+	int	ret;
 
-#endif
+	if (write(fd, "", 0) == -1)
+		return (-1);
+	i = 8;
+	ret = 0;
+	while (--i >= 0)
+	{
+		if ((byte >> i) & 1)
+			ret += write(fd, "1", 1);
+		else
+			ret += write(fd, "0", 1);
+	}
+	return (ret);
+}

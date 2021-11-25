@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   t_fd_lst.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/07/06 12:48:32 by jodufour          #+#    #+#             */
+/*   Updated: 2021/07/22 01:47:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef T_FD_LST_H
+# define T_FD_LST_H
 
-typedef struct s_token	t_token;
+# include <string.h>
+# include "t_fd.h"
 
-struct	s_token
+typedef struct s_fd_lst	t_fd_lst;
+
+struct s_fd_lst
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
+	t_fd	*head;
+	t_fd	*tail;
+	size_t	size;
 };
 
 #endif

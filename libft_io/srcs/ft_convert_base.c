@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:21:58 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/20 09:11:23 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_io.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*ft_convert_base(char const *nb,
+	char const *base_from, char const *base_to)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
-
-#endif
+	if (!ft_isvalid(base_from) || !ft_isvalid(base_to))
+		return (NULL);
+	return (ft_itoa_base(ft_atoi_base(nb, base_from), base_to));
+}

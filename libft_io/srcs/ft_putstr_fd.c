@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/25 19:14:18 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/15 01:22:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <unistd.h>
+#include <string.h>
 
-typedef struct s_token	t_token;
-
-struct	s_token
+static size_t	ft_strlen(char const *str)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	register char const	*ptr = str;
 
-#endif
+	while (*ptr)
+		++ptr;
+	return (ptr - str);
+}
+
+int	ft_putstr_fd(char const *str, int const fd)
+{
+	if (!str)
+		return (-1);
+	return ((int)write(fd, str, ft_strlen(str)));
+}

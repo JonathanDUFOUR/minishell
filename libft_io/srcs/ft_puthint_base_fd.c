@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_puthint_base_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/15 15:33:07 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/21 02:27:41 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdlib.h>
+#include "ft_io.h"
 
-typedef struct s_token	t_token;
-
-struct	s_token
+int	ft_puthint_base_fd(t_hint const nb, char const *base, int const fd)
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+	int		ret;
+	char	*buff;
+	t_uint	base_len;
 
-#endif
+	if (write(fd, "", 0) == -1 || !ft_isvalid(base))
+		return (-1);
+	buff = ft_hitoa_base(nb, base);
+	if (!buff)
+		return (-1);
+	base_len = (t_uint)ft_indexof(0, base);
+	ret = (int)write(1, buff, ft_hintlen_base(nb, base_len));
+	free(buff);
+	return (ret);
+}

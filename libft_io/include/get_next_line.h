@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/04/20 23:52:53 by jodufour          #+#    #+#             */
+/*   Updated: 2021/07/22 01:52:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-typedef struct s_token	t_token;
+# include <stdbool.h>
 
-struct	s_token
-{
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+# ifndef GNL_BUFF_SIZE
+#  define GNL_BUFF_SIZE 4096
+# endif
+
+int		get_next_line(int fd, char **line);
+bool	gnl_fd_del(int fd);
+void	gnl_clear(void);
 
 #endif

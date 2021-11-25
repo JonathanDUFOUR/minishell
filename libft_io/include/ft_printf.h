@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
+/*   Updated: 2021/07/30 03:10:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-typedef struct s_token	t_token;
-
-struct	s_token
-{
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+int	ft_printf(char const *format, ...);
 
 #endif

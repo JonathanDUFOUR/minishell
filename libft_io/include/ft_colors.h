@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_colors.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/08 11:05:29 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/18 23:27:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef FT_COLORS_H
+# define FT_COLORS_H
 
-typedef struct s_token	t_token;
-
-struct	s_token
-{
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
-};
+# define BLACK		"\e[30m"
+# define RED		"\e[31m"
+# define GREEN		"\e[32m"
+# define YELLOW		"\e[33m"
+# define BLUE		"\e[34m"
+# define MAGENTA	"\e[35m"
+# define CYAN		"\e[36m"
+# define WHITE		"\e[37m"
+# define RESET		"\e[0m"
 
 #endif

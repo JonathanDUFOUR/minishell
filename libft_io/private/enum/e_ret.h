@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   e_ret.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Created: 2021/11/10 15:13:39 by jodufour          #+#    #+#             */
+/*   Updated: 2021/11/10 15:14:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef E_RET_H
+# define E_RET_H
 
-typedef struct s_token	t_token;
-
-struct	s_token
+enum	e_ret
 {
-	char const	*str;
-	int const	type;
-	t_token		*next;
-	t_token		*prev;
+	SUCCESS,
+	WRITE_ERR,
+	MALLOC_ERR
 };
 
 #endif
