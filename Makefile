@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
+#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/11/30 11:36:10 by jodufour         ###   ########.fr        #
+#    Updated: 2021/11/30 18:19:12 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,11 @@ FT_IO_A			:=	${addprefix ${FT_IO_DIR}, ${FT_IO_A}}
 #            SOURCE FILES            #
 ######################################
 SRC				=	\
+					${addprefix builtins/,  \
+        				${addprefix pwd/,   \
+         					core.c         	\
+        				}                   \
+      				} 						\
 					main.c
 
 ######################################

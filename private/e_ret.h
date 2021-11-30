@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_ret.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:23:57 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/24 14:24:19 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:25:00 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 enum	e_ret
 {
-	SUCCESS
+	SUCCESS,
+	FAILURE
 };
 
 #endif
