@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/11/25 14:55:59 by jodufour         ###   ########.fr        #
+#    Updated: 2021/11/30 11:36:10 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,10 @@ ifeq (${DEBUG}, 1)
 	CFLAGS		+=	-g
 endif
 
+VG_OPT			=	--suppressions=ignoreliberror
+VG_OPT			+=	--leak-check=full
+VG_OPT			+=	--show-leak-kinds=all
+
 #######################################
 #                RULES                #
 #######################################
@@ -101,4 +105,7 @@ fre:	fclean all
 -include /home/jodufour/Templates/mk_files/coffee.mk
 -include /home/jodufour/Templates/mk_files/norm.mk
 
-.PHONY:	all clean fclean re fre
+valgrind:
+	valgrind ${VG_OPT} ./minishell
+
+.PHONY:	all clean fclean re fre valgrind

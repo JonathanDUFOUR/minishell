@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:31 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/11/30 11:25:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ struct	s_token
 	int const	type;
 	t_token		*next;
 	t_token		*prev;
+};
+
+enum	e_type
+{
+	WORD,
+	FILE,
+	OPTION,
+	COMMAND,
+	ARGUMENT,
+	OPERATOR,
+	PIPE,
 };
 
 #endif
