@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 18:55:17 by jdufour           #+#    #+#             */
+/*   Updated: 2021/07/21 02:47:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <string.h>
+#include <stdint.h>
+#include <stdlib.h>
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+void	*ft_memchr(const void *addr, int c, size_t n)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	size_t	i;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	i = 0;
+	while (i < n && (*(uint8_t *)addr) != (uint8_t)c)
+	{
+		++i;
+		++addr;
+	}
+	if (i < n && (*(uint8_t *)addr) == (uint8_t)c)
+		return ((uint8_t *)addr);
+	else
+		return (NULL);
+}

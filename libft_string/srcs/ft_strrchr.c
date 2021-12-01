@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 21:55:54 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 02:31:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_string.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*ft_strrchr(char const *str, int const c)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	char const	*ptr = str;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	ptr += ft_strlen(str);
+	while (ptr >= str && *ptr != (char const)c)
+		--ptr;
+	if (*ptr == (char const)c)
+		return ((char *)ptr);
+	return (NULL);
+}

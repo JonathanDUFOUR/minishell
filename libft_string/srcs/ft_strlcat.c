@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 02:28:28 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 01:12:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_string.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+size_t	ft_strlcat(char *dst, char const *src, size_t size)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	size_t	i;
+	size_t	dst_len;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	i = 0;
+	while (i < size)
+	{
+		if (!dst[i])
+		{
+			i = 0;
+			dst_len = ft_strlen(dst);
+			while (src[i] && i < (size - dst_len) - 1)
+			{
+				dst[dst_len + i] = src[i];
+				++i;
+			}
+			dst[dst_len + i] = 0;
+			return (dst_len + ft_strlen(src));
+		}
+		++i;
+	}
+	return (size + ft_strlen(src));
+}

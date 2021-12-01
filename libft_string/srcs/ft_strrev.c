@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/26 22:41:53 by jdufour           #+#    #+#             */
+/*   Updated: 2021/12/01 17:59:03 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_string.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+static void	char_swap(char *c1, char *c2)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	*c1 ^= *c2;
+	*c2 ^= *c1;
+	*c1 ^= *c2;
+}
 
-t_token	*token_new(char const *str, t_type const type);
+char	*ft_strrev(char *str)
+{
+	char	*ptr0;
+	char	*ptr1;
 
-#endif
+	if (!*str || !*(str + 1))
+		return (str);
+	ptr0 = str;
+	ptr1 = str + ft_strlen(str) - 1;
+	while (ptr0 < ptr1)
+		char_swap(ptr0++, ptr1--);
+	return (str);
+}

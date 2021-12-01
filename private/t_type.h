@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   t_type.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/01 14:22:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#ifndef T_TYPE_H
+# define T_TYPE_H
 
-# include "t_type.h"
+typedef enum e_type	t_type;
 
-typedef struct s_token	t_token;
-
-struct	s_token
+enum	e_type
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
+	T_WORD,
+	T_FILE,
+	T_OPTION,
+	T_COMMAND,
+	T_ARGUMENT,
+	T_OPERATOR,
+	T_PIPE
 };
-
-t_token	*token_new(char const *str, t_type const type);
 
 #endif

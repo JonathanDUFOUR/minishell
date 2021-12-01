@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strncasecmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/27 02:38:36 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 01:17:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <string.h>
+#include "type/t_int.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+static int	ft_toupper(int c)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	return (c - (c >= 'a' && c <= 'z') * ('a' - 'A'));
+}
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+int	ft_strncasecmp(char const *s0, char const *s1, size_t n)
+{
+	while (n && s0 && s1 && *s0 && ft_toupper(*s0) == ft_toupper(*s1))
+	{
+		++s0;
+		++s1;
+		--n;
+	}
+	return (*(t_hhuint *)s0 - *(t_hhuint *)s1);
+}

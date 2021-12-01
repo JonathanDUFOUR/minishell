@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/26 19:29:08 by jdufour           #+#    #+#             */
+/*   Updated: 2021/12/01 17:57:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdlib.h>
+#include "ft_string.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*ft_strmapi(char const *str, char (*f)(t_uint, char))
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	char	*map;
+	char	*ptr;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	map = malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!map)
+		return (NULL);
+	ptr = map;
+	while (*str)
+	{
+		*ptr = (*f)((ptr - map), *str++);
+		++ptr;
+	}
+	*ptr = 0;
+	return (map);
+}

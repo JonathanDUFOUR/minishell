@@ -1,43 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   token_lst_add_back.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:21:44 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 19:41:01 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/01 21:46:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
-#include "ft_mem.h"
-#include "minishell.h"
 #include "t_token_lst.h"
-#include "e_ret.h"
 
-int	main(void)
+int	token_lst_add_back(char const *str, t_type const type)
 {
-	char		*line;
-	t_token_lst	tokens;
+	t_token *const	node = token_new(str, type);
 
-	ft_bzero(&tokens, sizeof(tokens));
-	line = readline(PROMPT);
-	while (line)
-	{
-		if (token_lst_get(&tokens, line))
-		{
-			token_lst_clear(&tokens);
-			ft_memdel(&line);
-			perror("Error");
-			exit(EXIT_FAILURE);
-		}
-		token_lst_clear(&tokens);
-		ft_memdel(&line);
-		line = readline(PROMPT);
-	}
-	printf("Bye Bye\n");
+	if (!node)
+		return (EXIT_FAILURE);
+	
 	return (EXIT_SUCCESS);
 }

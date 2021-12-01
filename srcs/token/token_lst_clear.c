@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   token_lst_clear.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 14:01:16 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/01 19:21:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdlib.h>
+#include "t_token_lst.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+void	token_lst_clear(t_token_lst *const tokens)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	t_token	*next;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	while (tokens->size)
+	{
+		next = tokens->head->next;
+		token_lst_delone(tokens, tokens->head);
+		tokens->head = next;
+		--tokens->size;
+	}
+	tokens->tail = NULL;
+}

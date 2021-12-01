@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 22:11:06 by jdufour           #+#    #+#             */
+/*   Updated: 2021/12/01 17:58:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include "ft_string.h"
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+char	*ft_strnstr(char const *str, const char *tf, size_t n)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	len = ft_strlen(str);
+	n = (len < n) * len + (len >= n) * n;
+	len = ft_strlen(tf);
+	i = 0;
+	while ((i + len) <= n)
+	{
+		j = 0;
+		while (tf[j] && (str[j] == tf[j]))
+			++j;
+		if (!tf[j])
+			return ((char *)str);
+		++str;
+		++i;
+	}
+	return (NULL);
+}

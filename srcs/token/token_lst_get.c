@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   token_lst_get.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:21:44 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/01 19:40:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* DEBUG */
 #include <stdio.h>
+
 #include <stdlib.h>
-#include <readline/readline.h>
-#include "ft_mem.h"
-#include "minishell.h"
 #include "t_token_lst.h"
-#include "e_ret.h"
 
-int	main(void)
+static char const	*skip_token(char const *line)
 {
-	char		*line;
-	t_token_lst	tokens;
+	while (*line && *line != ' ')
+		++line;
+	while (*line && *line == ' ')
+		++line;
+	return (line);
+}
 
-	ft_bzero(&tokens, sizeof(tokens));
-	line = readline(PROMPT);
-	while (line)
+int	token_lst_get(t_token_lst *const tokens, char const *line)
+{
+	while (*line)
 	{
-		if (token_lst_get(&tokens, line))
-		{
-			token_lst_clear(&tokens);
-			ft_memdel(&line);
-			perror("Error");
-			exit(EXIT_FAILURE);
-		}
-		token_lst_clear(&tokens);
-		ft_memdel(&line);
-		line = readline(PROMPT);
+		printf("line: |%s|\n", line);
+		line = skip_token(line);
 	}
-	printf("Bye Bye\n");
 	return (EXIT_SUCCESS);
 }

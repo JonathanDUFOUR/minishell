@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token.h                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 19:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 22:21:47 by jdufour           #+#    #+#             */
+/*   Updated: 2021/07/21 02:48:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TOKEN_H
-# define T_TOKEN_H
+#include <stdint.h>
+#include <string.h>
 
-# include "t_type.h"
-
-typedef struct s_token	t_token;
-
-struct	s_token
+int	ft_memcmp(void const *a1, void const *a2, size_t n)
 {
-	char const	*str;
-	t_type		type;
-	t_token		*next;
-	t_token		*prev;
-};
+	uint8_t	*p1;
+	uint8_t	*p2;
 
-t_token	*token_new(char const *str, t_type const type);
-
-#endif
+	if (!n || a1 == a2)
+		return (0);
+	p1 = (uint8_t *)a1;
+	p2 = (uint8_t *)a2;
+	while (n--)
+	{
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		++p1;
+		++p2;
+	}
+	return (0);
+}
