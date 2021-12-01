@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   t_env.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 18:21:44 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/01 15:25:37 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/01 17:07:46 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <readline/readline.h>
-#include "e_ret.h"
+#ifndef T_ENV_H
+# define T_ENV_H
 
-int	main(void)
+typedef struct s_env	t_env;
+
+struct s_env
 {
-	return (SUCCESS);
-}
+	char	*name;
+	char	*value;
+	t_env	*next;
+	t_env	*prev;
+};
+
+#endif

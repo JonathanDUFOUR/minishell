@@ -1,6 +1,7 @@
 **
 
 !srcs/
+!srcs/environment/
 !private/
 !libft_io/
 !*.c

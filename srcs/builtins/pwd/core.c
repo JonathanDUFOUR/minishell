@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/30 17:54:23 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:52:04 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "e_ret.h"
 
-int	pwd(void)
+int	msh_pwd(void)
 {
 	char	*buf;
 

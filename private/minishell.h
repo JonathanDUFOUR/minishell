@@ -6,13 +6,13 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/30 17:54:29 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:51:59 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-int	pwd(void);
+int	msh_pwd(void);
 
 #endif

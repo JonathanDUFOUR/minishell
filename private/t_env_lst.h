@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   t_env_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 18:21:44 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/01 15:31:01 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/01 19:08:38 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <readline/readline.h>
-#include "e_ret.h"
+#ifndef T_ENV_LST_H
+# define T_ENV_LST_H
 
-int	main(void)
+# include <stddef.h>
+# include "t_env.h"
+
+typedef struct s_env_lst	t_env_lst;
+
+struct	s_env_lst
 {
-	return (SUCCESS);
-}
+	t_env	*head;
+	t_env	*tail;
+	size_t	size;
+};
+
+t_env	*env_new(char *name, char *value);
+
+void	env_addback(t_env_lst *data, t_env *new);
+void	env_delone(t_env *elem);
+void	env_clear(t_env_lst *data);
+
+#endif
