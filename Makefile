@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/01 21:40:59 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/02 04:23:57 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,37 +58,41 @@ FT_STRING_A		:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_A}}
 #            SOURCE FILES            #
 ######################################
 SRC				=	\
-					${addprefix builtins/,		\
-						${addprefix cd/,		\
-							core.c				\
-						}						\
-						${addprefix echo/,		\
-							core.c				\
-						}						\
-						${addprefix env/,		\
-							core.c				\
-						}						\
-						${addprefix exit/,		\
-							core.c				\
-						}						\
-						${addprefix export/,	\
-							core.c				\
-						}						\
-						${addprefix pwd/,		\
-							core.c				\
-						}						\
-						${addprefix unset/,		\
-							core.c				\
-						}						\
-					}							\
-					${addprefix token/,			\
-						token_lst_add_back.c	\
-						token_lst_clear.c		\
-						token_lst_delone.c		\
-						token_lst_get.c			\
-						token_lst_push_back.c	\
-						token_new.c				\
-					}							\
+					${addprefix builtins/,			\
+						${addprefix cd/,			\
+							core.c					\
+						}							\
+						${addprefix echo/,			\
+							core.c					\
+						}							\
+						${addprefix env/,			\
+							core.c					\
+						}							\
+						${addprefix exit/,			\
+							core.c					\
+						}							\
+						${addprefix export/,		\
+							core.c					\
+						}							\
+						${addprefix pwd/,			\
+							core.c					\
+						}							\
+						${addprefix unset/,			\
+							core.c					\
+						}							\
+					}								\
+					${addprefix token/,				\
+						${addprefix lst/,			\
+							token_lst_clear.c		\
+							token_lst_delone.c		\
+							token_lst_get.c			\
+							token_lst_print.c		\
+							token_lst_push_back.c	\
+						}							\
+						token_get.c					\
+						token_new.c					\
+						token_print.c				\
+					}								\
 					main.c
 
 ######################################
@@ -146,10 +150,10 @@ ${FT_STRING_A}:
 	${MAKE} ${@F} -C ${@D}
 
 clean:
-	${RM} ${OBJ_DIR} ${NAME}
+	${RM} ${OBJ_DIR} ${NAME} vgcore*
 
 fclean:
-	${RM} ${OBJ_DIR} ${NAME}
+	${RM} ${OBJ_DIR} ${NAME} vgcore*
 	${MAKE} $@ -C ${FT_IO_DIR}
 	${MAKE} $@ -C ${FT_MEM_DIR}
 	${MAKE} $@ -C ${FT_STRING_DIR}

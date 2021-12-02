@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_type.h                                           :+:      :+:    :+:   */
+/*   ft_putuint_base_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 03:42:15 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:24:56 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/27 00:12:26 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TYPE_H
-# define T_TYPE_H
+#include <stdlib.h>
+#include "ft_io.h"
 
-typedef enum e_type	t_type;
-
-/*
-	Words:
-	- File
-	- Option
-	- Command
-	- Argument
-
-	Operators:
-	- Pipe
-	- Redirection
-*/
-enum	e_type
+int	ft_putuint_base_fd(t_uint const nb, char const *base, int const fd)
 {
-	T_WORD,
-	T_FILE,
-	T_PIPE,
-	T_OPTION,
-	T_COMMAND,
-	T_ARGUMENT,
-	T_OPERATOR,
-	T_UNDEFINED,
-	T_REDIRECTION
-};
+	int		ret;
+	char	*buff;
+	t_uint	base_len;
 
-#endif
+	if (write(fd, "", 0) == -1 || !ft_isvalid(base))
+		return (-1);
+	buff = ft_utoa_base(nb, base);
+	if (!buff)
+		return (-1);
+	base_len = (t_uint)ft_indexof(0, base);
+	ret = (int)write(fd, buff, ft_uintlen_base(nb, base_len));
+	free(buff);
+	return (ret);
+}

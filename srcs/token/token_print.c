@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   token_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/02 01:10:46 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/02 01:13:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdio.h>
+#include "t_token.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+void	token_print(t_token *const node)
+{
+	printf("%15s: %p\n", "node", node);
+	printf("%15s: %s\n", "node->str", node->str);
+	printf("%15s: %i\n", "node->type", node->type);
+	printf("%15s: %p\n", "node->next", node->next);
+	printf("%15s: %p\n", "node->prev", node->prev);
+}

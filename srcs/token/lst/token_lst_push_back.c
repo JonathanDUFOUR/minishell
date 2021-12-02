@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   token_lst_push_back.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 18:40:08 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/02 00:47:46 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "t_token_lst.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+void	token_lst_push_back(t_token_lst *const tokens, t_token *const node)
+{
+	if (!tokens->size)
+	{
+		tokens->head = node;
+		tokens->tail = node;
+	}
+	else
+	{
+		node->prev = tokens->tail;
+		tokens->tail->next = node;
+		tokens->tail = node;
+	}
+	++tokens->size;
+}
