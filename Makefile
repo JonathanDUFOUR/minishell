@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/02 04:23:57 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/03 20:03:17 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC				=	\
 							token_lst_get.c			\
 							token_lst_print.c		\
 							token_lst_push_back.c	\
+							token_lst_type_define.c	\
 						}							\
 						token_get.c					\
 						token_new.c					\
@@ -162,8 +163,8 @@ re: clean all
 
 fre: fclean all
 
--include /home/jodufour/Templates/mk_files/coffee.mk
--include /home/jodufour/Templates/mk_files/norm.mk
+-include coffee.mk
+-include norm.mk
 
 valgrind: ${NAME}
 	$@ ${VG_OPT} ./$<

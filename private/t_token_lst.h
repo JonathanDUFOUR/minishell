@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:59:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/02 18:37:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	token_lst_delone(t_token_lst *const tokens, t_token *const node)
 void	token_lst_print(t_token_lst *const tokens)
 		__attribute__((nonnull));
 void	token_lst_push_back(t_token_lst *const tokens, t_token *const node)
+		__attribute__((nonnull));
+void	token_lst_type_define(t_token_lst *const tokens)
 		__attribute__((nonnull));
 
 #endif
