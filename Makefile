@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/03 11:13:00 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/03 19:22:01 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,21 @@ SRC				=	\
         				${addprefix pwd/,   \
          					core.c         	\
         				}                   \
+						${addprefix env/,	\
+							core.c			\
+						}					\
       				} 						\
+					${addprefix environment/,	\
+						env_addback.c			\
+						env_clear.c				\
+						env_delone.c			\
+						env_new.c				\
+						init_env.c				\
+					}							\
+					${addprefix tokens/,	\
+						count_args.c		\
+						error_option.c		\
+					}						\
 					main.c
 
 ######################################
@@ -136,7 +150,7 @@ fre:	fclean all
 -include /home/jodufour/Templates/mk_files/coffee.mk
 -include /home/jodufour/Templates/mk_files/norm.mk
 
-valgrind:
+valgrind: ${NAME}
 	$@ ${VG_OPT} ./$<
 
 .PHONY:	all clean fclean re fre valgrind

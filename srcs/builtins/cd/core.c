@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 17:53:24 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/03 18:20:22 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "ft_io.h"
 // TODO inclure les gestions de string de la libft
 
-static unsigned int	__count_arg(t_token *args)
+static unsigned int	__count_arg(t_token *args) // TODO eviter de compter les options
 {
 	unsigned int	nb_arg;
 
@@ -68,7 +68,7 @@ static char	*__getcdpath(char *directory, bool *is_cdpath) //, t_env *env // TOD
 }
 
 // je pars du principe que args pointe sur le premier argument
-int	msh_cd(t_token *args) //, t_env *env
+int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 {
 	char			*directory;
 	char			*curpath;

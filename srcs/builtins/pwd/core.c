@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 17:52:04 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/03 19:22:27 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "e_ret.h"
+#include "t_token_lst.h"
 
-int	msh_pwd(void)
+int	msh_pwd(t_token *args)
 {
 	char	*buf;
 
+	if (args->type == T_OPTION)
+		return (error_option("pwd: ", args));
 	buf = NULL;
 	buf = getcwd(buf, 0);
 	if (buf == NULL)

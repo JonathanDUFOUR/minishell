@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_addback.c                                      :+:      :+:    :+:   */
+/*   error_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 17:59:50 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/03 14:27:56 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/03 19:12:52 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_env_lst.h"
+#include <unistd.h>
+#include "e_ret.h"
+#include "t_token_lst.h"
+#include "ft_io.h"
 
-void	env_addback(t_env_lst *data, t_env *new)
+int	error_option(const char *str, t_token *args)
 {
-	if (data->head == NULL)
-	{
-		data->head = new;
-		data->tail = new;
-		data->size = 1;
-		return ;
-	}
-	data->tail->next = new;
-	new->prev = data->tail;
-	data->tail = new;
-	data->size++;
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putchar_fd(args->str[0], STDERR_FILENO);
+	ft_putchar_fd(args->str[1], STDERR_FILENO);
+	ft_putendl_fd(": invalid option", STDERR_FILENO);
+	return (FAILURE);
 }

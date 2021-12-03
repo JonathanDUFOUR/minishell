@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_token.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/30 11:25:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/03 19:21:36 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ struct	s_token
 
 enum	e_type
 {
-	WORD,
-	FILE,
-	OPTION,
-	COMMAND,
-	ARGUMENT,
-	OPERATOR,
-	PIPE,
+	T_WORD,
+	T_FILE,
+	T_OPTION,
+	T_COMMAND,
+	T_ARGUMENT,
+	T_OPERATOR,
+	T_PIPE,
 };
+
+int	error_option(const char *str, t_token *args)__attribute__((nonnull));
 
 #endif

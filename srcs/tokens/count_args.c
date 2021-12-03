@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_addback.c                                      :+:      :+:    :+:   */
+/*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 17:59:50 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/03 14:27:56 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/03 18:52:12 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/03 19:18:05 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_env_lst.h"
+#include "t_token_lst.h"
 
-void	env_addback(t_env_lst *data, t_env *new)
+// args peut valoir NULL s'il n'y a aucun arguments
+unsigned int	count_args(t_token *args)
 {
-	if (data->head == NULL)
+	unsigned int	nb_arg;
+
+	nb_arg = 0;
+	if (args == NULL)
+		return (0);
+	while (args->type == T_OPTION)
+		args = args->next;
+	while (args->type == T_ARGUMENT)
 	{
-		data->head = new;
-		data->tail = new;
-		data->size = 1;
-		return ;
+		args = args->next;
+		nb_arg++;
 	}
-	data->tail->next = new;
-	new->prev = data->tail;
-	data->tail = new;
-	data->size++;
+	return (nb_arg);
 }

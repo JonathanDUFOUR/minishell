@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:03:49 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/01 18:59:06 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:27:37 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_env	*env_new(char *name, char *value)
 {
 	t_env	*new;
 
-	if (!name || !value)
-		return (NULL);
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
