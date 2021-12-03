@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/25 19:14:18 by jdufour           #+#    #+#             */
+/*   Updated: 2021/11/27 14:03:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_io.h"
+#include <unistd.h>
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+int	ft_putstr_fd(char const *str, int const fd)
+{
+	return ((int)write(fd, str, ft_indexof(0, str)));
+}

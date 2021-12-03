@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/26 03:09:10 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 01:08:14 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+void	ft_striter(char *str, void (*f)(char *))
+{
+	if (str && f)
+		while (*str)
+			f(str++);
+}

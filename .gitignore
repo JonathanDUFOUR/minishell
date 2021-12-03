@@ -1,11 +1,5 @@
-**
-
-!srcs/
-!srcs/environment/
-!private/
-!libft_io/
-!*.c
-!*.h
-!ignoreliberror
-!Makefile
-!.gitignore
+**.a
+**.o
+**.d
+**.so
+minishell

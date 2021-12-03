@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memswap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:28:15 by jdufour           #+#    #+#             */
+/*   Updated: 2021/08/30 19:07:46 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdint.h>
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+void	ft_memswap(uint8_t *a, uint8_t *b)
+{
+	*a ^= *b;
+	*b ^= *a;
+	*a ^= *b;
+}

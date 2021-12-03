@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 01:58:43 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/11 17:02:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:33:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_printf(char const *format, ...)
 	t_ctx	ctx;
 	va_list	va;
 
-	if (!format)
-		return (-1);
 	ctx.len = 0;
 	va_start(va, format);
 	while (*format)
@@ -43,7 +41,7 @@ int	ft_printf(char const *format, ...)
 		if (!format)
 		{
 			va_end(va);
-			return (-(!!MALLOC_ERR));
+			return (-!!MALLOC_ERR);
 		}
 	}
 	va_end(va);

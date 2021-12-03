@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_indexof.c                                       :+:      :+:    :+:   */
+/*   ft_putuint_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/21 06:22:26 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/27 14:00:57 by jodufour         ###   ########.fr       */
+/*   Created: 2021/03/06 17:33:23 by jonathan          #+#    #+#             */
+/*   Updated: 2021/11/26 00:58:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "ft_io.h"
 
-ssize_t	ft_indexof(char const c, char const *str)
+static void	fill_buff(t_uint abs, char *buff)
 {
-	ssize_t	i;
+	while (abs)
+	{
+		*--buff = abs % 10 + '0';
+		abs /= 10;
+	}
+}
 
-	i = 0;
-	while (str[i] && c != str[i])
-		i++;
-	if (str[i] == c)
-		return (i);
-	return (-1);
+int	ft_putuint_fd(t_uint const nb, int const fd)
+{
+	char	buff[10];
+	t_uint	len;
+
+	if (write(fd, "", 0) == -1)
+		return (-1);
+	if (!nb)
+		return ((int)write(fd, "0", 1));
+	len = ft_uintlen(nb);
+	fill_buff(nb, buff + len);
+	return ((int)write(fd, buff, len));
 }

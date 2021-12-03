@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2021/04/06 18:05:39 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/01 17:56:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_string.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+size_t	ft_strlcpy(char *dst, char const *src, size_t size)
+{
+	size_t	src_len;
 
-#endif
+	src_len = ft_strlen(src);
+	if (!size)
+		return (src_len);
+	while (--size && *src)
+		*dst++ = *src++;
+	*dst = 0;
+	return (src_len);
+}

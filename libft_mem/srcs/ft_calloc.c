@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/04/30 05:44:00 by jdufour           #+#    #+#             */
+/*   Updated: 2021/07/21 02:07:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdlib.h>
+#include "ft_mem.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+void	*ft_calloc(size_t n, size_t size)
+{
+	char	*output;
 
-#endif
+	output = malloc(size * n);
+	if (n && size && output)
+		ft_bzero(output, size * n);
+	return (output);
+}

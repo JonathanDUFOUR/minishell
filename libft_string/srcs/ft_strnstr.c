@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 22:11:06 by jdufour           #+#    #+#             */
+/*   Updated: 2021/12/01 17:58:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_string.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+char	*ft_strnstr(char const *str, const char *tf, size_t n)
+{
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
-#endif
+	len = ft_strlen(str);
+	n = (len < n) * len + (len >= n) * n;
+	len = ft_strlen(tf);
+	i = 0;
+	while ((i + len) <= n)
+	{
+		j = 0;
+		while (tf[j] && (str[j] == tf[j]))
+			++j;
+		if (!tf[j])
+			return ((char *)str);
+		++str;
+		++i;
+	}
+	return (NULL);
+}

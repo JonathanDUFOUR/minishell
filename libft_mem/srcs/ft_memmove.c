@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 07:07:46 by jdufour           #+#    #+#             */
+/*   Updated: 2021/07/21 02:11:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_mem.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+void	*ft_memmove(void *dst, const void *src, size_t n)
+{
+	size_t	i;
 
-#endif
+	if (src == dst)
+		return (dst);
+	if (src < dst)
+		return (ft_memcpy(dst, src, n));
+	i = 0;
+	while (i < n)
+	{
+		((char *)dst)[i] = ((char *)src)[i];
+		++i;
+	}
+	return (dst);
+}

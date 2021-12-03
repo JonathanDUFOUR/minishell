@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/26 19:29:08 by jdufour           #+#    #+#             */
+/*   Updated: 2021/12/01 17:57:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdlib.h>
+#include "ft_string.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+char	*ft_strmapi(char const *str, char (*f)(t_uint, char))
+{
+	char	*map;
+	char	*ptr;
 
-#endif
+	map = malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!map)
+		return (NULL);
+	ptr = map;
+	while (*str)
+	{
+		*ptr = (*f)((ptr - map), *str++);
+		++ptr;
+	}
+	*ptr = 0;
+	return (map);
+}

@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 06:57:51 by jdufour           #+#    #+#             */
+/*   Updated: 2021/07/21 02:09:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <string.h>
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
-
-#endif
+void	*ft_memcpy(void *dst, void const *src, size_t n)
+{
+	if (!dst || !src)
+		return (NULL);
+	else if (dst != src)
+		while (n--)
+			((char *)dst)[n] = ((char *)src)[n];
+	return (dst);
+}

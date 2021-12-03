@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/21 23:29:24 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 01:17:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <string.h>
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+char	*ft_strncat(char *dst, char const *src, size_t n)
+{
+	char	*ptr;
 
-#endif
+	ptr = dst;
+	while (*ptr)
+		++ptr;
+	while (n-- && *src)
+		*ptr++ = *src++;
+	*ptr = 0;
+	return (dst);
+}

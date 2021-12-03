@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 21:55:54 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 02:31:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_string.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+char	*ft_strrchr(char const *str, int const c)
+{
+	char const	*ptr = str;
 
-#endif
+	ptr += ft_strlen(str);
+	while (ptr >= str && *ptr != (char const)c)
+		--ptr;
+	if (*ptr == (char const)c)
+		return ((char *)ptr);
+	return (NULL);
+}

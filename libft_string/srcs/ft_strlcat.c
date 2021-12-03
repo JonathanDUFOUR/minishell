@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/28 01:32:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 00:33:22 by jodufour         ###   ########.fr       */
+/*   Created: 2020/03/22 02:28:28 by jdufour           #+#    #+#             */
+/*   Updated: 2021/10/05 01:12:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_string.h"
 
-int	ft_printf(char const *format, ...)
-	__attribute__((nonnull (1)));
+size_t	ft_strlcat(char *dst, char const *src, size_t size)
+{
+	size_t	i;
+	size_t	dst_len;
 
-#endif
+	i = 0;
+	while (i < size)
+	{
+		if (!dst[i])
+		{
+			i = 0;
+			dst_len = ft_strlen(dst);
+			while (src[i] && i < (size - dst_len) - 1)
+			{
+				dst[dst_len + i] = src[i];
+				++i;
+			}
+			dst[dst_len + i] = 0;
+			return (dst_len + ft_strlen(src));
+		}
+		++i;
+	}
+	return (size + ft_strlen(src));
+}
