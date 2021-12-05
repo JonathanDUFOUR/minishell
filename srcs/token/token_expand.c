@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:54:41 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/05 02:02:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
+#include <stdbool.h>
+#include "ft_io.h"
 #include "ft_mem.h"
+#include "ft_string.h"
 #include "minishell.h"
-#include "t_token_lst.h"
-#include "e_ret.h" /* TODO Retirer l'include (n'est plus utilise) */
+#include "t_token.h"
 
-int	main(void)
+/*
+	Expand variables contained in the str of the given node
+*/
+int	token_expand(t_token *const node)
 {
-	char		*line;
-	t_token_lst	tokens;
+	char const	*ptr = node->str;
+	char		*str;
 
-	ft_bzero(&tokens, sizeof(tokens));
-	line = readline(PROMPT);
-	while (line)
+	str = ft_ctoa(0);
+	if (!str)
+		return (EXIT_FAILURE);
+	while (*ptr)
 	{
-		if (token_lst_get(&tokens, line))
+		if (append_literal(&str, &ptr))
 		{
-			token_lst_clear(&tokens);
-			ft_memdel(&line);
-			perror("Error");
-			exit(EXIT_FAILURE);
+			ft_memdel(&str);
+			return (EXIT_FAILURE);
 		}
-		token_lst_clear(&tokens);
-		ft_memdel(&line);
-		line = readline(PROMPT);
+		if (append_expand(&str, &ptr))
+		{
+			ft_memdel(&str);
+			return (EXIT_FAILURE);
+		}
 	}
-	printf("Bye Bye\n");
+	ft_memdel(&node->str);
+	node->str = str;
 	return (EXIT_SUCCESS);
 }

@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   token_lst_get.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:54:41 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/05 02:16:10 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <readline/readline.h>
 #include "ft_mem.h"
+#include "ft_string.h"
 #include "minishell.h"
 #include "t_token_lst.h"
-#include "e_ret.h" /* TODO Retirer l'include (n'est plus utilise) */
 
-int	main(void)
+/*
+	Parse line to get tokens and store them in a list
+*/
+int	token_lst_get(t_token_lst *const tokens, char const *line)
 {
-	char		*line;
-	t_token_lst	tokens;
+	t_token	*node;
 
-	ft_bzero(&tokens, sizeof(tokens));
-	line = readline(PROMPT);
-	while (line)
+	while (*line && *line == ' ')
+		++line;
+	while (*line)
 	{
-		if (token_lst_get(&tokens, line))
-		{
-			token_lst_clear(&tokens);
-			ft_memdel(&line);
-			perror("Error");
-			exit(EXIT_FAILURE);
-		}
-		token_lst_clear(&tokens);
-		ft_memdel(&line);
-		line = readline(PROMPT);
+		node = token_get(line);
+		if (!node)
+			return (EXIT_FAILURE);
+		token_lst_push_back(tokens, node);
+		line += ft_strlen(node->str);
+		while (*line && *line == ' ')
+			++line;
 	}
-	printf("Bye Bye\n");
+	token_lst_type_define(tokens);
+	if (token_lst_expand(tokens))
+		return (EXIT_FAILURE);
+	token_lst_print(tokens);
 	return (EXIT_SUCCESS);
 }
