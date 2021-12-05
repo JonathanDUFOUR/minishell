@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/03 19:09:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:09:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ typedef enum e_type	t_type;
 	- File
 	- Command
 	- Argument
+	- Delimiter
 
 	Operators:
 	- Pipe
-	- Redirection
+	- Redirect
 */
 enum	e_type
 {

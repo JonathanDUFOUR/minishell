@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/03 20:03:17 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/05 02:03:02 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,14 +85,21 @@ SRC				=	\
 						${addprefix lst/,			\
 							token_lst_clear.c		\
 							token_lst_delone.c		\
+							token_lst_expand.c		\
 							token_lst_get.c			\
 							token_lst_print.c		\
 							token_lst_push_back.c	\
 							token_lst_type_define.c	\
 						}							\
+						token_expand.c				\
 						token_get.c					\
 						token_new.c					\
 						token_print.c				\
+					}								\
+					${addprefix util/,				\
+						append_expand.c				\
+						append_literal.c			\
+						varlen.c					\
 					}								\
 					main.c
 

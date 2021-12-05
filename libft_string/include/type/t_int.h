@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:52:02 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/01 17:54:02 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/03 20:15:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef signed long long	t_llint;
 typedef unsigned char		t_hhuint;
 typedef unsigned short		t_huint;
 typedef unsigned int		t_uint;
-typedef unsigned long 		t_luint;
+typedef unsigned long		t_luint;
 typedef unsigned long long	t_lluint;
 
 #endif

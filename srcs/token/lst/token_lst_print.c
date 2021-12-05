@@ -6,13 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 00:50:50 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 04:41:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/05 03:22:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "t_token_lst.h"
 
+/*
+	Print data of the tokens list
+	Print data of every token in the list
+*/
 void	token_lst_print(t_token_lst *const tokens)
 {
 	t_token	*node;

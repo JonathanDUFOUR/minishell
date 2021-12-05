@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/02 18:37:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/04 17:47:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ struct s_token_lst
 	size_t	size;
 };
 
+int		token_lst_expand(t_token_lst *const tokens)
+		__attribute__((nonnull));
 int		token_lst_get(t_token_lst *const tokens, char const *line)
 		__attribute__((nonnull));
 

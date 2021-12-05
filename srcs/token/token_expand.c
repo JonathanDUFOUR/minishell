@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_get.c                                    :+:      :+:    :+:   */
+/*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 02:16:10 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/05 02:02:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include "ft_io.h"
 #include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
-#include "t_token_lst.h"
+#include "t_token.h"
 
 /*
-	Parse line to get tokens and store them in a list
+	Expand variables contained in the str of the given node
 */
-int	token_lst_get(t_token_lst *const tokens, char const *line)
+int	token_expand(t_token *const node)
 {
-	t_token	*node;
+	char const	*ptr = node->str;
+	char		*str;
 
-	while (*line && *line == ' ')
-		++line;
-	while (*line)
-	{
-		node = token_get(line);
-		if (!node)
-			return (EXIT_FAILURE);
-		token_lst_push_back(tokens, node);
-		line += ft_strlen(node->str);
-		while (*line && *line == ' ')
-			++line;
-	}
-	token_lst_type_define(tokens);
-	if (token_lst_expand(tokens))
+	str = ft_ctoa(0);
+	if (!str)
 		return (EXIT_FAILURE);
-	token_lst_print(tokens);
+	while (*ptr)
+	{
+		if (append_literal(&str, &ptr))
+		{
+			ft_memdel(&str);
+			return (EXIT_FAILURE);
+		}
+		if (append_expand(&str, &ptr))
+		{
+			ft_memdel(&str);
+			return (EXIT_FAILURE);
+		}
+	}
+	ft_memdel(&node->str);
+	node->str = str;
 	return (EXIT_SUCCESS);
 }
