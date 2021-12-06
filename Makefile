@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
+#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/05 16:44:08 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/06 17:17:35 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,10 +67,16 @@ FT_STRING_A		:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_A}}
 ######################################
 SRC				=	\
 					${addprefix builtins/,	\
+						${addprefix env/,	\
+							core.c			\
+						}					\
+						${addprefix export/,\
+							core.c			\
+						}					\
         				${addprefix pwd/,	\
          					core.c			\
         				}					\
-						${addprefix env/,	\
+						${addprefix unset/,	\
 							core.c			\
 						}					\
       				} 						\
@@ -79,7 +85,10 @@ SRC				=	\
 						env_clear.c				\
 						env_delone.c			\
 						env_new.c				\
+						get_env.c				\
 						init_env.c				\
+						put_env.c				\
+						unset_env.c				\
 					}							\
 					${addprefix token/,				\
 						${addprefix lst/,			\
@@ -116,7 +125,7 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra #-Werror
+CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}

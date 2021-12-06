@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:50:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:58:50 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int		append_expand(char **const str, char const **const ptr)
 		__attribute__((nonnull));
 int		append_literal(char **const str, char const **const ptr)
 		__attribute__((nonnull));
-int		msh_env(t_token *args, t_env_lst *data)
-		__attribute__((nonnull (2)));
+int		msh_env(t_env_lst *data, t_token *args)
+		__attribute__((nonnull (1)));
+int		msh_export(t_env_lst *data, t_token *args)
+		__attribute__((nonnull (1)));
 int		msh_pwd(t_token *args);
+int		msh_unset(t_env_lst *data, t_token *args)
+		__attribute__((nonnull (1)));
 
 size_t	varlen(char const *str)
 		__attribute__((nonnull));

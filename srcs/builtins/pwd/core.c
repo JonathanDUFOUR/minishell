@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:58:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:29:54 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "e_ret.h"
 #include "t_token_lst.h"
 
 int	msh_pwd(t_token *args)
@@ -27,14 +26,14 @@ int	msh_pwd(t_token *args)
 	if (buf == NULL)
 	{
 		perror("pwd: getcwd");
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 	if (printf("%s\n", buf) < 0)
 	{
 		perror("pwd: printf");
 		free(buf);
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 	free(buf);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }

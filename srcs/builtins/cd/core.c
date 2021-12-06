@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:56:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/06 11:05:36 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <unistd.h>
 // perror
 #include <stdio.h>
-#include "e_ret.h"
+//EXIT_SUCCESS
+#include <stdlib.h>
 #include "t_token_lst.h" // TODO token.h ou token_lst.h ?
 #include "minishell.h"
 #include "ft_io.h"
@@ -27,7 +28,7 @@ static unsigned int	__count_arg(t_token *args) // TODO eviter de compter les opt
 	nb_arg = 0;
 	if (args == NULL)
 		return (0);
-	while (args->type == ARGUMENT)
+	while (args->type == T_ARGUMENT)
 	{
 		args = args->next;
 		nb_arg++;
@@ -81,7 +82,7 @@ int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 	if (nb_arg > 1)			  		// plus d'un argument est une erreur
 	{
 		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 
 	if (nb_arg == 0)				// s'il n'y a pas d'argument on recupere HOME
@@ -91,7 +92,7 @@ int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 		else
 		{
 			ft_putendl_fd("cd: HOME not set", STDERR_FILENO);
-			return (FAILURE);
+			return (EXIT_FAILURE);
 		}
 	}
 	else
@@ -117,7 +118,7 @@ int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 	if (chdir(curpath) == -1) 				// on change de working directory
 	{
 		perror("cd: chdir");
-		return (FAILURE);
+		return (EXIT_FAILURE);
 	}
 
 	if (/*getenv("PWD") != NULL*/) 			// on met a jour les variables d'environnement
@@ -127,7 +128,7 @@ int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 	// export PWD=(curpath)
 	
 	if (is_cdpath == true) 					// si on a utilise un path de CDPATH il faut faire un pwd()
-		if (pwd() == FAILURE)
-			return (FAILURE);
-	return (SUCCESS);
+		if (pwd() == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

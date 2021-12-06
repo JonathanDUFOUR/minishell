@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_ret.h                                            :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:23:57 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/30 15:25:00 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/06 17:03:08 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/06 17:09:24 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef E_RET_H
-# define E_RET_H
+#include "t_env_lst.h"
+#include "ft_string.h"
 
-enum	e_ret
+char	*get_env(const char *name, t_env_lst *data)
 {
-	SUCCESS,
-	FAILURE
-};
+	t_env	*elem;
+	char	*value;
 
-#endif
+	elem = data->head;
+	while (elem && ft_strcmp(name, elem->name))
+		elem = elem->next;
+	value = NULL;
+	if (elem)
+	{
+		value = ft_strdup(elem->value);
+		if (value == NULL)
+			return (NULL);
+	}
+	return (value);
+}

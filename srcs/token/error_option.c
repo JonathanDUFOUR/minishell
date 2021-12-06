@@ -1,43 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_type.h                                           :+:      :+:    :+:   */
+/*   error_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 10:52:55 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/06 11:04:44 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TYPE_H
-# define T_TYPE_H
+#include <unistd.h>
+#include <stdlib.h>
+#include "t_token_lst.h"
+#include "ft_io.h"
 
-typedef enum e_type	t_type;
-
-/*
-	Words:
-	- File
-	- Command
-	- Argument
-	- Delimiter
-
-	Operators:
-	- Pipe
-	- Redirect
-*/
-enum	e_type
+int	error_option(const char *str, t_token *args)
 {
-	T_WORD,
-	T_FILE,
-	T_PIPE,
-	T_COMMAND,
-	T_ARGUMENT,
-	T_OPTION,
-	T_OPERATOR,
-	T_REDIRECT,
-	T_DELIMITER,
-	T_UNDEFINED,
-};
-
-#endif
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putchar_fd(args->str[0], STDERR_FILENO);
+	ft_putchar_fd(args->str[1], STDERR_FILENO);
+	ft_putendl_fd(": invalid option", STDERR_FILENO);
+	return (EXIT_FAILURE);
+}

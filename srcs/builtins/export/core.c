@@ -3,35 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 16:57:46 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:54:59 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "e_ret.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "t_env_lst.h"
-#include "t_token_lst.h"
+#include "t_token.h"
+#include "ft_string.h"
+//surprise
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include "get_next_line.h"
 
-int	msh_export(t_token_lst *args, t_env_lst *data) // TODO export()
+#ifndef VAR_CHARS
+# define VAR_CHARS	"\
+	abcdefghijklmnopqrstuvwxyz\
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+	0123456789\
+	_"
+#endif
+
+int	__surprise(void)
 {
-	return (SUCCESS);
+	char	*line;
+	int		fd;
+
+	fd = open("srcs/builtins/export/surprise", O_RDONLY);
+	while (get_next_line(fd, &line) == 1)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	if (line)
+		printf("%s\n", line);
+	free(line);
+	close(fd);
+	return (EXIT_SUCCESS);
 }
-/*
- * export :
- * si on fait comme bash --posix --> fait un env en ordre alphabetique sous ce format --> "export NAME="value""
- * si on suit le man --> undifined (donc une occasion de ne rien faire XD)
- *
- * export NAME --> ne fait rien
- * 
- * export NAME= :
- * si NAME n'existe pas --> cree NAME et set sa valeur a rien
- * si NAME existe --> set sa valeur a rien
- * 
- * export NAME=value :
- * si NAME n'existe pas --> cree NAME et set sa valeur a value
- * si NAME existe --> set sa valeur a value
- * 
- * Pas de maximum pour le nombre d'argument
- */
+
+static bool	__is_valid(const char *str) // TODO verifier la len de str
+{
+	char	*tmp;
+
+	tmp = (char *)str;
+	while (*tmp && *tmp != '=')
+	{
+		if (ft_strchr(VAR_CHARS, *tmp) == NULL)
+			return (false);
+		tmp++;
+	}
+	return (true);
+}
+
+int	msh_export(t_env_lst *data, t_token *args)
+{
+	if (args == NULL)
+		return (__surprise());
+	if (args->type == T_OPTION)
+		return (error_option("export: ", args));
+	while (args && args->type == T_ARGUMENT)
+	{
+		if (__is_valid(args->str) == false)
+		{
+			// message d'erreur
+		}
+		else
+		{
+			if (put_env(args->str, data) == EXIT_FAILURE)
+			{
+				perror("export");
+				return (EXIT_FAILURE);
+			}
+		}
+		// TODO verifier que NAME soit valide (alphanumerique + _ + len > 0)
+		args = args->next;
+	}
+	return (EXIT_SUCCESS);
+}
