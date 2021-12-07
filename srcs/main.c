@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:22:06 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:55:30 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "minishell.h"
 #include "t_token_lst.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(void)
 {
 	char		*line;
 	t_token_lst	tokens;
