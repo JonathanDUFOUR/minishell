@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:25:47 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_export(t_env_lst *data, t_token *args)
+int	msh_export(t_env_lst *env, t_token *args)
 {
 	if (args == NULL)
 		return (__surprise());
@@ -84,7 +84,7 @@ int	msh_export(t_env_lst *data, t_token *args)
 		}
 		else
 		{
-			if (put_env(args->str, data) == EXIT_FAILURE)
+			if (put_env(args->str, env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		args = args->next;

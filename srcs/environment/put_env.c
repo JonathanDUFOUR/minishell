@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/06 16:06:22 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,30 @@ static size_t	__value_len(const char *variable)
 	return (len);
 }
 
-static t_env	*__get_env_var(const char *str, t_env_lst *data)
+static t_env	*__get_env_var(const char *str, t_env_lst *env)
 {
 	t_env	*elem;
 
-	elem = data->head;
+	elem = env->head;
 	while (elem && ft_strncmp(str, elem->name, ft_strlen(elem->name)))
 		elem = elem->next;
 	return (elem);
 }
 
 // str --> "NAME=value"
-int	put_env(const char *str, t_env_lst *data)
+int	put_env(const char *str, t_env_lst *env)
 {
 	t_env	*elem;
 
 	if (ft_strchr(str, '=') == NULL)
 		return (EXIT_SUCCESS);
-	elem = __get_env_var(str, data);
+	elem = __get_env_var(str, env);
 	if (elem == NULL)
 	{
 		elem = env_new(str);
 		if (elem == NULL)
 			return (EXIT_FAILURE);
-		env_addback(data, elem);
+		env_addback(env, elem);
 	}
 	else
 	{

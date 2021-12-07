@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 11:05:36 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:06:05 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*__getcdpath(char *directory, bool *is_cdpath) //, t_env *env // TOD
 }
 
 // je pars du principe que args pointe sur le premier argument
-int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
+int	msh_cd(t_env_lst *env, t_token *args) // TODO traiter les options
 {
 	char			*directory;
 	char			*curpath;
@@ -128,7 +128,7 @@ int	msh_cd(t_token *args) //, t_env *env // TODO traiter les options
 	// export PWD=(curpath)
 	
 	if (is_cdpath == true) 					// si on a utilise un path de CDPATH il faut faire un pwd()
-		if (pwd() == EXIT_FAILURE)
+		if (msh_pwd(NULL) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

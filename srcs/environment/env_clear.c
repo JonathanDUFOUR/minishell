@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:49:33 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/03 15:20:03 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "t_env_lst.h"
 #include "ft_mem.h"
 
-void	env_clear(t_env_lst *data)
+void	env_clear(t_env_lst *env)
 {
-	while (data->head)
-		env_delone(data, data->head);
-	data->tail = NULL;
+	while (env->head)
+		env_delone(env, env->head);
+	env->tail = NULL;
 }

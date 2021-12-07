@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:15 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:18:41 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_unset(t_env_lst *data, t_token *args)
+int	msh_unset(t_env_lst *env, t_token *args)
 {
 	if (args == NULL)
 		return (EXIT_SUCCESS);
@@ -59,7 +59,7 @@ int	msh_unset(t_env_lst *data, t_token *args)
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		}
 		else
-			unset_env(args->str, data);
+			unset_env(args->str, env);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);

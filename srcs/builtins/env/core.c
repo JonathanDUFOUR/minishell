@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 17:52:15 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "t_token_lst.h"
 #include "ft_io.h"
 
-int	msh_env(t_env_lst *data, t_token *args)
+int	msh_env(t_env_lst *env, t_token *args)
 {
 	t_env	*elem;
 
@@ -30,7 +30,7 @@ int	msh_env(t_env_lst *data, t_token *args)
 			return (EXIT_FAILURE);
 		}
 	}
-	elem = data->head;
+	elem = env->head;
 	while (elem)
 	{
 		printf("%s=%s\n", elem->name, elem->value);
