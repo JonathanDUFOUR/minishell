@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_args.c                                       :+:      :+:    :+:   */
+/*   msh_cd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 18:52:12 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/07 15:19:03 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/07 17:25:39 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_token_lst.h"
+#ifndef MSH_CD_H
+# define MSH_CD_H
 
-unsigned int	count_args(t_token *args)
-{
-	unsigned int	nb_arg;
+// chdir, access
+# include <unistd.h>
+// perror
+# include <stdio.h>
+//EXIT_SUCCESS
+# include <stdlib.h>
+# include "t_token.h"
+# include "minishell.h"
+# include "ft_io.h"
+# include "ft_mem.h"
+# include "ft_string.h"
 
-	nb_arg = 0;
-	if (args == NULL)
-		return (0);
-	while (args->type == T_OPTION)
-		args = args->next;
-	while (args->type == T_ARGUMENT)
-	{
-		args = args->next;
-		nb_arg++;
-	}
-	return (nb_arg);
-}
+bool	__is_ending_slash(const char *str);
+
+char	*__getcdpath(t_env_lst *env, char *directory, bool *is_cdpath);
+
+#endif

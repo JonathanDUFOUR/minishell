@@ -6,89 +6,20 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 15:06:05 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:25:57 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// chdir, access
-#include <unistd.h>
-// perror
-#include <stdio.h>
-//EXIT_SUCCESS
-#include <stdlib.h>
-#include "t_token_lst.h" // TODO token.h ou token_lst.h ?
-#include "minishell.h"
-#include "ft_io.h"
-// TODO inclure les gestions de string de la libft
+#include "msh_cd.h"
 
-static unsigned int	__count_arg(t_token *args) // TODO eviter de compter les options
+// SECURE toutes les allocations
+
+static char	*__getdirectory(t_env_lst *env, char *args_str, int nb_arg)
 {
-	unsigned int	nb_arg;
-
-	nb_arg = 0;
-	if (args == NULL)
-		return (0);
-	while (args->type == T_ARGUMENT)
+	if (nb_arg == 0)
 	{
-		args = args->next;
-		nb_arg++;
-	}
-	return (nb_arg);
-}
-
-// CDPATH=path:path:path:path
-static char	*__getcdpath(char *directory, bool *is_cdpath) //, t_env *env // TODO getcdpath()
-{
-	char	**cdpath;
-	char	*tmp_path;
-	char	*dest;
-	int		i;
-
-	i = 0;
-	if (/*getenv("CDPATH") == NULL*/)
-		return (directory);
-	cdpath = ft_split(/*getenv("CDPATH")*/, ':'); // TODO inclure ft_split()
-	while (cdpath[i])
-	{
-		if (cdpath[i][0] == '\0') // ou ft_strlen(cdpath[i]) == 0
-			tmp_path = "./";
-		else if (/*cdpath[i] ne fini pas par '/'*/) // TODO regarder si une string fini par un '/'
-			tmp_path = ft_strjoin(cdpath[i], "/"); // TODO include ft_strjoin()
-		else
-			tmp_path = cdpath[i];
-		dest = ft_strjoin(tmp_path, directory);
-		free(tmp_path);
-		if (access(dest, F_OK) == 0)
-			break ;
-		free(dest);
-		i++;
-	}
-	free(cdpath);
-	*is_cdpath = true;
-	return (dest);
-}
-
-// je pars du principe que args pointe sur le premier argument
-int	msh_cd(t_env_lst *env, t_token *args) // TODO traiter les options
-{
-	char			*directory;
-	char			*curpath;
-	char			*tmp_path;
-	unsigned int	nb_arg;
-	bool			is_cdpath;
-
-	is_cdpath = false;
-	nb_arg = __count_arg(args); 	// compte le nbr d'arguments
-	if (nb_arg > 1)			  		// plus d'un argument est une erreur
-	{
-		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-
-	if (nb_arg == 0)				// s'il n'y a pas d'argument on recupere HOME
-	{
-		if (/*getenv("HOME") != NULL*/)
-			directory = /*getenv("HOME")*/;
+		if (get_env("HOME", env) != NULL)
+			return (ft_strdup(get_env("HOME", env)));
 		else
 		{
 			ft_putendl_fd("cd: HOME not set", STDERR_FILENO);
@@ -96,38 +27,104 @@ int	msh_cd(t_env_lst *env, t_token *args) // TODO traiter les options
 		}
 	}
 	else
-		directory = args->str;		// sinon on recupere le repertoire dans lequel on doit aller
-	
-	if (*directory != '/' && *directory != '.')// directory ne commence pas par '/' ni par '.' ni par '..'
-		curpath = __getcdpath(directory, &is_cdpath);
-	else
-		curpath = directory;
+		return (ft_strdup(args_str));
+}
 
-	if (*curpath != '/') // TODO dans une fonction() // si curpath ne commence pas par un '/' on lui rajoute PWD au debut
+static char	*__getpwd(t_env_lst *env, char *curpath)
+{
+	char	*pwd_path;
+	char	*tmp_path;
+	char	*dest;
+
+	dest = curpath;
+	if (*dest != '/')
 	{
-		if (/*PWD ne fini pas par '/'*/)
-			tmp_path = ft_strjoin(/*getenv(PWD)*/, "/");
+		if (__is_ending_slash(get_env("PWD", env)) == false)
+			pwd_path = ft_strjoin(get_env("PWD", env), "/");
 		else
-			tmp_path = /*getenv(PWD)*/;
-		curpath = ft_strjoin(tmp_path, curpath); // remplacer curpath dans ft_strjoin par un temporaire qu'on pourra free()
+			pwd_path = ft_strdup(get_env("PWD", env));
+		tmp_path = dest;
+		dest = ft_strjoin(pwd_path, tmp_path);
+		free(pwd_path);
 		free(tmp_path);
 	}
-	
-	// clean de curpath (voir le google doc Minishell etape 8)
+	return (dest);
+}
 
-	if (chdir(curpath) == -1) 				// on change de working directory
+static int	__updatepwd(t_env_lst *env, char *curpath)
+{
+	char	*tmp_path;
+
+	if (get_env("PWD", env) != NULL)
 	{
-		perror("cd: chdir");
+		tmp_path = ft_strjoin("OLDPWD=", get_env("PWD", env));
+		put_env(tmp_path, env);
+		free(tmp_path);
+	}
+	tmp_path = ft_strjoin("PWD=", curpath);
+	put_env(tmp_path, env);
+	free(tmp_path);
+	return (EXIT_SUCCESS);
+}
+
+static char	*__cleanpath(char *curpath)
+{
+	/*
+	 * a. un "./" doit etre supprime s'il y a un mot apres
+	 * b. pour chaque "../", s'il y a un mot avant et que c'est ni root ni "../" alors :
+	 * 		i. si l'element d'avant ne fait pas reference a un repertoire --> erreur
+	 * 		ii. l'element precedent, tous les '/' qui le separe de "..",
+	 * 			".." et tous les '/' qui le separe de l'element d'apres (s'il y en a un) doivent etre supprime
+	 * c. - supprimer tous les trailing '/' qui ne sont pas des leading '/'
+	 * 	  - remplacer tous les non-leading '/' consecutifs par un seul '/'
+	 * 	  - remplacer 3 ou plus leading '/' par un seul
+	 * 	  si apres ca curpath est null, il ne faut pas aller plus loin
+	 * 
+	 * leading slash --> /dir/dir/dir/ <-- trailing slash
+	 */
+}
+
+int	msh_cd(t_env_lst *env, t_token *args)
+{
+	char			*directory;
+	char			*curpath;
+	unsigned int	nb_arg;
+	bool			is_cdpath;
+
+	// Gestion d'erreurs
+	if (args->type == T_OPTION)
+		return (error_option("cd: ", args));
+	nb_arg = count_args(args);
+	if (nb_arg > 1)
+	{
+		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 
-	if (/*getenv("PWD") != NULL*/) 			// on met a jour les variables d'environnement
-	{
-		// export OLDPWD=(getenv("PWD"))
-	}
-	// export PWD=(curpath)
+	// S'il n'y a pas d'argument on essaye de recuperer HOME sinon on recupere l'argument
+	directory = __getdirectory(env, args->str, nb_arg); // SECURE __getdirectory()
 	
-	if (is_cdpath == true) 					// si on a utilise un path de CDPATH il faut faire un pwd()
+	// Si directory ne commence pas par '/' ni par '.' ni par '..' on essaye de recuperer un path de CDPATH
+	is_cdpath = false;
+	if (*directory != '/' && *directory != '.')
+		curpath = __getcdpath(env, directory, &is_cdpath);
+	else
+		curpath = directory;
+
+	// Si curpath ne commence pas par un '/' on lui rajoute PWD au debut
+	curpath = __getpwd(env, curpath); // SECURE __getpwd()
+
+	// TODO clean de curpath (voir le google doc Minishell etape 8)
+
+	// On change de working directory
+	if (chdir(curpath) == -1)
+		return (EXIT_FAILURE);
+
+	// On met a jour les variables d'environnement
+	__updatepwd(env, curpath); // SECURE __updatepwd()
+
+	// Si on a utilise un path de CDPATH il faut faire un pwd()
+	if (is_cdpath == true)
 		if (msh_pwd(NULL) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
