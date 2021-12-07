@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:15 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 18:14:18 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:18:41 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,34 @@
 #include "ft_io.h"
 #include "ft_string.h"
 
+#ifndef VAR_CHARS
+# define VAR_CHARS	"\
+	abcdefghijklmnopqrstuvwxyz\
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+	0123456789\
+	_"
+#endif
+
+static bool	__is_valid(const char *str)
+{
+	char	*tmp;
+	int		len;
+
+	tmp = (char *)str;
+	len = 0;
+	while (tmp[len])
+		len++;
+	if (len == 0)
+		return (false);
+	while (*tmp)
+	{
+		if (ft_strchr(VAR_CHARS, *tmp) == NULL)
+			return (false);
+		tmp++;
+	}
+	return (true);
+}
+
 int	msh_unset(t_env_lst *data, t_token *args)
 {
 	if (args == NULL)
@@ -24,14 +52,14 @@ int	msh_unset(t_env_lst *data, t_token *args)
 		return (error_option("unset: ", args));
 	while (args && args->type == T_ARGUMENT)
 	{
-		if (ft_strchr(args->str, '=') != NULL) // TODO verifier que str est valide (alnum + _ + len > 0)
+		if (__is_valid(args->str) == false)
 		{
-			ft_putstr_fd("unset: ", STDERR_FILENO);
+			ft_putstr_fd("unset: '", STDERR_FILENO);
 			ft_putstr_fd(args->str, STDERR_FILENO);
-			ft_putendl_fd("not a valid identifier", STDERR_FILENO);
-			return (EXIT_FAILURE);
+			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		}
-		unset_env(args->str, data);
+		else
+			unset_env(args->str, data);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);

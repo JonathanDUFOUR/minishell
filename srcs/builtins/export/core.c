@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 18:54:59 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:25:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "t_env_lst.h"
 #include "t_token.h"
 #include "ft_string.h"
+#include "ft_io.h"
 //surprise
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -47,11 +48,17 @@ int	__surprise(void)
 	return (EXIT_SUCCESS);
 }
 
-static bool	__is_valid(const char *str) // TODO verifier la len de str
+static bool	__is_valid(const char *str)
 {
 	char	*tmp;
+	int		len;
 
 	tmp = (char *)str;
+	len = 0;
+	while (tmp[len] && tmp[len] != '=')
+		len++;
+	if (len == 0)
+		return (false);
 	while (*tmp && *tmp != '=')
 	{
 		if (ft_strchr(VAR_CHARS, *tmp) == NULL)
@@ -71,17 +78,15 @@ int	msh_export(t_env_lst *data, t_token *args)
 	{
 		if (__is_valid(args->str) == false)
 		{
-			// message d'erreur
+			ft_putstr_fd("export: '", STDERR_FILENO);
+			ft_putstr_fd(args->str, STDERR_FILENO);
+			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		}
 		else
 		{
 			if (put_env(args->str, data) == EXIT_FAILURE)
-			{
-				perror("export");
 				return (EXIT_FAILURE);
-			}
 		}
-		// TODO verifier que NAME soit valide (alphanumerique + _ + len > 0)
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);

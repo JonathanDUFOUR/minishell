@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 18:29:54 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ int	msh_pwd(t_token *args)
 	buf = NULL;
 	buf = getcwd(buf, 0);
 	if (buf == NULL)
-	{
-		perror("pwd: getcwd");
 		return (EXIT_FAILURE);
-	}
 	if (printf("%s\n", buf) < 0)
 	{
-		perror("pwd: printf");
 		free(buf);
 		return (EXIT_FAILURE);
 	}
