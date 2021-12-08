@@ -1,44 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_type.h                                           :+:      :+:    :+:   */
+/*   sigquit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 10:56:01 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/07 21:40:41 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/07 21:42:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TYPE_H
-# define T_TYPE_H
+#include <stdlib.h>
+#include <signal.h>
 
-typedef enum e_type	t_type;
-
-/*
-	Words:
-	- File
-	- Option
-	- Command
-	- Argument
-	- Delimiter
-
-	Operators:
-	- Pipe
-	- Redirect
-*/
-enum	e_type
+int	set_sigquit_handle(void)
 {
-	T_WORD,
-	T_FILE,
-	T_PIPE,
-	T_OPTION,
-	T_COMMAND,
-	T_ARGUMENT,
-	T_OPERATOR,
-	T_REDIRECT,
-	T_DELIMITER,
-	T_UNDEFINED,
-};
-
-#endif
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}

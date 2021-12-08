@@ -6,9 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:41:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 03:39:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/05 19:42:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* DBG */
+#include <stdio.h>
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -16,9 +19,15 @@
 #include "ft_string.h"
 #include "minishell.h"
 
-static char	*__get_expand(char const *str)
+static char	*__get_expand(char const *str, size_t const len)
 {
-	(void)str;
+	char const	*name = ft_strndup(str, len);
+
+	printf("%s:\n", __func__);
+	if (!name)
+		return (NULL);
+	printf("%15s: [%s]\n", "name", name);
+	ft_memdel(&name);
 	return (ft_strdup("[expand]"));
 }
 
@@ -35,10 +44,10 @@ int	append_expand(char **const str, char const **const ptr)
 
 	if (**ptr != '$')
 		return (EXIT_SUCCESS);
-	append = __get_expand(*ptr);
+	len = varlen(*ptr);
+	append = __get_expand(*ptr, len);
 	if (!append)
 		return (EXIT_FAILURE);
-	len = varlen(*ptr);
 	tmp = *str;
 	*str = ft_strjoin(*str, append);
 	ft_memdel(&tmp);

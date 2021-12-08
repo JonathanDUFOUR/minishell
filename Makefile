@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/05 02:03:02 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/08 11:34:42 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,10 @@ SRC				=	\
 						${addprefix unset/,			\
 							core.c					\
 						}							\
+					}								\
+					${addprefix signal/,			\
+						sigint.c					\
+						sigquit.c					\
 					}								\
 					${addprefix token/,				\
 						${addprefix lst/,			\
