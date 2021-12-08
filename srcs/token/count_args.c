@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/03 18:52:12 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/03 19:18:05 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "t_token_lst.h"
 
-int	msh_pwd(t_token *args)
+// args peut valoir NULL s'il n'y a aucun arguments
+unsigned int	count_args(t_token *args)
 {
-	char	*buf;
+	unsigned int	nb_arg;
 
-	if (args->type == T_OPTION)
-		return (error_option("pwd: ", args));
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
+	nb_arg = 0;
+	if (args == NULL)
+		return (0);
+	while (args->type == T_OPTION)
+		args = args->next;
+	while (args->type == T_ARGUMENT)
 	{
-		free(buf);
-		return (EXIT_FAILURE);
+		args = args->next;
+		nb_arg++;
 	}
-	free(buf);
-	return (EXIT_SUCCESS);
+	return (nb_arg);
 }

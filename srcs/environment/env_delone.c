@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   env_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
+/*   Created: 2021/12/01 18:25:59 by majacque          #+#    #+#             */
 /*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "t_env_lst.h"
-#include "t_token_lst.h"
-#include "ft_io.h"
+#include "ft_mem.h"
 
-int	msh_env(t_env_lst *env, t_token *args)
+void	env_delone(t_env_lst *env, t_env *elem)
 {
-	t_env	*elem;
-
-	if (args != NULL)
+	if (env->size == 0)
+		return ;
+	if (elem == env->head)
 	{
-		if (args->type == T_OPTION)
-			return (error_option("env: ", args));
-		if (args->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			return (EXIT_FAILURE);
-		}
+		env->head = env->head->next;
+		if (env->head != NULL)
+			env->head->prev = NULL;
 	}
-	elem = env->head;
-	while (elem)
+	else if (elem == env->tail)
 	{
-		printf("%s=%s\n", elem->name, elem->value);
-		elem = elem->next;
+		env->tail = env->tail->prev;
+		if (env->tail != NULL)
+			env->tail->next = NULL;
 	}
-	return (EXIT_SUCCESS);
+	else
+	{
+		elem->next->prev = elem->prev;
+		elem->prev->next = elem->next;
+	}
+	free(elem->name);
+	free(elem->value);
+	ft_bzero(elem, sizeof(t_env));
+	ft_memdel(&elem);
+	env->size--;
 }

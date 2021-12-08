@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   error_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/06 11:04:44 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "t_token_lst.h"
+#include "ft_io.h"
 
-int	msh_pwd(t_token *args)
+int	error_option(const char *str, t_token *args)
 {
-	char	*buf;
-
-	if (args->type == T_OPTION)
-		return (error_option("pwd: ", args));
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
-	{
-		free(buf);
-		return (EXIT_FAILURE);
-	}
-	free(buf);
-	return (EXIT_SUCCESS);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putchar_fd(args->str[0], STDERR_FILENO);
+	ft_putchar_fd(args->str[1], STDERR_FILENO);
+	ft_putendl_fd(": invalid option", STDERR_FILENO);
+	return (EXIT_FAILURE);
 }

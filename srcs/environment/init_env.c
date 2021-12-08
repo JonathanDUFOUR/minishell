@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/01 15:52:00 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include "t_token_lst.h"
+#include "t_env_lst.h"
 
-int	msh_pwd(t_token *args)
+int	init_env(t_env_lst *env, char **envp)
 {
-	char	*buf;
-
-	if (args->type == T_OPTION)
-		return (error_option("pwd: ", args));
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
+	t_env	*new;
+	int		i;
+	
+	env->head = NULL;
+	env->tail = NULL;
+	env->size = 0;
+	i = -1;
+	while (envp[++i])
 	{
-		free(buf);
-		return (EXIT_FAILURE);
+		new = env_new(envp[i]);
+		if (new == NULL)
+		{
+			env_clear(env);
+			return (EXIT_FAILURE);
+		}
+		env_addback(env, new);
 	}
-	free(buf);
 	return (EXIT_SUCCESS);
 }

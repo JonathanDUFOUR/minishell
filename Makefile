@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/08 11:34:42 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/08 11:50:33 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,14 @@ PRV_DIR				=	private/
 FT_IO_DIR			=	libft_io/
 FT_IO_INC_DIR		=	include/
 FT_IO_INC_DIR		:=	${addprefix ${FT_IO_DIR}, ${FT_IO_INC_DIR}}
+
+FT_MEM_DIR			=	libft_mem/
+FT_MEM_INC_DIR		=	include/
+FT_MEM_INC_DIR		:=	${addprefix ${FT_MEM_DIR}, ${FT_MEM_INC_DIR}}
+
+FT_STRING_DIR		=	libft_string/
+FT_STRING_INC_DIR	=	include/
+FT_STRING_INC_DIR	:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_INC_DIR}}
 
 FT_MEM_DIR			=	libft_mem/
 FT_MEM_INC_DIR		=	include/
@@ -81,6 +89,16 @@ SRC				=	\
 							core.c					\
 						}							\
 					}								\
+					${addprefix environment/,		\
+						env_addback.c				\
+						env_clear.c					\
+						env_delone.c				\
+						env_new.c					\
+						get_env.c					\
+						init_env.c					\
+						put_env.c					\
+						unset_env.c					\
+					}								\
 					${addprefix signal/,			\
 						sigint.c					\
 						sigquit.c					\
@@ -95,6 +113,8 @@ SRC				=	\
 							token_lst_push_back.c	\
 							token_lst_type_define.c	\
 						}							\
+						count_args.c				\
+						error_option.c				\
 						token_expand.c				\
 						token_get.c					\
 						token_new.c					\
@@ -118,7 +138,7 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra #-Werror
+CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}

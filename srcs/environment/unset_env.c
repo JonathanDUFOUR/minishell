@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   unset_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/06 16:29:30 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include "t_token_lst.h"
+#include "t_env_lst.h"
+#include "ft_string.h"
 
-int	msh_pwd(t_token *args)
+void	unset_env(const char *str, t_env_lst *env)
 {
-	char	*buf;
+	t_env	*elem;
 
-	if (args->type == T_OPTION)
-		return (error_option("pwd: ", args));
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
-	{
-		free(buf);
-		return (EXIT_FAILURE);
-	}
-	free(buf);
-	return (EXIT_SUCCESS);
+	elem = env->head;
+	while (elem && ft_strcmp(str, elem->name))
+		elem = elem->next;
+	if (elem)
+		env_delone(env, elem);
 }

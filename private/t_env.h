@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_ret.h                                            :+:      :+:    :+:   */
+/*   t_env.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 14:23:57 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/24 14:24:19 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/01 15:25:37 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/01 17:07:46 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef E_RET_H
-# define E_RET_H
+#ifndef T_ENV_H
+# define T_ENV_H
 
-enum	e_ret
+typedef struct s_env	t_env;
+
+struct s_env
 {
-	SUCCESS
+	char	*name;
+	char	*value;
+	t_env	*next;
+	t_env	*prev;
 };
 
 #endif

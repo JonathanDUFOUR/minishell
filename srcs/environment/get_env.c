@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/06 17:03:08 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "t_token_lst.h"
+#include "t_env_lst.h"
+#include "ft_string.h"
 
-int	msh_pwd(t_token *args)
+char	*get_env(const char *name, t_env_lst *env)
 {
-	char	*buf;
+	t_env	*elem;
+	char	*value;
 
-	if (args->type == T_OPTION)
-		return (error_option("pwd: ", args));
-	buf = NULL;
-	buf = getcwd(buf, 0);
-	if (buf == NULL)
-		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
+	elem = env->head;
+	while (elem && ft_strcmp(name, elem->name))
+		elem = elem->next;
+	value = NULL;
+	if (elem)
 	{
-		free(buf);
-		return (EXIT_FAILURE);
+		value = elem->value;
+		if (value == NULL)
+			return (NULL);
 	}
-	free(buf);
-	return (EXIT_SUCCESS);
+	return (value);
 }

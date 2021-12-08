@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 10:56:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 11:52:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ enum	e_type
 	T_OPTION,
 	T_COMMAND,
 	T_ARGUMENT,
+	T_OPTION,
 	T_OPERATOR,
 	T_REDIRECT,
 	T_DELIMITER,
