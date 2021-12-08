@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 11:52:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:50:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #  define PROMPT	"$> "
 # endif
 
-int		append_expand(char **const str, char const **const ptr)
+int		append_expand(char **const str, char const **const ptr,
+			t_env_lst *const env)
 		__attribute__((nonnull));
 int		append_literal(char **const str, char const **const ptr)
 		__attribute__((nonnull));

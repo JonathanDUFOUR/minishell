@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:29:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,13 @@ static t_env	*__get_env_var(const char *str, t_env_lst *env)
 	return (elem);
 }
 
-// str --> "NAME=value"
-int	put_env(const char *str, t_env_lst *env)
+/*
+	Create a new node in env list
+	where name and value are those given in str ("name=value"),
+	or reassign the value of the node with the name
+	given in str if it already exists
+*/
+int	put_env(const char *str, t_env_lst *const env)
 {
 	t_env	*elem;
 

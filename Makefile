@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/08 11:50:33 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/08 16:12:29 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC				=	\
 						env_clear.c					\
 						env_delone.c				\
 						env_new.c					\
+						env_print.c					\
 						get_env.c					\
 						init_env.c					\
 						put_env.c					\
@@ -138,7 +139,7 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra #-Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 02:16:10 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:45:10 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 #include "t_token_lst.h"
 
 /*
-	Parse line to get tokens and store them in a list
+	Parse line to get tokens and store them into a list
 */
-int	token_lst_get(t_token_lst *const tokens, char const *line)
+int	token_lst_get(t_token_lst *const tokens, char const *line,
+	t_env_lst *const env)
 {
 	t_token	*node;
 
@@ -36,7 +37,7 @@ int	token_lst_get(t_token_lst *const tokens, char const *line)
 			++line;
 	}
 	token_lst_type_define(tokens);
-	if (token_lst_expand(tokens))
+	if (token_lst_expand(tokens, env))
 		return (EXIT_FAILURE);
 	token_lst_print(tokens);
 	return (EXIT_SUCCESS);

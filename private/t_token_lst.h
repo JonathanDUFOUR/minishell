@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/04 17:47:47 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:45:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include "t_token.h"
+# include "t_env_lst.h"
 
 typedef struct s_token_lst	t_token_lst;
 
@@ -25,9 +26,10 @@ struct s_token_lst
 	size_t	size;
 };
 
-int		token_lst_expand(t_token_lst *const tokens)
+int		token_lst_expand(t_token_lst *const tokens, t_env_lst *const env)
 		__attribute__((nonnull));
-int		token_lst_get(t_token_lst *const tokens, char const *line)
+int		token_lst_get(t_token_lst *const tokens, char const *line,
+			t_env_lst *const env)
 		__attribute__((nonnull));
 
 void	token_lst_clear(t_token_lst *const tokens)

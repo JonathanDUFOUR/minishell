@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:41:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 19:42:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:35:44 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,22 @@
 #include "ft_string.h"
 #include "minishell.h"
 
-static char	*__get_expand(char const *str, size_t const len)
+static char	*__get_expand(char const *str, size_t const len,
+	t_env_lst *const env)
 {
-	char const	*name = ft_strndup(str, len);
+	char const	*name = ft_strndup(str + 1, len - 1);
+	char const	*value;
 
-	printf("%s:\n", __func__);
 	if (!name)
 		return (NULL);
-	printf("%15s: [%s]\n", "name", name);
+	if (*name == '?')
+		value = NULL;
+	else
+		value = get_env(name, env);
 	ft_memdel(&name);
-	return (ft_strdup("[expand]"));
+	if (!value)
+		return (ft_calloc(1, sizeof(char)));
+	return (ft_strdup(value));
 }
 
 /*
@@ -36,7 +42,8 @@ static char	*__get_expand(char const *str, size_t const len)
 	and append it to str
 	move ptr to the end of the variable name
 */
-int	append_expand(char **const str, char const **const ptr)
+int	append_expand(char **const str, char const **const ptr,
+	t_env_lst *const env)
 {
 	char	*tmp;
 	char	*append;
@@ -45,7 +52,7 @@ int	append_expand(char **const str, char const **const ptr)
 	if (**ptr != '$')
 		return (EXIT_SUCCESS);
 	len = varlen(*ptr);
-	append = __get_expand(*ptr, len);
+	append = __get_expand(*ptr, len, env);
 	if (!append)
 		return (EXIT_FAILURE);
 	tmp = *str;

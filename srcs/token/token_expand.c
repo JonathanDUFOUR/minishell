@@ -6,22 +6,20 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 02:02:36 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:50:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include "ft_io.h"
 #include "ft_mem.h"
-#include "ft_string.h"
 #include "minishell.h"
 #include "t_token.h"
 
 /*
 	Expand variables contained in the str of the given node
 */
-int	token_expand(t_token *const node)
+int	token_expand(t_token *const node, t_env_lst *const env)
 {
 	char const	*ptr = node->str;
 	char		*str;
@@ -36,7 +34,7 @@ int	token_expand(t_token *const node)
 			ft_memdel(&str);
 			return (EXIT_FAILURE);
 		}
-		if (append_expand(&str, &ptr))
+		if (append_expand(&str, &ptr, env))
 		{
 			ft_memdel(&str);
 			return (EXIT_FAILURE);

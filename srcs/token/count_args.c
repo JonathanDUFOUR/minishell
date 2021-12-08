@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 18:52:12 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/03 19:18:05 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:26:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_token_lst.h"
 
-// args peut valoir NULL s'il n'y a aucun arguments
+/*
+	Return the number of arguments given to the calling command
+	Return 0 if args is NULL
+*/
 unsigned int	count_args(t_token *args)
 {
 	unsigned int	nb_arg;

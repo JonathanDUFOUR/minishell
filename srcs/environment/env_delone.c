@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:25:59 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 14:46:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "t_env_lst.h"
 #include "ft_mem.h"
 
-void	env_delone(t_env_lst *env, t_env *elem)
+void	env_delone(t_env_lst *const env, t_env *elem)
 {
 	if (env->size == 0)
 		return ;
@@ -35,7 +35,7 @@ void	env_delone(t_env_lst *env, t_env *elem)
 		elem->next->prev = elem->prev;
 		elem->prev->next = elem->next;
 	}
-	free(elem->name);
+	free((void *)elem->name);
 	free(elem->value);
 	ft_bzero(elem, sizeof(t_env));
 	ft_memdel(&elem);

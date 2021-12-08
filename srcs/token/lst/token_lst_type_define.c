@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:32:23 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 03:31:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:07:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static void	__word_or_operator(t_token_lst *const tokens)
 	}
 }
 
+static bool	__is_already_command(t_token const *node)
+{
+	node = node->prev->prev->prev;
+	while (node && node->type != T_COMMAND && node->type != T_PIPE)
+		node = node->prev;
+	if (node && node->type == T_COMMAND)
+		return (true);
+	return (false);
+}
+
 static void	__which_word(t_token_lst *const tokens)
 {
 	t_token	*node;
@@ -51,10 +61,19 @@ static void	__which_word(t_token_lst *const tokens)
 		{
 			if (!node->prev)
 				node->type = T_COMMAND;
-			else if (node->prev->type == T_COMMAND
-				|| node->prev->type == T_ARGUMENT
-				|| (node->prev->prev && node->prev->prev->type == T_REDIRECT))
-				node->type = T_ARGUMENT;
+			else
+			{
+				if (node->prev->type == T_COMMAND
+					|| node->prev->type == T_ARGUMENT)
+					node->type = T_ARGUMENT;
+				if (node->prev->prev && node->prev->prev->type == T_REDIRECT)
+				{
+					if (__is_already_command(node))
+						node->type = T_ARGUMENT;
+					else
+						node->type = T_COMMAND;
+				}
+			}
 		}
 		node = node->next;
 	}
