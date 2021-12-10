@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:31:01 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:17:09 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct	s_env_lst
 t_env	*env_new(const char *str)
 		__attribute__((nonnull));
 
-void	env_addback(t_env_lst *env, t_env *new)
+void	env_addback(t_env_lst *env, t_env *new_elem)
 		__attribute__((nonnull));
 void	env_delone(t_env_lst *env, t_env *elem)
 		__attribute__((nonnull));

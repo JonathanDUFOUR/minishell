@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:42 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:39:46 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		append_expand(char **const str, char const **const ptr)
 		__attribute__((nonnull));
 int		append_literal(char **const str, char const **const ptr)
 		__attribute__((nonnull));
+int		msh_cd(t_env_lst *env, t_token *args)
+		__attribute__((nonnull (1)));
 int		msh_env(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 int		msh_export(t_env_lst *env, t_token *args)

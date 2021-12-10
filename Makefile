@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/07 14:24:03 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/10 16:40:18 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,12 @@ FT_STRING_A		:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_A}}
 ######################################
 SRC				=	\
 					${addprefix builtins/,	\
+						${addprefix cd/,	\
+							cleanpath.c		\
+							core.c			\
+							getcdpath.c		\
+							utils.c			\
+						}					\
 						${addprefix echo/,	\
 							core.c			\
 						}					\

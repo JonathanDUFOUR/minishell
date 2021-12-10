@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 12:24:50 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 14:43:32 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	msh_pwd(t_token *args)
 {
 	char	*buf;
 
-	if (args->type == T_OPTION)
+	if (args && args->type == T_OPTION)
 		return (error_option("pwd: ", args));
 	buf = NULL;
 	buf = getcwd(buf, 0);

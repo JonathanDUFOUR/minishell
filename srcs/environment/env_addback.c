@@ -6,23 +6,23 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 17:59:50 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 13:17:29 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_env_lst.h"
 
-void	env_addback(t_env_lst *env, t_env *new)
+void	env_addback(t_env_lst *env, t_env *new_elem)
 {
 	if (env->head == NULL)
 	{
-		env->head = new;
-		env->tail = new;
+		env->head = new_elem;
+		env->tail = new_elem;
 		env->size = 1;
 		return ;
 	}
-	env->tail->next = new;
-	new->prev = env->tail;
-	env->tail = new;
+	env->tail->next = new_elem;
+	new_elem->prev = env->tail;
+	env->tail = new_elem;
 	env->size++;
 }
