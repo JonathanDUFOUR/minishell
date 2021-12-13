@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/13 17:58:12 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/13 19:24:26 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,6 +122,7 @@ SRC				=	\
 					${addprefix util/,				\
 						append_expand.c				\
 						append_literal.c			\
+						free_tab2d.c				\
 						varlen.c					\
 					}								\
 					main.c

@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 17:42:00 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:50:37 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	msh_cd(t_env_lst *env, t_token *args)
 	if (count_args(args) > 1)
 	{
 		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	}
 	curpath = __setcurpath(env, args, &is_cdpath);
 	if (curpath == NULL)

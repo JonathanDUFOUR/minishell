@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 18:00:45 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:52:48 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ int		msh_unset(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 
 void	msh_echo(t_token *args);
+void	free_tab2d(char **tab)
+		__attribute__((nonnull));
 
 size_t	varlen(char const *str)
+		__attribute__((nonnull));
+
+char	*msh_str3join(char const *s1, char const *s2, char const *s3)
 		__attribute__((nonnull));
 
 #endif

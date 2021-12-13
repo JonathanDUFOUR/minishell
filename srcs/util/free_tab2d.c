@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_option.c                                     :+:      :+:    :+:   */
+/*   free_tab2d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 18:31:29 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/13 19:20:48 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/13 19:21:48 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include "t_token_lst.h"
-#include "ft_io.h"
 
-int	error_option(const char *str, t_token *args)
+void	free_tab2d(char **tab)
 {
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putchar_fd(args->str[0], STDERR_FILENO);
-	ft_putchar_fd(args->str[1], STDERR_FILENO);
-	ft_putendl_fd(": invalid option", STDERR_FILENO);
-	return (EXIT_SUCCESS);
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

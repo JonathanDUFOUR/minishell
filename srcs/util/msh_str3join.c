@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_option.c                                     :+:      :+:    :+:   */
+/*   msh_str3join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 18:31:29 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/13 19:51:21 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/13 19:51:59 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include "t_token_lst.h"
-#include "ft_io.h"
 
-int	error_option(const char *str, t_token *args)
+char	*msh_str3join(char const *s1, char const *s2, char const *s3)
 {
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putchar_fd(args->str[0], STDERR_FILENO);
-	ft_putchar_fd(args->str[1], STDERR_FILENO);
-	ft_putendl_fd(": invalid option", STDERR_FILENO);
-	return (EXIT_SUCCESS);
+	size_t	len;
+	char	*dest;
+	char	*d;
+
+	if (!s1 || !s2 || !s3)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
+	d = dest;
+	while (*s1)
+		*d++ = *s1++;
+	while (*s2)
+		*d++ = *s2++;
+	while (*s3)
+		*d++ = *s3++;
+	*d = 0;
+	return (dest);
 }

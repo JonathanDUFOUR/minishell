@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   env_to_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 18:32:07 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/13 19:08:16 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/13 19:53:04 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "t_env_lst.h"
-#include "t_token_lst.h"
-#include "ft_io.h"
+#include "minishell.h"
+#include "ft_mem.h"
 
-int	msh_env(t_env_lst *env, t_token *args)
+char	**env_to_envp(t_env_lst *env)
 {
+	char	**envp;
 	t_env	*elem;
+	int		i;
 
-	if (args != NULL)
-	{
-		if (args->type == T_OPTION)
-			return (error_option("env: ", args));
-		if (args->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			return (EXIT_SUCCESS);
-		}
-	}
+	envp = ft_calloc(env->size + 1, sizeof(char *));
+	if (envp == NULL)
+		return (NULL);
+	i = 0;
 	elem = env->head;
 	while (elem)
 	{
-		printf("%s=%s\n", elem->name, elem->value);
+		envp[i] = msh_str3join(elem->name, "=", elem->value);
+		if (envp[i] == NULL)
+		{
+			free_tab2d(envp);
+			return (NULL);
+		}
 		elem = elem->next;
+		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (envp);
 }
