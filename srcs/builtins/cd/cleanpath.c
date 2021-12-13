@@ -6,13 +6,11 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:57:06 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/10 18:02:21 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:41:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_cd.h"
-
-// SECURE toutes les allocations
 
 static void	__del_consecutive_slash(char *curpath)
 {
@@ -22,7 +20,6 @@ static void	__del_consecutive_slash(char *curpath)
 	src = curpath;
 	while (*src && *src == '/')
 		src++;
-	// FIX Je doit pouvoir utiliser ft_memcpy() mais il copie depuis la fin
 	curpath = ft_memmove(curpath, src, (ft_strlen(src) + 1));
 }
 
@@ -46,6 +43,8 @@ static int	__del_name_dotdot(char *curpath, char *tmp_curpath, char *cursor)
 	char	*tmp;
 
 	tmp = ft_strndup(curpath, (cursor - curpath) + 1);
+	if (tmp == NULL)
+		return (EXIT_FAILURE);
 	if (__isdirectory(tmp) == false)
 	{
 		ft_putstr_fd("cd: '", STDERR_FILENO);
@@ -61,7 +60,6 @@ static int	__del_name_dotdot(char *curpath, char *tmp_curpath, char *cursor)
 		tmp--;
 	if (*tmp == '/')
 		tmp++;
-	// FIX idem pour ft_memcpy()
 	ft_memmove(tmp, cursor + 4, ft_strlen(cursor + 4) + 1);
 	return (EXIT_SUCCESS);
 }
@@ -96,7 +94,6 @@ char	*__cleanpath(char *curpath)
 	{
 		if (*(cursor + 2) == '\0')
 			break ;
-		// FIX idem pour ft_memcpy()
 		if (cursor != curpath && *(cursor - 1) != '.')
 			cursor = ft_memmove(cursor, cursor + 2, ft_strlen(cursor + 2) + 1);
 		else

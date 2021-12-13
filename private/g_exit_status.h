@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   g_exit_status.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 17:51:39 by majacque         ###   ########.fr       */
+/*   Created: 2021/12/13 17:49:15 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/13 17:49:49 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <stdlib.h>
+#ifndef G_EXIT_STATUS_H
+# define G_EXIT_STATUS_H
 
-void	msh_exit(t_env_lst *env, t_token_lst *tokens, char *line)
-{
-	env_clear(env);
-	token_lst_clear(tokens);
-	free(line);
-	exit(exit_status);
-}
+int	exit_status;
+
+#endif

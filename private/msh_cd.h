@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/10 18:01:08 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:42:18 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "t_token.h"
 # include "minishell.h"
 # include "ft_io.h"
 # include "ft_mem.h"

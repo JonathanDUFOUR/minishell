@@ -6,20 +6,24 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/10 18:22:11 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:42:00 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_cd.h"
 
-// SECURE toutes les allocations
-
 static char	*__getdirectory(t_env_lst *env, t_token *args, int nb_arg)
 {
+	char	*directory;
+
 	if (nb_arg == 0)
 	{
 		if (get_env("HOME", env) != NULL)
-			return (ft_strdup(get_env("HOME", env)));
+		{
+			directory = ft_strdup(get_env("HOME", env));
+			if (directory == NULL)
+				return (NULL);
+		}
 		else
 		{
 			ft_putendl_fd("cd: HOME not set", STDERR_FILENO);
@@ -27,7 +31,12 @@ static char	*__getdirectory(t_env_lst *env, t_token *args, int nb_arg)
 		}
 	}
 	else
-		return (ft_strdup(args->str));
+	{
+		directory = ft_strdup(args->str);
+		if (directory == NULL)
+			return (NULL);
+	}
+	return (directory);
 }
 
 static char	*__getpwd(t_env_lst *env, char *curpath)
@@ -43,6 +52,8 @@ static char	*__getpwd(t_env_lst *env, char *curpath)
 			pwd_path = ft_strjoin(get_env("PWD", env), "/");
 		else
 			pwd_path = ft_strdup(get_env("PWD", env));
+		if (pwd_path == NULL)
+			return (NULL);
 		tmp_path = dest;
 		dest = ft_strjoin(pwd_path, tmp_path);
 		free(pwd_path);
@@ -61,11 +72,17 @@ static int	__updatepwd(t_env_lst *env, char *curpath)
 	if (get_env("PWD", env) != NULL)
 	{
 		tmp_path = ft_strjoin("OLDPWD=", get_env("PWD", env));
-		put_env(tmp_path, env);
+		if (tmp_path == NULL)
+			return (EXIT_FAILURE);
+		if (put_env(tmp_path, env) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 		free(tmp_path);
 	}
 	tmp_path = ft_strjoin("PWD=", curpath);
-	put_env(tmp_path, env);
+	if (tmp_path == NULL)
+		return (EXIT_FAILURE);
+	if (put_env(tmp_path, env) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	free(tmp_path);
 	return (EXIT_SUCCESS);
 }

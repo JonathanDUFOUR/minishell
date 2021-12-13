@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/10 16:40:18 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/13 17:58:12 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,9 @@ SRC				=	\
 							core.c			\
 						}					\
 						${addprefix env/,	\
+							core.c			\
+						}					\
+						${addprefix exit/,	\
 							core.c			\
 						}					\
 						${addprefix export/,\

@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/10 16:39:46 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:00:45 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "t_token_lst.h"
 # include "t_env_lst.h"
+# include "g_exit_status.h"
 # include <stddef.h>
 
 # ifndef PROMPT
@@ -29,6 +30,8 @@ int		msh_cd(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 int		msh_env(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
+void	msh_exit(t_env_lst *env, t_token_lst *tokens, char *line)
+		__attribute__((nonnull));
 int		msh_export(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 int		msh_pwd(t_token *args);
