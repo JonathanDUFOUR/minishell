@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 15:45:30 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 02:54:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,26 @@ int		token_lst_expand(t_token_lst *const tokens, t_env_lst *const env)
 int		token_lst_get(t_token_lst *const tokens, char const *line,
 			t_env_lst *const env)
 		__attribute__((nonnull));
+int		token_lst_merge(t_token_lst *const tokens)
+		__attribute__((nonnull));
+int		token_lst_sed(t_token_lst *const tokens)
+		__attribute__((nonnull));
+int		token_lst_split(t_token_lst *const tokens)
+		__attribute__((nonnull));
 
 void	token_lst_clear(t_token_lst *const tokens)
 		__attribute__((nonnull));
 void	token_lst_delone(t_token_lst *const tokens, t_token *const node)
 		__attribute__((nonnull));
-void	token_lst_print(t_token_lst *const tokens)
+void	token_lst_print(t_token_lst const *const tokens)
 		__attribute__((nonnull));
 void	token_lst_push_back(t_token_lst *const tokens, t_token *const node)
 		__attribute__((nonnull));
-void	token_lst_type_define(t_token_lst *const tokens)
+void	token_lst_remove_useless(t_token_lst *const tokens)
+		__attribute__((nonnull));
+void	token_lst_which_word(t_token_lst *const tokens)
+		__attribute__((nonnull));
+void	token_lst_word_or_operator(t_token_lst *const tokens)
 		__attribute__((nonnull));
 
 #endif

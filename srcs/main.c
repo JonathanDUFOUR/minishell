@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 15:42:26 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 03:50:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	__get_command_line(t_env_lst *const env)
 {
 	t_token_lst	tokens;
 
+	if (put_env("A=t -e -b <pouic>titi $koala", env) || put_env("B=s -la", env))
+		return (EXIT_FAILURE);
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	g_line = readline(PROMPT);
 	while (g_line)

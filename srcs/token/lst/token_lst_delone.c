@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:07:25 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 14:46:30 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:20:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	token_lst_delone(t_token_lst *const tokens, t_token *node)
 			node->prev->next = node->next;
 		}
 		free((void *)node->str);
+		sed_lst_clear(&node->seds);
 		ft_bzero(node, sizeof(t_token));
 		ft_memdel(&node);
 		--tokens->size;

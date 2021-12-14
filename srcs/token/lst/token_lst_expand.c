@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 15:46:13 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/13 16:06:49 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/13 20:20:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 #include "t_token_lst.h"
 
 /*
-	Expand each token's str of the tokens list
+	Expand each sed node contained in each token of the given tokens lst
 */
 int	token_lst_expand(t_token_lst *const tokens, t_env_lst *const env)
 {
-	t_token	*node;
+	t_token	*curr;
 
-	node = tokens->head;
-	while (node)
+	curr = tokens->head;
+	while (curr)
 	{
-		if (node->type != T_PIPE && node->type != T_REDIRECT
-			&& token_expand(node, env))
+		if (token_expand(curr, env))
 			return (EXIT_FAILURE);
-		node = node->next;
+		curr = curr->next;
 	}
 	return (EXIT_SUCCESS);
 }

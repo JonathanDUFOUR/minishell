@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 13:13:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:42:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_export(t_env_lst *env, t_token *args)
+int	msh_export(t_env_lst *const env, t_token *args)
 {
 	if (args == NULL)
 		return (__surprise());

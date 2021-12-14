@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 00:50:50 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 03:22:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:20:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 #include "t_token_lst.h"
 
 /*
-	Print data of the tokens list
-	Print data of every token in the list
+	Print data of the given tokens list
+	Print data of every node in the list
 */
-void	token_lst_print(t_token_lst *const tokens)
+void	token_lst_print(t_token_lst const *const tokens)
 {
-	t_token	*node;
-	size_t	i;
+	t_token const	*curr;
 
 	printf("%s:\n", __func__);
-	printf("%15s: %p\n", "tokens->head", tokens->head);
-	printf("%15s: %p\n", "tokens->tail", tokens->tail);
-	printf("%15s: %zu\n\n", "tokens->size", tokens->size);
-	node = tokens->head;
-	i = 0;
-	while (i < tokens->size)
+	if (1)
+		printf("%15s: %p\n", "tokens->head", tokens->head);
+	if (1)
+		printf("%15s: %p\n", "tokens->tail", tokens->tail);
+	if (1)
+		printf("%15s: %zu\n\n", "tokens->size", tokens->size);
+	curr = tokens->head;
+	if (curr)
+		printf("==========================================\n");
+	while (curr)
 	{
-		token_print(node);
-		node = node->next;
-		if (++i < tokens->size)
-			printf("------------------------------------------\n");
+		token_print(curr);
+		curr = curr->next;
+		printf("==========================================\n");
 	}
 }

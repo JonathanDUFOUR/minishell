@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_type.h                                           :+:      :+:    :+:   */
+/*   sed_lst_push_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 12:01:22 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/08 18:47:35 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/09 16:13:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_TYPE_H
-# define T_TYPE_H
-
-typedef enum e_type	t_type;
+#include "t_sed_lst.h"
 
 /*
-	Words:
-	- File
-	- Option
-	- Command
-	- Argument
-	- Delimiter
-
-	Operators:
-	- Pipe
-	- Redirect
+	Append `node` to the end of the seds list
+	Update the list's data accordingly
 */
-enum	e_type
+void	sed_lst_push_back(t_sed_lst *const seds, t_sed *const node)
 {
-	T_WORD,
-	T_FILE,
-	T_PIPE,
-	T_OPTION,
-	T_COMMAND,
-	T_ARGUMENT,
-	T_OPERATOR,
-	T_REDIRECT,
-	T_DELIMITER,
-	T_UNDEFINED,
-};
-
-#endif
+	if (!seds->size)
+	{
+		seds->head = node;
+		seds->tail = node;
+	}
+	else
+	{
+		seds->tail->next = node;
+		seds->tail = node;
+	}
+	++seds->size;
+}
