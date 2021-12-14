@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 11:13:40 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:54:57 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void			token_print(t_token const *const node)
 
 t_token			*token_get(char const *line)
 				__attribute__((nonnull));
-
 t_token			*token_new(char const *str, t_type const type)
 				__attribute__((nonnull (1)));
+
+char			**tokens_to_aa(t_token *command, size_t n)
+				__attribute__((nonnull));
 
 #endif

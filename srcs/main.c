@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 18:02:44 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:58:21 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	exit_status = 0;
+	g_exit_status = 0;
 	init_env(&env, envp);
 	ft_bzero(&tokens, sizeof(tokens));
 	line = readline(PROMPT);

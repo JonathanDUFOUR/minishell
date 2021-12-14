@@ -6,11 +6,12 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:51:21 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 19:51:59 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 10:59:36 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_string.h"
 
 char	*msh_str3join(char const *s1, char const *s2, char const *s3)
 {

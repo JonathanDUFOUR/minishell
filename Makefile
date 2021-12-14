@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/13 19:24:26 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/14 10:55:55 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,11 +118,13 @@ SRC				=	\
 						token_get.c					\
 						token_new.c					\
 						token_print.c				\
+						tokens_to_aa.c				\
 					}								\
 					${addprefix util/,				\
 						append_expand.c				\
 						append_literal.c			\
 						free_tab2d.c				\
+						msh_str3join.c				\
 						varlen.c					\
 					}								\
 					main.c

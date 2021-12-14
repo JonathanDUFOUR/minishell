@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 10:52:55 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 12:30:22 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ enum	e_type
 	T_FILE,
 	T_PIPE,
 	T_COMMAND,
+	T_BUILTIN,
 	T_ARGUMENT,
 	T_OPTION,
 	T_OPERATOR,
