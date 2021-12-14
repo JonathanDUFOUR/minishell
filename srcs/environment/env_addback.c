@@ -6,12 +6,15 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 17:59:50 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 18:49:47 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:22:16 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_env_lst.h"
 
+/*
+	Append the given `new_elem` at the end of the given env list `env`
+*/
 void	env_addback(t_env_lst *env, t_env *new_elem)
 {
 	if (env->head == NULL)

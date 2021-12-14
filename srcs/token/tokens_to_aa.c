@@ -6,15 +6,19 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:39 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 10:59:04 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:32:21 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minishell.h"
 #include "ft_string.h"
 #include "ft_mem.h"
 
+/*
+	Allocate a new array of pointers
+	and fill it with the values contained in the given token node `command`
+	and the next `n` token nodes
+*/
 char	**tokens_to_aa(t_token *command, size_t n)
 {
 	char	**tab;

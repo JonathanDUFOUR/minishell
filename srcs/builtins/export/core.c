@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 16:42:21 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:18:40 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include "t_env_lst.h"
-#include "t_token.h"
+#include "minishell.h"
 #include "ft_string.h"
 #include "ft_io.h"
 /* surprise */
@@ -21,14 +19,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "get_next_line.h"
-
-#ifndef VAR_CHARS
-# define VAR_CHARS	"\
-	abcdefghijklmnopqrstuvwxyz\
-	ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-	0123456789\
-	_"
-#endif
 
 int	__surprise(void)
 {

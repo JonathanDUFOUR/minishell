@@ -6,13 +6,12 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 16:39:08 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:18:50 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <unistd.h>
-#include <stdlib.h>
 #include <sys/wait.h>
 
 static int	__count_cmd(t_token_lst *tokens)

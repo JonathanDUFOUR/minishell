@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:03:49 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/08 14:50:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:26:04 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ static t_env	*__error_strndup(t_env *elem)
 	return (NULL);
 }
 
+/*
+	Allocate a new env node and set its `name` and `value` attributes
+	depending on content of the given `str` ("name=value")
+	Return the address of the new node
+	Return NULL upon failure
+*/
 t_env	*env_new(const char *str)
 {
 	t_env	*new;

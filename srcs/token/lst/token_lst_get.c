@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_get.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:54:29 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:19:05 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
-#include "t_token_lst.h"
 
 static void	__release_str_resources(t_token_lst *const tokens)
 {

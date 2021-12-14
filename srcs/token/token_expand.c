@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 02:45:30 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:18:54 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_io.h"
 #include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
-#include "t_token.h"
 
 static char	*__append_literal(char const *const str, char const **const ptr)
 {

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_which_word.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 02:52:58 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:45:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:09:37 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "ft_string.h"
 #include "t_token_lst.h"
-#include "g_builtin_name.h"
+#include "lookup_builtin.h"
 
 static void	__command_or_builtin(t_token *const node)
 {
 	register int	i;
 
 	i = 0;
-	while (g_builtin_name[i] && ft_strcmp(node->str, g_builtin_name[i]))
+	while (g_builtin[i].name && ft_strcmp(node->str, g_builtin[i].name))
 		++i;
-	if (g_builtin_name[i])
+	if (g_builtin[i].name)
 		node->type = T_BUILTIN;
 	else
 		node->type = T_COMMAND;

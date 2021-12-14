@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:27:46 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/09 21:34:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:27:44 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static char	**populate(char **output, char *ptr, char const *s, char c)
 	Split the given string `str` whenever char `c` is encountered
 	Return an array of strings resulting of the spliting
 */
+// TODO calculer la taille exacte sans surplus inutile
 char	**ft_split(char const *str, char c)
 {
 	char	**output;

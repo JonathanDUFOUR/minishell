@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_builtin_name.h                                   :+:      :+:    :+:   */
+/*   sgt_line.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 03:10:32 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:12:23 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/14 20:00:31 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/14 20:00:42 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef G_BUILTIN_NAME_H
-# define G_BUILTIN_NAME_H
+#ifndef SGT_LINE_H
+# define SGT_LINE_H
 
-# include <stddef.h>
-
-static char const	*g_builtin_name[] = {
-	"cd",
-	"echo",
-	"env",
-	"exit",
-	"export",
-	"pwd",
-	"unset",
-	NULL
-};
+char	**sgt_line(void);
 
 #endif

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_line.h                                           :+:      :+:    :+:   */
+/*   sgt_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 12:38:31 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/06 12:39:26 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/14 20:01:38 by majacque          #+#    #+#             */
+/*   Updated: 2021/12/14 20:02:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef G_LINE_H
-# define G_LINE_H
+#include <stddef.h>
+#include "sgt_line.h"
 
-# include <stddef.h>
+char	**sgt_line(void)
+{
+	static char	*line = NULL;
 
-static char const	*g_line = NULL;
-
-#endif
+	return (&line);
+}

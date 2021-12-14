@@ -6,13 +6,19 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:51:21 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 10:59:36 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:34:33 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_string.h"
 
+/*
+	Allocate a new string, fill it with the content of the given string `s1`,
+	append the content of the given string `s2` and then
+	append the content of the given string `s3`
+	Return the address of the new string or NULL upon failure
+*/
 char	*msh_str3join(char const *s1, char const *s2, char const *s3)
 {
 	size_t	len;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:25:59 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/08 14:46:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:24:04 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "t_env_lst.h"
 #include "ft_mem.h"
 
+/*
+	Release the resources of the given env node `elem`
+	Update the env list data accordingly
+*/
 void	env_delone(t_env_lst *const env, t_env *elem)
 {
 	if (env->size == 0)

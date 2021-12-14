@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/14 18:58:53 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/14 20:03:51 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,7 +150,8 @@ SRC				=	\
 						msh_str3join.c						\
 						namelen.c							\
 					}										\
-					main.c
+					main.c									\
+					sgt_line.c
 
 ######################################
 #            OBJECT FILES            #

@@ -6,13 +6,13 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:49:15 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 10:57:58 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:49:25 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef G_EXIT_STATUS_H
 # define G_EXIT_STATUS_H
 
-int	g_exit_status;
+extern int	g_exit_status;
 
 #endif

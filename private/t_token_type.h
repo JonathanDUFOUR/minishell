@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 18:48:41 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 19:36:30 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ enum	e_token_type
 	T_OPTION,
 	T_BUILTIN,
 	T_COMMAND,
-	T_BUILTIN,
 	T_ARGUMENT,
 	T_OPERATOR,
 	T_REDIRECT,
