@@ -6,13 +6,14 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:08:16 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 19:53:04 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:53:59 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "ft_mem.h"
 
+// TODO faire comme le split de jo --> 1 seul malloc
 char	**env_to_envp(t_env_lst *env)
 {
 	char	**envp;
