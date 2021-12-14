@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 18:31:29 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:52:42 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include "t_token_lst.h"
 #include "ft_io.h"
 
+/*
+	Output an invalid option error message on stderr
+	Always return EXIT_FAILURE
+*/
 int	error_option(const char *str, t_token *args)
 {
 	ft_putstr_fd(str, STDERR_FILENO);

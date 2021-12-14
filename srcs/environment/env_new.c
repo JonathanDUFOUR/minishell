@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:03:49 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/06 15:00:08 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/08 14:50:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static size_t	__value_len(const char *variable)
 
 static t_env	*__error_strndup(t_env *elem)
 {
-	free(elem->name);
+	free((void *)elem->name);
 	free(elem);
 	return (NULL);
 }

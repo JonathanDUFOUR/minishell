@@ -5,44 +5,103 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 02:02:36 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/14 02:45:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include "ft_io.h"
 #include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
 #include "t_token.h"
 
-/*
-	Expand variables contained in the str of the given node
-*/
-int	token_expand(t_token *const node)
+static char	*__append_literal(char const *const str, char const **const ptr)
+{
+	register char const	*end = *ptr;
+	char				*output;
+	char				*tmp;
+
+	while (*end && (*end != '$' || !ft_strchr(VAR_CHARS, *(end + 1))))
+		++end;
+	tmp = ft_strndup(*ptr, end - *ptr);
+	if (!tmp)
+		return (NULL);
+	*ptr = end;
+	if (!str)
+		return (tmp);
+	output = ft_strjoin(str, tmp);
+	ft_memdel(&tmp);
+	return (output);
+}
+
+static char	*__append_value(char const *const str, char const **const ptr,
+	t_env_lst *const env)
+{
+	char	*value;
+	char	*name;
+	size_t	len;
+
+	if (!**ptr)
+		return (ft_strdup(str));
+	len = namelen(++*ptr);
+	name = ft_strndup(*ptr, len);
+	if (!name)
+		return (NULL);
+	value = get_env(name, env);
+	ft_memdel(&name);
+	*ptr += len;
+	if (!value)
+		return (ft_strdup(str));
+	return (ft_strjoin(str, value));
+}
+
+static int	__expand_str(t_sed *const node, t_env_lst *const env)
 {
 	char const	*ptr = node->str;
-	char		*str;
+	char const	*str;
+	char const	*tmp;
 
-	str = ft_ctoa(0);
-	if (!str)
-		return (EXIT_FAILURE);
+	str = NULL;
 	while (*ptr)
 	{
-		if (append_literal(&str, &ptr))
-		{
-			ft_memdel(&str);
+		tmp = str;
+		str = __append_literal(str, &ptr);
+		ft_memdel(&tmp);
+		if (!str)
 			return (EXIT_FAILURE);
-		}
-		if (append_expand(&str, &ptr))
-		{
-			ft_memdel(&str);
+		tmp = str;
+		str = __append_value(str, &ptr, env);
+		ft_memdel(&tmp);
+		if (!str)
 			return (EXIT_FAILURE);
-		}
 	}
-	ft_memdel(&node->str);
+	if (!str)
+		str = ft_ctoa(0);
+	if (!str)
+		return (EXIT_FAILURE);
+	free((void *)node->str);
 	node->str = str;
+	return (EXIT_SUCCESS);
+}
+
+/*
+	Expand each sed node of the given token node
+*/
+int	token_expand(t_token *const node, t_env_lst *const env)
+{
+	t_sed	*curr;
+
+	if (node->type == T_DELIMITER)
+		return (EXIT_SUCCESS);
+	curr = node->seds.head;
+	while (curr)
+	{
+		if ((curr->type == DQUOTED || curr->type == UQUOTED)
+			&& __expand_str(curr, env))
+			return (EXIT_FAILURE);
+		curr = curr->next;
+	}
 	return (EXIT_SUCCESS);
 }

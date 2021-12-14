@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:15 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:49:11 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_unset(t_env_lst *env, t_token *args)
+int	msh_unset(t_env_lst *const env, t_token *args)
 {
 	if (args == NULL)
 		return (EXIT_SUCCESS);

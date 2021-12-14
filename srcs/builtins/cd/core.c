@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 18:50:37 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:49:13 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	msh_cd(t_env_lst *env, t_token *args)
 		return (EXIT_FAILURE);
 	free(curpath);
 	if (is_cdpath == true)
-		if (msh_pwd(NULL) == EXIT_FAILURE)
+		if (msh_pwd(env, NULL) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   varlen.c                                           :+:      :+:    :+:   */
+/*   sed_lst_push_back.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 22:22:34 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 03:15:58 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/08 18:47:35 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/09 16:13:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_io.h"
-#include "ft_string.h"
-
-#ifndef VAR_CHARS
-# define VAR_CHARS	"\
-	abcdefghijklmnopqrstuvwxyz\
-	ABCDEFGHIJKLMNOPQRSTUVWXYZ\
-	0123456789\
-	_"
-#endif
+#include "t_sed_lst.h"
 
 /*
-	Return the length of the variable name str is on
+	Append `node` to the end of the seds list
+	Update the list's data accordingly
 */
-size_t	varlen(char const *str)
+void	sed_lst_push_back(t_sed_lst *const seds, t_sed *const node)
 {
-	register char const	*ptr = str;
-
-	++ptr;
-	if (ft_strchr("$?", *ptr))
-		return (2);
-	while (*ptr && ft_strchr(VAR_CHARS, *ptr))
-		++ptr;
-	return (ptr - str);
+	if (!seds->size)
+	{
+		seds->head = node;
+		seds->tail = node;
+	}
+	else
+	{
+		seds->tail->next = node;
+		seds->tail = node;
+	}
+	++seds->size;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/07 15:08:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:42:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "t_token.h"
 #include "ft_string.h"
 #include "ft_io.h"
-//surprise
+/* surprise */
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -68,7 +68,7 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_export(t_env_lst *env, t_token *args)
+int	msh_export(t_env_lst *const env, t_token *args)
 {
 	if (args == NULL)
 		return (__surprise());

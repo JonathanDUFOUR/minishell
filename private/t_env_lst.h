@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:31:01 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/08 13:17:09 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:47:31 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ t_env	*env_new(const char *str)
 
 void	env_addback(t_env_lst *env, t_env *new_elem)
 		__attribute__((nonnull));
-void	env_delone(t_env_lst *env, t_env *elem)
+void	env_delone(t_env_lst *const env, t_env *elem)
 		__attribute__((nonnull));
-void	env_clear(t_env_lst *env)
+void	env_clear(t_env_lst *const env)
 		__attribute__((nonnull));
-
-int		init_env(t_env_lst *env, char **envp)
-		__attribute__((nonnull));
-int		put_env(const char *str, t_env_lst *env)
+void	env_print(t_env_lst *const env)
 		__attribute__((nonnull));
 
-void	unset_env(const char *str, t_env_lst *env)
+int		init_env(t_env_lst *const env, char const *const *envp)
+		__attribute__((nonnull));
+int		put_env(const char *str, t_env_lst *const env)
 		__attribute__((nonnull));
 
-char	*get_env(const char *name, t_env_lst *env)
+void	unset_env(const char *str, t_env_lst *const env)
+		__attribute__((nonnull));
+
+char	*get_env(const char *name, t_env_lst *const env)
 		__attribute__((nonnull));
 
 #endif

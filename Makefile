@@ -6,7 +6,7 @@
 #    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/14 10:55:55 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/14 18:58:53 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,48 +85,71 @@ SRC				=	\
 						${addprefix export/,\
 							core.c			\
 						}					\
-        				${addprefix pwd/,	\
-         					core.c			\
-        				}					\
+						${addprefix pwd/,	\
+							core.c			\
+						}					\
 						${addprefix unset/,	\
 							core.c			\
 						}					\
-      				} 						\
-					${addprefix environment/,	\
-						env_addback.c			\
-						env_clear.c				\
-						env_delone.c			\
-						env_new.c				\
-						get_env.c				\
-						init_env.c				\
-						put_env.c				\
-						unset_env.c				\
-					}							\
-					${addprefix token/,				\
-						${addprefix lst/,			\
-							token_lst_clear.c		\
-							token_lst_delone.c		\
-							token_lst_expand.c		\
-							token_lst_get.c			\
-							token_lst_print.c		\
-							token_lst_push_back.c	\
-							token_lst_type_define.c	\
-						}							\
-						count_args.c				\
-						error_option.c				\
-						token_expand.c				\
-						token_get.c					\
-						token_new.c					\
-						token_print.c				\
-						tokens_to_aa.c				\
-					}								\
-					${addprefix util/,				\
-						append_expand.c				\
-						append_literal.c			\
-						free_tab2d.c				\
-						msh_str3join.c				\
-						varlen.c					\
-					}								\
+					}						\
+					${addprefix environment/,				\
+						env_addback.c						\
+						env_clear.c							\
+						env_delone.c						\
+						env_new.c							\
+						env_print.c							\
+						get_env.c							\
+						init_env.c							\
+						put_env.c							\
+						unset_env.c							\
+					}										\
+					${addprefix sed/,						\
+						${addprefix lst/,					\
+							sed_lst_add_back.c				\
+							sed_lst_clear.c					\
+							sed_lst_delone.c				\
+							sed_lst_print.c					\
+							sed_lst_push_back.c				\
+						}									\
+						sed_new.c							\
+						sed_prev.c							\
+						sed_print.c							\
+						sed_size.c							\
+					}										\
+					${addprefix signal/,					\
+						sigint.c							\
+						sigquit.c							\
+					}										\
+					${addprefix token/,						\
+						${addprefix lst/,					\
+							token_lst_clear.c				\
+							token_lst_delone.c				\
+							token_lst_expand.c				\
+							token_lst_get.c					\
+							token_lst_merge.c				\
+							token_lst_print.c				\
+							token_lst_push_back.c			\
+							token_lst_remove_useless.c		\
+							token_lst_sed.c					\
+							token_lst_split.c				\
+							token_lst_which_word.c			\
+							token_lst_word_or_operator.c	\
+						}									\
+						count_args.c						\
+						error_option.c						\
+						token_expand.c						\
+						token_get.c							\
+						token_merge.c						\
+						token_new.c							\
+						token_print.c						\
+						token_sed.c							\
+						tokens_to_aa.c						\
+					}										\
+					${addprefix util/,						\
+						free_tab2d.c						\
+						msh_str3join.c						\
+						namelen.c							\
+					}										\
 					main.c
 
 ######################################
@@ -155,10 +178,6 @@ LDFLAGS			+=	-L${FT_STRING_DIR} -lft_string
 ifeq (${DEBUG}, 1)
 	CFLAGS		+=	-g
 endif
-
-VG_OPT			=	--suppressions=ignoreliberror
-VG_OPT			+=	--leak-check=full
-VG_OPT			+=	--show-leak-kinds=all
 
 #######################################
 #                RULES                #
@@ -198,8 +217,7 @@ fre: fclean all
 
 -include coffee.mk
 -include norm.mk
+-include valgrind.mk
+-include update.mk
 
-valgrind: ${NAME}
-	$@ ${VG_OPT} ./$<
-
-.PHONY: all clean fclean re fre valgrind
+.PHONY: all clean fclean re fre

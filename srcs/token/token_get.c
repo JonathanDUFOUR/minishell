@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 03:18:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/05 02:25:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:23:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static char	*__word_get(char const *line)
 	Return a new token node that:
 	- contains the appropriated str with no expansion
 	- has the type T_UNDEFINED
+	- has an empty seds list
 	Upon failure, return NULL
 */
 t_token	*token_get(char const *line)
@@ -83,5 +84,5 @@ t_token	*token_get(char const *line)
 		str = __word_get(line);
 	if (!str)
 		return (NULL);
-	return (token_new(str, T_UNDEFINED));
+	return (token_new(str, T_UNDEFINED, (t_sed_lst){0}));
 }
