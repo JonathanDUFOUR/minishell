@@ -33,8 +33,6 @@ static int	__get_command_line(t_env_lst *const env)
 {
 	t_token_lst	tokens;
 
-	if (put_env("A=t -e -b <pouic>titi $koala", env) || put_env("B=s -la", env))
-		return (EXIT_FAILURE);
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	g_line = readline(PROMPT);
 	while (g_line)
