@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 02:54:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/15 21:55:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		token_lst_merge(t_token_lst *const tokens)
 int		token_lst_sed(t_token_lst *const tokens)
 		__attribute__((nonnull));
 int		token_lst_split(t_token_lst *const tokens)
+		__attribute__((nonnull));
+int		token_lst_syntax_check(t_token_lst *const tokens, char const *program)
 		__attribute__((nonnull));
 
 void	token_lst_clear(t_token_lst *const tokens)

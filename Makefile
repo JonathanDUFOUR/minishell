@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/14 20:03:51 by majacque         ###   ########.fr        #
+#    Updated: 2021/12/15 23:03:36 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,7 @@ SRC				=	\
 							token_lst_remove_useless.c		\
 							token_lst_sed.c					\
 							token_lst_split.c				\
+							token_lst_syntax_check.c		\
 							token_lst_which_word.c			\
 							token_lst_word_or_operator.c	\
 						}									\
@@ -150,8 +151,7 @@ SRC				=	\
 						msh_str3join.c						\
 						namelen.c							\
 					}										\
-					main.c									\
-					sgt_line.c
+					main.c
 
 ######################################
 #            OBJECT FILES            #
