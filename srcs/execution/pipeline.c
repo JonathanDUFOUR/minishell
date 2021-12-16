@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 19:18:50 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:42:11 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ static int	__count_cmd(t_token_lst *tokens)
 
 static t_token	*__next_command(t_token *elem)
 {
-	elem = elem->next;
+/* 	elem = elem->next;
 	while (elem && (elem->type != T_COMMAND && elem->type != T_BUILTIN))
 		elem = elem->next;
+	return (elem); */
+	while (elem && elem->type != T_PIPE)
+		elem = elem->next;
+	if (elem)
+		return (elem->next);
 	return (elem);
 }
 
-static char **get_path_env(t_env_lst *env)
+static char **__get_path_env(t_env_lst *env)
 {
 	char	**path;
 	char	*env_path;
@@ -63,35 +68,31 @@ int	pipeline(t_token_lst *tokens, t_env_lst *env)
 	cmd_n = __count_cmd(tokens);
 	i = 0;
 	/*recuperer PATH avec un split*/
-	path = get_path_env(env);
+	path = __get_path_env(env); // SECURE get_path_env()
 	/*recuperer l'environnemnt avec env_to_envp*/
-	envp = env_to_envp(env);
+	envp = env_to_envp(env); // SECURE env_to_envp()
 	while (i < cmd_n)
 	{
-		if (elem->type == T_COMMAND)
-		{ // TODO dans un fonction()
-			pid = fork();
-			if (pid == -1)
-				return (EXIT_FAILURE);
-			if (pid == 0)
-			{
-				// TODO open + redirections
-				// TODO close les fd pas utiliser
-				// TODO exec
-				/*exec*/
-				/*|--> recuperer la commande avec tokens_to_aa()*/
-				/*|--> recuperer le chemin absolu vers la commande*/
-				/*|--> execve*/
-			}
-			if (waitpid(pid, &status, 0) == -1)
-			{
-				/*erreur*/
-				return (EXIT_FAILURE);
-			}
-		}
-		else
+		// TODO fork dans un fonction()
+		pid = fork();
+		if (pid == -1)
+			return (EXIT_FAILURE);
+		if (pid == 0)
 		{
-			// TODO exec le builtin avec une lookup table
+			// TODO open + redirections
+			if (redirections(elem, ) == EXIT_FAILURE)
+				exit(EXIT_FAILURE);
+			// TODO close les fd pas utiliser
+			// TODO exec
+			/*exec*/
+			/*|--> recuperer la commande avec tokens_to_aa()*/
+			/*|--> recuperer le chemin absolu vers la commande*/
+			/*|--> execve*/
+		}
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			/*erreur*/
+			return (EXIT_FAILURE);
 		}
 		elem = __next_command(elem);
 		i++;
