@@ -6,13 +6,18 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 03:01:12 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/15 00:22:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:08:45 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <unistd.h>
 
+/*
+	Print the given uint8_t `byte` in binary on the given file descriptor `fd`
+	Return the number of printed bytes
+	Return -1 upon failure
+*/
 int	ft_putbyte_fd(uint8_t const byte, int const fd)
 {
 	int	i;

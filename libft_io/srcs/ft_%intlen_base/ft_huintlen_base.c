@@ -6,12 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 23:16:03 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/15 00:32:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:24:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type/t_int.h"
 
+/*
+	Return the length of the given t_huint `nb` in base `base_len`
+*/
 t_uint	ft_huintlen_base(t_huint nb, t_uint const base_len)
 {
 	t_uint	len;

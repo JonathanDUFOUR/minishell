@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putwchar_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 19:04:21 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/15 19:42:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:11:09 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <stdint.h>
 #include <unistd.h>
 
+/*
+	Print the given wild character `wc` on the given file descriptor `fd`
+	Return the number of printed bytes
+	Return -1 upon failure
+*/
 int	ft_putwchar_fd(wchar_t const wc, int const fd)
 {
 	char	buff[4];

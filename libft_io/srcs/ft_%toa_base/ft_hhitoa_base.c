@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 00:02:23 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/21 19:06:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:48:46 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_io.h"
 
+/*
+	Allocate a new string and fill it with the digits of the given t_hhint `nb`
+	converted in the given base
+	Return the address of the new string
+	Return NULL upon failure
+*/
 char	*ft_hhitoa_base(t_hhint nb, char const *base)
 {
 	char	*output;

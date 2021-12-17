@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:12:50 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/25 22:37:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:08:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_io.h"
 
+/*
+	Print the first `size` bytes pointed by the given pointer `addr` in binary
+	on the given file descriptor `fd`
+	Return the number of printed bytes
+	Return -1 upon failure
+*/
 int	ft_putbytes_fd(void *addr, size_t size, int const fd)
 {
 	int		ret;

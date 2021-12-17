@@ -6,12 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 22:55:14 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/20 07:33:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:53:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 
+/*
+	Return the t_hhint value of the first number
+	encountered in the given string `str`
+	It doesn't handle overflows
+*/
 t_hhint	ft_atohhi(char const *str)
 {
 	t_hhint	output;

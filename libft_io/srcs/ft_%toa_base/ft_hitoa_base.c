@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 00:34:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/21 19:06:42 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:49:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_io.h"
 
+/*
+	Allocate a new string and fill it with the digits of the given t_hint `nb`
+	converted in the given base
+	Return the address of the new string
+	Return NULL upon failure
+*/
 char	*ft_hitoa_base(t_hint nb, char const *base)
 {
 	char	*output;

@@ -21,6 +21,10 @@ static size_t	ft_strlen(char const *str)
 	return (ptr - str);
 }
 
+/*
+	Return true if the given string `base` is a valid base
+	Return false else
+*/
 bool	ft_isvalid(char const *base)
 {
 	char const	*ptr;

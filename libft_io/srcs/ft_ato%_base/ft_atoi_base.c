@@ -6,12 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:21:19 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/20 07:51:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:56:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 
+/*
+	Return the int value of the first number in the given base
+	encountered in the given string `str`
+	It doesn't handle overflows
+*/
 int	ft_atoi_base(char const *str, char const *base)
 {
 	int	output;

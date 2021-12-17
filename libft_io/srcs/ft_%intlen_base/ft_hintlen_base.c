@@ -6,12 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 23:14:05 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/21 13:32:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:24:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "type/t_int.h"
 
+/*
+	Return the length of the given t_hint `nb` in base `base_len`
+*/
 t_uint	ft_hintlen_base(t_hint nb, t_uint const base_len)
 {
 	t_huint	abs;

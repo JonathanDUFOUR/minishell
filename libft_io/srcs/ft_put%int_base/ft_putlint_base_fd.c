@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 18:03:29 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/27 00:12:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:17:03 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_io.h"
 
+/*
+	Print the given t_lint `nb` converted in the given base
+	on the given file descriptor `fd`
+	Return the number of printed bytes
+	Return -1 upon failure
+*/
 int	ft_putlint_base_fd(t_lint const nb, char const *base, int const fd)
 {
 	int		ret;

@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 00:39:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/21 19:07:25 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:49:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_io.h"
 
+/*
+	Allocate a new string and fill it with the digits of the given t_llint `nb`
+	converted in the given base
+	Return the address of the new string
+	Return NULL upon failure
+*/
 char	*ft_llitoa_base(t_llint nb, char const *base)
 {
 	char	*output;

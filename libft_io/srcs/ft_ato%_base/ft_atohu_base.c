@@ -6,12 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 19:01:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/20 07:50:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:56:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 
+/*
+	Return the t_huint value of the first number in the given base
+	encountered in the given string `str`
+	It doesn't handle overflows
+*/
 t_huint	ft_atohu_base(char const *str, char const *base)
 {
 	t_huint	output;

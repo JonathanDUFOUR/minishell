@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/26 02:19:11 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/26 00:52:29 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 20:13:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ static void	fill_buff(t_uint abs, char *buff)
 	}
 }
 
+/*
+	Print the given int `nb` on the given file descriptor `fd`
+	Return the number of printed bytes
+	Return -1 upon failure
+*/
 int	ft_putint_fd(int const nb, int const fd)
 {
 	char	buff[11];

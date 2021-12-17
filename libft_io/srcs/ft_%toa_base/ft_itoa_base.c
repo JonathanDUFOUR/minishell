@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:23:38 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/21 19:16:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:49:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "ft_io.h"
 
+/*
+	Allocate a new string and fill it with the digits of the given int `nb`
+	converted in the given base
+	Return the address of the new string
+	Return NULL upon failure
+*/
 char	*ft_itoa_base(int nb, char const *base)
 {
 	char	*output;

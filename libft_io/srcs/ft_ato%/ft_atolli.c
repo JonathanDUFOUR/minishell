@@ -6,12 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 22:37:00 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/14 23:32:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:54:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 
+/*
+	Return the t_llint value of the first number
+	encountered in the given string `str`
+	It doesn't handle overflows
+*/
 t_llint	ft_atolli(char const *str)
 {
 	t_llint	output;
