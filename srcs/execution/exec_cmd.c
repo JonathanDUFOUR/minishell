@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/17 18:58:58 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:18:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
 	// TODO close les fd pas utiliser
 	// TODO exec
 	/*exec*/
-	/*|--> recuperer la commande avec tokens_to_aa()*/
+	/*|--> recuperer la commande avec token_get_cmd_opt_arg()*/
 	/*|--> recuperer le chemin absolu vers la commande*/
 	/*|--> execve*/
 	return (__return_exec_cmd(path, envp, EXIT_SUCCESS));
