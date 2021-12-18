@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 16:58:41 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:06:20 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char **__get_path_env(t_env_lst *env)
 	return (path);
 }
 
-// TODO voir s'il serait pas mieux de mettre les tubes, envp, path dans une structure
+// TODO voir s'il serait pas mieux de mettre les tubes, envp, path et les fd des fichiers open dans une structure
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
 	t_token	*elem;
