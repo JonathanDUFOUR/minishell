@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/18 17:46:29 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/18 20:20:07 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC				=	\
 						env_delone.c						\
 						env_new.c							\
 						env_print.c							\
+						env_to_envp.c						\
 						get_env.c							\
 						init_env.c							\
 						put_env.c							\

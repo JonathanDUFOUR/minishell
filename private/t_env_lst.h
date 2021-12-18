@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 15:31:01 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 18:47:31 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:21:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	unset_env(const char *str, t_env_lst *const env)
 		__attribute__((nonnull));
 
 char	*get_env(const char *name, t_env_lst *const env)
+		__attribute__((nonnull));
+
+char	**env_to_envp(t_env_lst const *const env)
 		__attribute__((nonnull));
 
 #endif

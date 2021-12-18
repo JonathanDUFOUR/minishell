@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:08:16 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 20:16:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:21:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	**__populate(char **output, t_env_lst const *const env)
 	Return the address of the new array of pointers
 	Return NULL upon failure
 */
-char	**env_to_envp(t_env_lst *const env)
+char	**env_to_envp(t_env_lst const *const env)
 {
 	char	**output;
 	size_t	size;
