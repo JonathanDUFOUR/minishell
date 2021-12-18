@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:39 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 19:12:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:44:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 /* V1 */
 
-static void	__get_size_and_len(t_token const *node, size_t *const size,
-	size_t *const len)
+static void	__get_size_and_len(size_t *const size, size_t *const len,
+	t_token const *node)
 {
 	*size = 0;
 	*len = 0;
@@ -61,8 +61,11 @@ static char	**__populate(char **output, t_token const *node)
 
 /*
 	Allocate a new array of pointers
-	and fill it with the strings contained in the given token node `command`
-	and the next `n` token nodes
+	and fill it with the strings contained in the token nodes starting at
+	the given token `node` that are commands, options, or arguments, and ending
+	on first pipe encountered, or on null next token
+	Return the address of the new array of pointers
+	Return NULL upon failure
 */
 char	**token_get_cmd_opt_arg(t_token const *const node)
 {
@@ -70,7 +73,7 @@ char	**token_get_cmd_opt_arg(t_token const *const node)
 	size_t	size;
 	size_t	len;
 
-	__get_size_and_len(node, &size, &len);
+	__get_size_and_len(&size, &len, node);
 	output = malloc((size + 1) * sizeof(char *) + (len + size) * sizeof(char));
 	if (!output)
 		return (NULL);
@@ -80,7 +83,7 @@ char	**token_get_cmd_opt_arg(t_token const *const node)
 
 /* V2 */
 /*
-static void	__get_size(t_token const *node, size_t *const size)
+static void	__get_size(size_t *const size, t_token const *node)
 {
 	*size = 0;
 	while (node && node->type != T_PIPE)
@@ -117,7 +120,7 @@ char	**token_get_cmd_opt_arg(t_token const *const node)
 	char	**output;
 	size_t	size;
 
-	__get_size(node, &size);
+	__get_size(&size, node);
 	output = malloc((size + 1) * sizeof(char *));
 	if (!output)
 		return (NULL);
