@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_clear.c                                  :+:      :+:    :+:   */
+/*   token_delone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:01:16 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/18 16:37:17 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/18 16:42:37 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/18 17:08:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#include "ft_mem.h"
+#include "t_token.h"
 
 /*
-	Release all resources contained in the given tokens list
-	and update the list's data
+	Release all the resources of the given token `node`
+	Relink its prev/next if needed
 */
-void	token_lst_clear(t_token_lst *const tokens)
+void	token_delone(t_token *node)
 {
-	t_token	*next;
-
-	while (tokens->size)
-	{
-		next = tokens->head->next;
-		token_lst_delone(tokens, tokens->head);
-		tokens->head = next;
-	}
-	tokens->tail = NULL;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	ft_memdel(&node->str);
+	sed_lst_clear(&node->seds);
+	ft_bzero(node, sizeof(t_token));
+	ft_memdel(&node);
 }

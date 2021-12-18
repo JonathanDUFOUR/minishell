@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/15 23:03:36 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/18 17:07:58 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +138,8 @@ SRC				=	\
 						}									\
 						count_args.c						\
 						error_option.c						\
+						token_clear.c						\
+						token_delone.c						\
 						token_expand.c						\
 						token_get.c							\
 						token_merge.c						\

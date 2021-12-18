@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_clear.c                                  :+:      :+:    :+:   */
+/*   token_clear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 14:01:16 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/18 16:37:17 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/18 16:35:55 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/18 16:56:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#include "t_token.h"
 
 /*
-	Release all resources contained in the given tokens list
-	and update the list's data
+	Release all the resources contained in the list the given token `node` is in
 */
-void	token_lst_clear(t_token_lst *const tokens)
+void	token_clear(t_token *const node)
 {
+	t_token	*curr;
+	t_token	*prev;
 	t_token	*next;
 
-	while (tokens->size)
+	curr = node->prev;
+	while (curr)
 	{
-		next = tokens->head->next;
-		token_lst_delone(tokens, tokens->head);
-		tokens->head = next;
+		prev = curr->prev;
+		token_delone(curr);
+		curr = prev;
 	}
-	tokens->tail = NULL;
+	curr = node->next;
+	while (curr)
+	{
+		next = curr->next;
+		token_delone(curr);
+		curr = next;
+	}
+	token_delone(node);
 }

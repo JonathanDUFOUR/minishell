@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_token.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:52:43 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:08:44 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int		token_merge(t_token *const node)
 int		token_sed(t_token *const node)
 		__attribute__((nonnull));
 
+void	token_clear(t_token *const node)
+		__attribute__((nonnull));
+void	token_delone(t_token *node)
+		__attribute__((nonnull));
 void	token_print(t_token const *const node)
 		__attribute__((nonnull));
 
