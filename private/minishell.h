@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:49:51 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:59:12 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 0123456789\
 _"
 # endif
+
+typedef int	t_tube[2];
+
+int		pipeline(t_token_lst *tokens, t_env_lst *env)
+		__attribute__((nonnull));
+int		setup_fork(t_token *token, t_env_lst *env, t_tube in, t_tube out)
+		__attribute__((nonnull));
+int		exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
+		__attribute__((nonnull));
 
 int		set_sigint_handle(void);
 int		set_sigquit_handle(void);

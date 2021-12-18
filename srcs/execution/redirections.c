@@ -3,74 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/16 17:44:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:53:54 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redirections.h"
 #include "ft_string.h"
-#include <stdbool.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-// stdin_fileno
 #include <unistd.h>
 
-static bool	__is_redirect_in(char *str)
+static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
 {
-	if (ft_strcmp("<", str) == 0)
-		return (true);
-	if (ft_strcmp("<<", str) == 0)
-		return (true);
-	return (false);
-}
-
-static bool	__is_redirect_out(char *str)
-{
-	if (ft_strcmp(">", str) == 0)
-		return (true);
-	if (ft_strcmp(">>", str) == 0)
-		return (true);
-	return (false);
-}
-
-static int	__open_in(t_token *token, int *fd)
-{
-	if (*fd > 2)
-		close(*fd);
-	if (ft_strcmp("<", token->str) == 0)
+	if (fd == -1)
 	{
-		*fd = open(token->next->str, O_RDONLY);
-		if (*fd == -1)
-			return (EXIT_FAILURE);
+		while (token && token->type == T_PIPE)
+			token = token->prev;
+		if (token)
+			if (dup2(tube_in[0], STDIN_FILENO) == -1)
+				return (EXIT_FAILURE);
 	}
-	else if (ft_strcmp("<<", token->str) == 0)
-		*fd = STDIN_FILENO;
-	return (EXIT_SUCCESS);
+	else
+		if (dup2(fd, STDIN_FILENO) == -1)
+			return (EXIT_FAILURE);
+
 }
 
-static int	__open_out(t_token *token, int *fd)
+static int	__redirect_output(t_token *token, t_tube tube_out, int fd)
 {
-	if (*fd > 2)
-		close(*fd);
-	if (ft_strcmp(">", token->str) == 0)
+	if (fd == -1)
 	{
-		*fd = open(token->next->str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		if (*fd == -1)
-			return (EXIT_FAILURE);
+		while (token && token->type == T_PIPE)
+			token = token->next;
+		if (token)
+			if (dup2(tube_out[1], STDOUT_FILENO) == -1)
+				reutrn (EXIT_FAILURE);
 	}
-	else if (ft_strcmp(">>", token->str) == 0)
-	{
-		*fd = open(token->next->str, O_CREAT | O_APPEND | O_WRONLY, 0644);
-		if (*fd == -1)
+	else
+		if (dup2(fd, STDOUT_FILENO) == -1)
 			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
 }
 
-typedef int	t_tube[2]; // TODO dans un header
+static int	__error_redirections(int fd_in, int fd_out)
+{
+	if (fd_in > 2)
+		close(fd_in);
+	if (fd_out > 2)
+		close(fd_out);
+	return (EXIT_FAILURE);
+}
 
 int	redirections(t_token *token, t_tube tube_in, t_tube tube_out)
 {
@@ -80,7 +62,6 @@ int	redirections(t_token *token, t_tube tube_in, t_tube tube_out)
 
 	fd_in = -1;
 	fd_out = -1;
-	// Premier passage pour les here_doc
 	elem = token;
 	while (elem && elem->type == T_PIPE)
 	{
@@ -88,23 +69,11 @@ int	redirections(t_token *token, t_tube tube_in, t_tube tube_out)
 			// TODO here_doc(elem->next->str);
 		elem = elem->next;
 	}
-	/*
-		Passage pour open tous les fichiers de redirection
-		il faut retenir le dernier fichier de redirection d'input
-		et le dernier fichier de redirection d'output
-	*/
-	elem = token;
-	while (elem && elem->type == T_PIPE)
-	{
-		if (elem->type == T_REDIRECT && __is_redirect_in(elem->str))
-			if (__open_in(elem, &fd_in) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-		else if (elem->type == T_REDIRECT && __is_redirect_out(elem->str))
-			if (__open_out(elem, &fd_out) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-		elem = elem->next;
-	}
-	// TODO Faire la redirection d'input et celle d'output
-	// il faudra voir en fonction de la presence de pipe avant et apres la commande
+	if (__open_files(token, &fd_in, &fd_out) == EXIT_FAILURE)
+		return (__error_redirections(fd_in, fd_out));
+	if (__redirect_input(token, tube_in, fd_in) == EXIT_FAILURE)
+		return (__error_redirections(fd_in, fd_out));
+	if (__redirect_output(token, tube_out, fd_out) == EXIT_FAILURE)
+		return (__error_redirections(fd_in, fd_out));
 	return (EXIT_SUCCESS);
 }

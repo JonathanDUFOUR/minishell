@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/16 17:42:11 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/18 16:58:41 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <unistd.h>
-#include <sys/wait.h>
 
 static int	__count_cmd(t_token_lst *tokens)
 {
@@ -31,10 +30,6 @@ static int	__count_cmd(t_token_lst *tokens)
 
 static t_token	*__next_command(t_token *elem)
 {
-/* 	elem = elem->next;
-	while (elem && (elem->type != T_COMMAND && elem->type != T_BUILTIN))
-		elem = elem->next;
-	return (elem); */
 	while (elem && elem->type != T_PIPE)
 		elem = elem->next;
 	if (elem)
@@ -54,51 +49,32 @@ static char **__get_path_env(t_env_lst *env)
 	return (path);
 }
 
+// TODO voir s'il serait pas mieux de mettre les tubes, envp, path dans une structure
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
 	t_token	*elem;
-	pid_t	pid;
-	int		status;
+	t_tube	tube_in;
+	t_tube	tube_out;
 	int		cmd_n;
 	int		i;
-	char	**path;
-	char	**envp;
 
 	elem = tokens->head;
 	cmd_n = __count_cmd(tokens);
 	i = 0;
-	/*recuperer PATH avec un split*/
-	path = __get_path_env(env); // SECURE get_path_env()
-	/*recuperer l'environnemnt avec env_to_envp*/
-	envp = env_to_envp(env); // SECURE env_to_envp()
+	if (pipe(tube_in) == -1)
+		return (EXIT_FAILURE);
+	if (pipe(tube_out) == -1)
+		return (EXIT_FAILURE);
 	while (i < cmd_n)
 	{
-		// TODO fork dans un fonction()
-		pid = fork();
-		if (pid == -1)
-			return (EXIT_FAILURE);
-		if (pid == 0)
-		{
-			// TODO open + redirections
-			if (redirections(elem, ) == EXIT_FAILURE)
-				exit(EXIT_FAILURE);
-			// TODO close les fd pas utiliser
-			// TODO exec
-			/*exec*/
-			/*|--> recuperer la commande avec tokens_to_aa()*/
-			/*|--> recuperer le chemin absolu vers la commande*/
-			/*|--> execve*/
-		}
-		if (waitpid(pid, &status, 0) == -1)
-		{
-			/*erreur*/
-			return (EXIT_FAILURE);
-		}
+		if ((i % 2) == 0)
+			if (setup_fork(elem, env, tube_in, tube_out) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
+		else
+			if (setup_fork(elem, env, tube_out, tube_in) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
 		elem = __next_command(elem);
 		i++;
 	}
-	/*clean path, envp*/
-	free(path);
-	free_tab2d(envp);
 	return (EXIT_SUCCESS);
 }
