@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/25 03:01:12 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/17 20:08:45 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:25:44 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	ft_putbyte_fd(uint8_t const byte, int const fd)
 	while (--i >= 0)
 	{
 		if ((byte >> i) & 1)
-			ret += write(fd, "1", 1);
+			ret += (int)write(fd, "1", 1);
 		else
-			ret += write(fd, "0", 1);
+			ret += (int)write(fd, "0", 1);
 	}
 	return (ret);
 }
