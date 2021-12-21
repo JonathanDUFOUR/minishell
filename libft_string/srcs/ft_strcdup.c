@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strcdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/28 23:11:11 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/21 01:35:13 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/20 19:19:35 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/20 22:11:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,23 @@
 #include "ft_string.h"
 
 /*
-	Allocate a new string and copy the content of the given string `str` to it
-	except the first/last characters that are found in the given string `set`
+	Allocate a new string
+	Copy the content of the given string `str` to it
+	During the copy, if the given character `c` is encountered,
+	it is not copied and the copy ends here
 	Return the address of the new string
 	Return NULL upon failure
 */
-char	*ft_strtrim(char const *str, char const *set)
+char	*ft_strcdup(char const *str, char const c)
 {
 	char		*output;
-	char const	*ptr;
+	char		*ptr;
 	size_t		len;
 
-	len = ft_strlen(str);
-	while (*str && ft_strchr(set, *str))
-	{
-		--len;
-		++str;
-	}
-	if (!*str)
-		return (ft_strdup(""));
-	ptr = str + len - 1;
-	while (ptr >= str && ft_strchr(set, *ptr))
-	{
-		--len;
-		--ptr;
-	}
+	ptr = ft_strchr(str, c);
+	if (!ptr)
+		ptr = ft_strchr(str, 0);
+	len = ptr - str;
 	output = malloc((len + 1) * sizeof(char));
 	if (!output)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 01:10:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:49:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 04:01:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	token_print(t_token const *const node)
 		++i;
 	if (1)
 		printf("%15s: %s\n", "node->type", g_token_type_name[i].name);
-	if (1)
+	if (0)
 		sed_lst_print(&node->seds);
 	if (0)
 		printf("%15s: %p\n", "node->next", node->next);

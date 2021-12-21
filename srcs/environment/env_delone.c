@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:25:59 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 19:24:04 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:58:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_string.h"
 #include "t_env_lst.h"
-#include "ft_mem.h"
 
 /*
 	Release the resources of the given env node `elem`

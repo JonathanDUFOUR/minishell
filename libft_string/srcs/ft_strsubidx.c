@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:00:20 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/10 15:34:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 02:47:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,20 @@
 
 /*
 	Allocate a new string and copy the content of the given string `str` to it
-	except the character at the `idx` position
+	except the character at the index `idx`
 	Return the address of the new string
 	Return NULL upon failure
 */
 char	*ft_strsubidx(char const *str, size_t const idx)
 {
-	char	*output;
-	char	*ptr;
+	char			*output;
+	size_t const	size = ft_strlen(str);
 
-	if (idx >= ft_strlen(str))
+	if (!size || idx >= size - 1)
 		return (ft_strdup(str));
-	output = malloc(ft_strlen(str) * sizeof(char));
+	output = malloc(size * sizeof(char));
 	if (!output)
 		return (NULL);
-	ptr = output;
-	while (*str && (size_t)(ptr - output) != idx)
-		*ptr++ = *str++;
-	++str;
-	while (*str)
-		*ptr++ = *str++;
-	*ptr = 0;
-	return (output);
+	ft_memcpy(output + idx, str + idx + 1, size - idx);
+	return (ft_memcpy(output, str, idx));
 }

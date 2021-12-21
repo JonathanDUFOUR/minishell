@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_cd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 19:43:05 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:57:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "minishell.h"
 # include "lookup_builtin.h"
 # include "ft_io.h"
-# include "ft_mem.h"
 # include "ft_string.h"
 
 bool	__is_ending_slash(const char *str);

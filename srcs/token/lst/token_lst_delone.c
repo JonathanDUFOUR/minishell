@@ -6,12 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:07:25 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 00:20:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:59:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_mem.h"
+#include "ft_string.h"
 #include "t_token_lst.h"
 
 /*

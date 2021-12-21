@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/18 17:53:54 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 03:38:23 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ struct	s_token
 int		error_option(const char *str, t_token *args)
 		__attribute__((nonnull));
 int		token_expand(t_token *const node, t_env_lst *const env)
+		__attribute__((nonnull));
+int		token_here_doc(t_token *const node, t_env_lst *const env,
+			char const *program)
 		__attribute__((nonnull));
 int		token_merge(t_token *const node)
 		__attribute__((nonnull));

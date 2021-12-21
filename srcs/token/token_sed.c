@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_sed.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:18:58 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:02:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
-#include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
 

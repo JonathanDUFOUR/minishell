@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/17 18:59:12 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:16:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 # include <stdlib.h>
 
 # ifndef PROMPT
-#  define PROMPT	"$> "
+#  define PROMPT	"minishell$> "
+# endif
+
+# ifndef HERE_DOC_PROMPT
+#  define HERE_DOC_PROMPT	"> "
 # endif
 
 # ifndef VAR_CHARS
@@ -30,20 +34,22 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 _"
 # endif
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE	65536
+# endif
+
 typedef int	t_tube[2];
 
+int		exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
+		__attribute__((nonnull));
+int		msh_readline(char const *prompt, char **const line)
+		__attribute__((nonnull));
 int		pipeline(t_token_lst *tokens, t_env_lst *env)
 		__attribute__((nonnull));
 int		setup_fork(t_token *token, t_env_lst *env, t_tube in, t_tube out)
 		__attribute__((nonnull));
-int		exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
-		__attribute__((nonnull));
-
-int		set_sigint_handle(void);
-int		set_sigquit_handle(void);
-
-void	free_tab2d(char **tab)
-		__attribute__((nonnull));
+int		setup_sigint_handle(void);
+int		setup_sigquit_handle(void);
 
 size_t	namelen(char const *str)
 		__attribute__((nonnull));

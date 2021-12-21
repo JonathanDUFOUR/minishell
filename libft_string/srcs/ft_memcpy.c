@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:57:51 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/19 22:52:16 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:40:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	__update(void **const ptr, void const **const src,
 	Copy the content of the area pointed by the given pointer `src`
 	to the area pointed by the given pointer `dst`
 	If both areas overlap, the result is undefined
+	Return `dst`
 */
 void	*ft_memcpy(void *const dst, void const *src, size_t size)
 {

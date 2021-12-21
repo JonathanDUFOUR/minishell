@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/18 20:20:07 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/21 02:07:17 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,18 +34,6 @@ FT_IO_DIR			=	libft_io/
 FT_IO_INC_DIR		=	include/
 FT_IO_INC_DIR		:=	${addprefix ${FT_IO_DIR}, ${FT_IO_INC_DIR}}
 
-FT_MEM_DIR			=	libft_mem/
-FT_MEM_INC_DIR		=	include/
-FT_MEM_INC_DIR		:=	${addprefix ${FT_MEM_DIR}, ${FT_MEM_INC_DIR}}
-
-FT_STRING_DIR		=	libft_string/
-FT_STRING_INC_DIR	=	include/
-FT_STRING_INC_DIR	:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_INC_DIR}}
-
-FT_MEM_DIR			=	libft_mem/
-FT_MEM_INC_DIR		=	include/
-FT_MEM_INC_DIR		:=	${addprefix ${FT_MEM_DIR}, ${FT_MEM_INC_DIR}}
-
 FT_STRING_DIR		=	libft_string/
 FT_STRING_INC_DIR	=	include/
 FT_STRING_INC_DIR	:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_INC_DIR}}
@@ -55,9 +43,6 @@ FT_STRING_INC_DIR	:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_INC_DIR}}
 #######################################
 FT_IO_A			=	libft_io.a
 FT_IO_A			:=	${addprefix ${FT_IO_DIR}, ${FT_IO_A}}
-
-FT_MEM_A		=	libft_mem.a
-FT_MEM_A		:=	${addprefix ${FT_MEM_DIR}, ${FT_MEM_A}}
 
 FT_STRING_A		=	libft_string.a
 FT_STRING_A		:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_A}}
@@ -127,6 +112,7 @@ SRC				=	\
 							token_lst_delone.c				\
 							token_lst_expand.c				\
 							token_lst_get.c					\
+							token_lst_here_doc.c			\
 							token_lst_merge.c				\
 							token_lst_print.c				\
 							token_lst_push_back.c			\
@@ -144,13 +130,14 @@ SRC				=	\
 						token_expand.c						\
 						token_get_cmd_opt_arg.c				\
 						token_get.c							\
+						token_here_doc.c					\
 						token_merge.c						\
 						token_new.c							\
 						token_print.c						\
 						token_sed.c							\
 					}										\
 					${addprefix util/,						\
-						free_tab2d.c						\
+						msh_readline.c						\
 						msh_str3join.c						\
 						namelen.c							\
 					}										\
@@ -171,12 +158,10 @@ CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}
-CFLAGS			+=	-I${FT_MEM_INC_DIR}
 CFLAGS			+=	-I${FT_STRING_INC_DIR}
 
 LDFLAGS			=	-lreadline
 LDFLAGS			+=	-L${FT_IO_DIR} -lft_io
-LDFLAGS			+=	-L${FT_MEM_DIR} -lft_mem
 LDFLAGS			+=	-L${FT_STRING_DIR} -lft_string
 
 ifeq (${DEBUG}, 1)
@@ -186,7 +171,7 @@ endif
 #######################################
 #                RULES                #
 #######################################
-${NAME}: ${OBJ} ${FT_IO_A} ${FT_MEM_A} ${FT_STRING_A}
+${NAME}: ${OBJ} ${FT_IO_A} ${FT_STRING_A}
 	${LINK} $@ ${OBJ} ${LDFLAGS}
 
 all: ${NAME}
@@ -200,9 +185,6 @@ ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 ${FT_IO_A}:
 	${MAKE} ${@F} -C ${@D}
 
-${FT_MEM_A}:
-	${MAKE} ${@F} -C ${@D}
-
 ${FT_STRING_A}:
 	${MAKE} ${@F} -C ${@D}
 
@@ -212,7 +194,6 @@ clean:
 fclean:
 	${RM} ${OBJ_DIR} ${NAME} vgcore*
 	${MAKE} $@ -C ${FT_IO_DIR}
-	${MAKE} $@ -C ${FT_MEM_DIR}
 	${MAKE} $@ -C ${FT_STRING_DIR}
 
 re: clean all

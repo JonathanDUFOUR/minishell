@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_merge.c                                      :+:      :+:    :+:   */
+/*   token_lst_here_doc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 00:36:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:02:21 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/20 01:00:13 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/21 04:12:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_string.h"
-#include "t_token.h"
+#include "t_token_lst.h"
 
 /*
-	Merge every seds of the given node to get the final `str` attribute
-	of the given node
-	Release the resources of the seds list once the merge is done
+	Proceed to each here-doc contained in the given token list
+	Each T_DELIMITER token is changed to a T_INPUT token
+	Each here-doc input is stored in the `str` atribute of the T_INPUT token
 */
-int	token_merge(t_token *const node)
+int	token_lst_here_doc(t_token_lst *const tokens, t_env_lst *const env,
+	char const *program)
 {
-	t_sed const	*curr = node->seds.head;
-	char const	*tmp;
+	t_token	*curr;
 
+	curr = tokens->head;
 	while (curr)
 	{
-		if (node->str)
-		{
-			tmp = node->str;
-			node->str = ft_strjoin(node->str, curr->str);
-			ft_memdel(&tmp);
-		}
-		else
-			node->str = ft_strdup(curr->str);
-		if (!node->str)
+		if (curr->type == T_DELIMITER && token_here_doc(curr, env, program))
 			return (EXIT_FAILURE);
 		curr = curr->next;
 	}
-	sed_lst_clear(&node->seds);
 	return (EXIT_SUCCESS);
 }

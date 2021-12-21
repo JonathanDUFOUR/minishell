@@ -6,13 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 10:45:39 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 19:44:08 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:01:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "ft_string.h"
-#include "ft_mem.h"
 
 /* V1 */
 

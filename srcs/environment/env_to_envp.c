@@ -6,12 +6,11 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:08:16 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 20:21:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:59:03 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "ft_mem.h"
 #include "ft_string.h"
 
 static void	__get_size_and_len(size_t *const size, size_t *const len,

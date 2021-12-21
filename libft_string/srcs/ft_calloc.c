@@ -6,12 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 05:44:00 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/19 20:40:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:49:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_mem.h"
+#include "ft_string.h"
 
 /*
 	Allocate `n` elements of `size` bytes each

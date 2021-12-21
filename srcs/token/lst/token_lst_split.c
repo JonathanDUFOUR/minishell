@@ -6,13 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 20:24:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:48:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:00:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "ft_mem.h"
 #include "ft_string.h"
 #include "t_token_lst.h"
 

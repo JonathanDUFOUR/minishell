@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:17:52 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:23:12 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 04:01:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_token_type_name const		g_token_type_name[] = {
 {T_WORD, "WORD"},
 {T_FILE, "FILE"},
 {T_PIPE, "PIPE"},
+{T_INPUT, "INPUT"},
 {T_OPTION, "OPTION"},
 {T_BUILTIN, "BUILTIN"},
 {T_COMMAND, "COMMAND"},

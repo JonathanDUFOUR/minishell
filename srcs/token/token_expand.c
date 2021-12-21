@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:18:54 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/21 04:09:14 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
-#include "ft_mem.h"
 #include "ft_string.h"
 #include "minishell.h"
 

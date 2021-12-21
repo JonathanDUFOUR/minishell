@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:40:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/09 17:19:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:09:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	__sigint_handler(int sig, siginfo_t *si, void *uctx)
 /*
 	Setup the behavior to have when receiving a SIGINT
 */
-int	set_sigint_handle(void)
+int	setup_sigint_handle(void)
 {
 	struct sigaction	sigint;
 

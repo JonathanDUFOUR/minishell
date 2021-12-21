@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_str3join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:51:21 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 19:34:33 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/21 02:41:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,25 @@
 #include "ft_string.h"
 
 /*
-	Allocate a new string, fill it with the content of the given string `s1`,
-	append the content of the given string `s2` and then
-	append the content of the given string `s3`
+	Allocate a new string,
+	copy the content of the given string `str0`
+	append the content of the given string `str1`
+	append the content of the given string `str2`
 	Return the address of the new string or NULL upon failure
 */
-char	*msh_str3join(char const *s1, char const *s2, char const *s3)
+char	*msh_str3join(char const *str0, char const *str1, char const *str2)
 {
-	size_t	len;
-	char	*dest;
-	char	*d;
+	char			*output;
+	size_t const	len0 = ft_strlen(str0);
+	size_t const	len1 = ft_strlen(str1);
+	size_t const	len2 = ft_strlen(str2);
+	size_t const	len = len0 + len1 + len2;
 
-	if (!s1 || !s2 || !s3)
+	output = malloc((len + 1) * sizeof(char));
+	if (!output)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
-	dest = malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
-	d = dest;
-	while (*s1)
-		*d++ = *s1++;
-	while (*s2)
-		*d++ = *s2++;
-	while (*s3)
-		*d++ = *s3++;
-	*d = 0;
-	return (dest);
+	output[len] = 0;
+	ft_memcpy(output + len0 + len1, str2, len2);
+	ft_memcpy(output + len0, str1, len1);
+	return (ft_memcpy(output, str0, len0));
 }

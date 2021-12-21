@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:26:57 by jdufour           #+#    #+#             */
-/*   Updated: 2021/12/09 20:38:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:12:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 #include "ft_string.h"
 
 /*
-	Allocate a new string and copy the content of the given string `str` to it
+	Allocate a new string 
+	Copy the content of the given string `str` to it
 	Return the address of the new string
 	Return NULL upon failure
 */
 char	*ft_strdup(char const *str)
 {
 	char	*output;
-	char	*ptr;
-	size_t	len;
+	size_t	size;
 
-	len = ft_strlen(str);
-	output = malloc((len + 1) * sizeof(char));
+	size = ft_strlen(str) + 1;
+	output = malloc(size * sizeof(char));
 	if (!output)
 		return (NULL);
-	ptr = output;
-	while (*str)
-		*ptr++ = *str++;
-	*ptr = 0;
-	return (output);
+	return (ft_memcpy(output, str, size));
 }
