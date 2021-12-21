@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/21 02:07:17 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/21 06:20:38 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,6 @@ SRC				=	\
 						token_sed.c							\
 					}										\
 					${addprefix util/,						\
-						msh_readline.c						\
 						msh_str3join.c						\
 						namelen.c							\
 					}										\

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:16:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 06:20:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ _"
 typedef int	t_tube[2];
 
 int		exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
-		__attribute__((nonnull));
-int		msh_readline(char const *prompt, char **const line)
 		__attribute__((nonnull));
 int		pipeline(t_token_lst *tokens, t_env_lst *env)
 		__attribute__((nonnull));

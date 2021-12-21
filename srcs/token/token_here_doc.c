@@ -6,11 +6,13 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:20:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 04:05:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/21 06:14:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <readline/readline.h>
 #include "ft_io.h"
 #include "ft_string.h"
 #include "minishell.h"
@@ -31,10 +33,9 @@ static int	__get_content(t_token *const node, char const *program)
 {
 	char const	*tmp;
 	char		*line;
-	int			ret;
 
-	ret = msh_readline(HERE_DOC_PROMPT, &line);
-	while (ret == 1)
+	line = readline(HERE_DOC_PROMPT);
+	while (line)
 	{
 		if (!ft_strcmp(line, node->str))
 		{
@@ -47,12 +48,10 @@ static int	__get_content(t_token *const node, char const *program)
 		ft_memdel(&line);
 		if (!node->seds.head->str)
 			return (EXIT_FAILURE);
-		ret = msh_readline(HERE_DOC_PROMPT, &line);
+		line = readline(HERE_DOC_PROMPT);
 	}
 	ft_memdel(&line);
-	if (!ret)
-		return (__interrupt_end(node->str, program));
-	return (EXIT_FAILURE);
+	return (__interrupt_end(node->str, program));
 }
 
 /*
