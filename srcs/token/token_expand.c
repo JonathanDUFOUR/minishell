@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 04:09:14 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/22 07:17:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*__append_literal(char const *const str, char const **const ptr)
 	char				*output;
 	char				*tmp;
 
-	while (*end && (*end != '$' || !ft_strchr(VAR_CHARS, *(end + 1))))
+	while (*end && (*end != '$' || !ft_strchr(VAR_FIRST_CHARS, *(end + 1))))
 		++end;
 	tmp = ft_strndup(*ptr, end - *ptr);
 	if (!tmp)

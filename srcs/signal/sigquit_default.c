@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_merge.c                                  :+:      :+:    :+:   */
+/*   sigquit_default.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 00:27:53 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:22:21 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/07 21:40:41 by jodufour          #+#    #+#             */
+/*   Updated: 2021/12/22 05:54:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_token_lst.h"
+#include <signal.h>
 
 /*
-	Merge every seds of each token node in the given list to get the final
-	`str` attribute of each token
+	Setup the default behavior to have when receiving a SIGQUIT
 */
-int	token_lst_merge(t_token_lst *const tokens)
+int	sigquit_default(void)
 {
-	t_token	*curr;
-
-	curr = tokens->head;
-	while (curr)
-	{
-		if (token_merge(curr))
-			return (EXIT_FAILURE);
-		curr = curr->next;
-	}
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

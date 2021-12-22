@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:20:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 06:14:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/22 06:49:07 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ int	token_here_doc(t_token *const node, t_env_lst *const env,
 {
 	char const	*str = ft_ctoa(0);
 
-	if (!str)
-		return (EXIT_FAILURE);
-	if (sed_lst_add_back(&node->seds, str, DQUOTED))
+	if (!str || sed_lst_add_back(&node->seds, str, DQUOTED))
 	{
 		ft_memdel(&str);
 		return (EXIT_FAILURE);
 	}
-	if (__get_content(node, program))
+	if (sigint_here_doc()
+		|| __get_content(node, program)
+		|| sigint_default())
 		return (EXIT_FAILURE);
 	ft_memdel(&node->str);
 	node->type = T_INPUT;

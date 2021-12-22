@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:36:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:02:21 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/22 07:22:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 /*
 	Merge every seds of the given node to get the final `str` attribute
 	of the given node
-	Release the resources of the seds list once the merge is done
 */
 int	token_merge(t_token *const node)
 {
@@ -38,6 +37,5 @@ int	token_merge(t_token *const node)
 			return (EXIT_FAILURE);
 		curr = curr->next;
 	}
-	sed_lst_clear(&node->seds);
 	return (EXIT_SUCCESS);
 }

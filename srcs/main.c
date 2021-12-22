@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 03:41:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/22 07:19:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,24 @@
 
 unsigned int	g_exit_status;
 
-static int	__usage_error(void)
+static int	__usage_error(char const *program)
 {
 	ft_putendl_fd(RED "Error: Wrong usage" RESET, STDERR_FILENO);
-	ft_putendl_fd("Usage: ./minishell", STDERR_FILENO);
+	ft_putstr_fd("Usage: ./", STDERR_FILENO);
+	ft_putendl_fd(program, STDERR_FILENO);
 	return (EXIT_FAILURE);
 }
 
-static int	__get_command_line(char const *program, t_env_lst *const env)
+static int	__clear_quit(char const *line, t_token_lst *const tokens,
+	int const ret)
+{
+	ft_memdel(&line);
+	rl_clear_history();
+	token_lst_clear(tokens);
+	return (ret);
+}
+
+static int	__get_command_line(t_env_lst *const env, char const *program)
 {
 	t_token_lst	tokens;
 	char const	*line = readline(PROMPT);
@@ -37,21 +47,12 @@ static int	__get_command_line(char const *program, t_env_lst *const env)
 	while (line)
 	{
 		if (token_lst_get(&tokens, line, env))
-		{
-			ft_memdel(&line);
-			rl_clear_history();
-			token_lst_clear(&tokens);
-			return (EXIT_FAILURE);
-		}
+			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		ret = token_lst_syntax_check(&tokens, program);
 		add_history(line);
 		ft_memdel(&line);
 		if (!ret && (token_lst_here_doc(&tokens, env, program)))
-		{
-			rl_clear_history();
-			token_lst_clear(&tokens);
-			return (EXIT_FAILURE);
-		}
+			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		token_lst_print(&tokens);
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);
@@ -65,13 +66,14 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 	t_env_lst	env;
 
 	if (ac != 1)
-		return (__usage_error());
+		return (__usage_error(av[0]));
 	g_exit_status = 0;
 	ft_bzero(&env, sizeof(t_env_lst));
-	if (setup_sigint_handle()
-		|| setup_sigquit_handle()
+	if (sigint_default()
+		|| sigquit_default()
+		|| sigterm_default()
 		|| init_env(&env, ep)
-		|| __get_command_line(av[0], &env))
+		|| __get_command_line(&env, av[0]))
 	{
 		env_clear(&env);
 		perror(av[0]);
