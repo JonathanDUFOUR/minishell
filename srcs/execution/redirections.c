@@ -6,16 +6,32 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/18 16:53:54 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:24:21 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirections.h"
 #include "ft_string.h"
-#include <unistd.h>
+#include "ft_io.h"
+
+static char	*__get_str_here_doc(t_token *token)
+{
+	char	*str;
+
+	str = NULL;
+	while (token && token->type != T_PIPE)
+	{
+		if (token->type == T_INPUT)
+			str = token->str;
+		token = token->next;
+	}
+	return (str);
+}
 
 static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
 {
+	char	*str_here_doc;
+
 	if (fd == -1)
 	{
 		while (token && token->type == T_PIPE)
@@ -24,10 +40,15 @@ static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
 			if (dup2(tube_in[0], STDIN_FILENO) == -1)
 				return (EXIT_FAILURE);
 	}
+	else if (fd == STDIN_FILENO)
+	{
+		str_here_doc = __get_str_here_doc(token);
+		if (ft_putstr_fd(str_here_doc, fd) == -1)
+			return (EXIT_FAILURE);
+	}
 	else
 		if (dup2(fd, STDIN_FILENO) == -1)
 			return (EXIT_FAILURE);
-
 }
 
 static int	__redirect_output(t_token *token, t_tube tube_out, int fd)
@@ -45,35 +66,13 @@ static int	__redirect_output(t_token *token, t_tube tube_out, int fd)
 			return (EXIT_FAILURE);
 }
 
-static int	__error_redirections(int fd_in, int fd_out)
+int	redirections(t_token *token, t_exec_data *data)
 {
-	if (fd_in > 2)
-		close(fd_in);
-	if (fd_out > 2)
-		close(fd_out);
-	return (EXIT_FAILURE);
-}
-
-int	redirections(t_token *token, t_tube tube_in, t_tube tube_out)
-{
-	t_token *elem;
-	int		fd_in;
-	int		fd_out;
-
-	fd_in = -1;
-	fd_out = -1;
-	elem = token;
-	while (elem && elem->type == T_PIPE)
-	{
-		if (elem->type == T_REDIRECT && ft_strcmp("<<", elem->str) == 0)
-			// TODO here_doc(elem->next->str);
-		elem = elem->next;
-	}
-	if (__open_files(token, &fd_in, &fd_out) == EXIT_FAILURE)
-		return (__error_redirections(fd_in, fd_out));
-	if (__redirect_input(token, tube_in, fd_in) == EXIT_FAILURE)
-		return (__error_redirections(fd_in, fd_out));
-	if (__redirect_output(token, tube_out, fd_out) == EXIT_FAILURE)
-		return (__error_redirections(fd_in, fd_out));
+	if (__open_files(token, &data->fd_in, &data->fd_out))
+		return (EXIT_FAILURE);
+	if (__redirect_input(token, data->tubes[data->tube_in], data->fd_in))
+		return (EXIT_FAILURE);
+	if (__redirect_output(token, data->tubes[data->tube_out], data->fd_out))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 16:56:40 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/23 10:45:07 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
 
 static bool	__is_redirect_in(char *str)
 {
@@ -47,9 +46,8 @@ static int	__open_in(t_token *token, int *fd)
 	}
 	else if (ft_strcmp("<<", token->str) == 0)
 		*fd = STDIN_FILENO;
-	// XXX pas sur de ca il faudra voir avec le here_doc
-	// je pense que here_doc devrait ecrire dans un fichier
-	// et qu'on devrait rediriger ce fichier sur stdin
+	// XXX voir s'il faudra utiliser fd_in au moment de se servir
+	// de ce qu'a recuperer le dernier here_doc
 	return (EXIT_SUCCESS);
 }
 

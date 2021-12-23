@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:18:19 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/23 10:23:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "t_token_lst.h"
+# include "t_env_lst.h"
 # include <stdlib.h>
 
 # ifndef PROMPT
@@ -39,14 +40,9 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 _"
 # endif
 
-typedef int	t_tube[2];
-
-int		exec_cmd(t_token *token, t_env_lst *env, t_tube in, t_tube out)
-		__attribute__((nonnull));
 int		pipeline(t_token_lst *tokens, t_env_lst *env)
 		__attribute__((nonnull));
-int		setup_fork(t_token *token, t_env_lst *env, t_tube in, t_tube out)
-		__attribute__((nonnull));
+
 int		sigint_default(void);
 int		sigint_here_doc(void);
 int		sigquit_default(void);

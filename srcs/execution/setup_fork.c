@@ -6,15 +6,14 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:09:42 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/17 18:50:51 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:39:31 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redirections.h"
 #include "g_exit_status.h"
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <unistd.h>
 
 static unsigned int	__calculate_exit_statux(unsigned int status)
 {
@@ -28,7 +27,7 @@ static unsigned int	__calculate_exit_statux(unsigned int status)
 		return (status);
 }
 
-int	setup_fork(t_token *token, t_env_lst *env, t_tube in, t_tube out)
+int	setup_fork(t_token *token, t_env_lst *env, t_exec_data *data)
 {
 	pid_t	pid;
 	int		status;
@@ -37,8 +36,14 @@ int	setup_fork(t_token *token, t_env_lst *env, t_tube in, t_tube out)
 	if (pid == -1)
 		return (EXIT_FAILURE);
 	if (pid == 0)
-		if (exec_cmd(token, env, in, out) == EXIT_FAILURE)
-			exit(EXIT_FAILURE);
+	{
+		// TODO save stdin & stdout
+		if (exec_cmd(token, env, data) == EXIT_FAILURE)
+		{
+			// TODO restore stdin & stdout
+			exit(EXIT_FAILURE); // FIX utiliser le builtin ?
+		}
+	}
 	if (waitpid(pid, &status, 0) == -1)
 		return (EXIT_FAILURE);
 	g_exit_status = __calculate_exit_status(status);

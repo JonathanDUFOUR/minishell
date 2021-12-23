@@ -6,12 +6,11 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 17:06:20 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:35:30 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <unistd.h>
+#include "redirections.h"
 
 static int	__count_cmd(t_token_lst *tokens)
 {
@@ -49,32 +48,61 @@ static char **__get_path_env(t_env_lst *env)
 	return (path);
 }
 
-// TODO voir s'il serait pas mieux de mettre les tubes, envp, path et les fd des fichiers open dans une structure
+static int	__init_data(t_exec_data *data, t_env_lst *env)
+{
+	data->fd_in = -1;
+	data->fd_out = -1;
+	data->tube_in = 0;
+	data->tube_out = 1;
+	if (pipe(data->tubes[data->tube_in]) == -1)
+		return (EXIT_FAILURE);
+	if (pipe(data->tubes[data->tube_out]) == -1)
+		return (EXIT_FAILURE);
+	data->path = __get_path_env(env);
+	if (data->path == NULL)
+		return (EXIT_FAILURE);
+	data->envp = env_to_envp(env);
+	if (data->envp == NULL)
+	{
+		free(data->path);
+		return (EXIT_FAILURE);
+	}
+}
+
+static void	__clean_data(t_exec_data *data)
+{
+	if (data->fd_in > 2)
+		close(data->fd_in);
+	if (data->fd_out > 2)
+		close(data->fd_out);
+	free(data->envp);
+	free(data->path);
+}
+
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
 	t_token	*elem;
-	t_tube	tube_in;
-	t_tube	tube_out;
+	t_exec_data	data;
 	int		cmd_n;
 	int		i;
 
 	elem = tokens->head;
 	cmd_n = __count_cmd(tokens);
 	i = 0;
-	if (pipe(tube_in) == -1)
+	if (__init_data(&data, env) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (pipe(tube_out) == -1)
-		return (EXIT_FAILURE);
-	while (i < cmd_n)
+	while (i < cmd_n) // XXX while (elem) ?
 	{
-		if ((i % 2) == 0)
-			if (setup_fork(elem, env, tube_in, tube_out) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
-		else
-			if (setup_fork(elem, env, tube_out, tube_in) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+		if (setup_fork(elem, env, &data) == EXIT_FAILURE)
+		{
+			__clean_data(&data);
+			return (EXIT_FAILURE);
+		}
+		data.tube_in ^= 1;
+		data.tube_out ^= 1;
 		elem = __next_command(elem);
 		i++;
 	}
+	__clean_data(&data);
 	return (EXIT_SUCCESS);
 }

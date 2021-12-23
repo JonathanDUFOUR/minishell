@@ -6,14 +6,13 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/18 19:30:34 by majacque         ###   ########.fr       */
+/*   Updated: 2021/12/23 11:05:49 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <unistd.h>
+#include "redirections.h"
 
-static char	*get_path_cmd(char **path, char *cmd_name)
+static char	*__get_path_cmd(char **path, char *cmd_name)
 {
 	int		i;
 	char	*cmd;
@@ -37,7 +36,7 @@ static char	*get_path_cmd(char **path, char *cmd_name)
 	return (NULL);
 }
 
-int	run_cmd(t_token *token, t_env_lst *env, char **path, char **envp)
+int	run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
 {
 	char	*cmd;
 	char	**cmd_opt_arg;
@@ -47,8 +46,8 @@ int	run_cmd(t_token *token, t_env_lst *env, char **path, char **envp)
 	if (token->type == T_COMMAND)
 	{
 		cmd_opt_arg = token_get_cmd_opt_arg(token); // SECURE token_get_cmd_opt_arg()
-		cmd = get_path_cmd(path, cmd_opt_arg[0]); // SECURE get_path_cmd()
-		execve(cmd, cmd_opt_arg, envp); // SECURE execve()
+		cmd = __get_path_cmd(data->path, cmd_opt_arg[0]); // SECURE get_path_cmd()
+		execve(cmd, cmd_opt_arg, data->envp); // SECURE execve()
 	}
 	else
 	{
