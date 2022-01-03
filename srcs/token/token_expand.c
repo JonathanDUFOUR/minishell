@@ -6,13 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:17:43 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/01 22:15:56 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 #include "ft_string.h"
 #include "minishell.h"
+#include "g_exit_status.h"
 
 static char	*__append_literal(char const *const str, char const **const ptr)
 {
@@ -20,7 +21,7 @@ static char	*__append_literal(char const *const str, char const **const ptr)
 	char				*output;
 	char				*tmp;
 
-	while (*end && (*end != '$' || !ft_strchr(VAR_FIRST_CHARS, *(end + 1))))
+	while (*end && (*end != '$' || !ft_strchr(VAR_FIRST_CHARS "?", *(end + 1))))
 		++end;
 	tmp = ft_strndup(*ptr, end - *ptr);
 	if (!tmp)
@@ -31,6 +32,20 @@ static char	*__append_literal(char const *const str, char const **const ptr)
 	output = ft_strjoin(str, tmp);
 	ft_memdel(&tmp);
 	return (output);
+}
+
+static char	*__exit_status_value(char const *const str)
+{
+	char	*value;
+	char	*tmp;
+
+	value = ft_utoa(g_exit_status);
+	if (!value)
+		return (NULL);
+	tmp = value;
+	value = ft_strjoin(str, value);
+	ft_memdel(&tmp);
+	return (value);
 }
 
 static char	*__append_value(char const *const str, char const **const ptr,
@@ -46,9 +61,14 @@ static char	*__append_value(char const *const str, char const **const ptr,
 	name = ft_strndup(*ptr, len);
 	if (!name)
 		return (NULL);
+	*ptr += len;
+	if (!ft_strcmp(name, "?"))
+	{
+		ft_memdel(&name);
+		return (__exit_status_value(str));
+	}
 	value = get_env(name, env);
 	ft_memdel(&name);
-	*ptr += len;
 	if (!value)
 		return (ft_strdup(str));
 	return (ft_strjoin(str, value));
@@ -57,10 +77,9 @@ static char	*__append_value(char const *const str, char const **const ptr,
 static int	__expand_str(t_sed *const node, t_env_lst *const env)
 {
 	char const	*ptr = node->str;
-	char const	*str;
+	char const	*str = NULL;
 	char const	*tmp;
 
-	str = NULL;
 	while (*ptr)
 	{
 		tmp = str;

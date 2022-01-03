@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/20 23:33:41 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/02 00:11:01 by jodufour         ###   ########.fr        #
+#    Updated: 2021/12/29 02:14:43 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SRC			=	\
 					ft_atolli.c					\
 					ft_atollu.c					\
 					ft_atolu.c					\
+					ft_atosize.c				\
 					ft_atou.c					\
 				}								\
 				${addprefix ft_ato%_base/,		\

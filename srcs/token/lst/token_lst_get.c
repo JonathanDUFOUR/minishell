@@ -6,12 +6,13 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:47:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/02 21:10:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_string.h"
 #include "minishell.h"
+#include "g_exit_status.h"
 
 static char const	*__skip_spaces(char const *line)
 {
@@ -61,19 +62,19 @@ int	token_lst_get(t_token_lst *const tokens, char const *line,
 	{
 		node = token_get(line);
 		if (!node)
-			return (EXIT_FAILURE);
+			return (g_exit_status = EXIT_FAILURE);
 		token_lst_push_back(tokens, node);
 		line += ft_strlen(node->str);
 		line = __skip_spaces(line);
 	}
 	token_lst_word_or_operator(tokens);
 	if (token_lst_sed(tokens))
-		return (EXIT_FAILURE);
+		return (g_exit_status = EXIT_FAILURE);
 	__release_str_resources(tokens);
 	if (token_lst_expand(tokens, env)
 		|| token_lst_split(tokens)
 		|| token_lst_merge(tokens))
-		return (EXIT_FAILURE);
+		return (g_exit_status = EXIT_FAILURE);
 	token_lst_remove_useless(tokens);
 	__release_sed_resources(tokens);
 	token_lst_which_word(tokens);

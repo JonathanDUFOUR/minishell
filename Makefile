@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2021/12/22 07:51:29 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/02 23:57:44 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -155,7 +155,7 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra# -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 19:02:43 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/27 14:49:13 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/29 02:14:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,9 @@ t_llint		ft_atolli_base(char const *str, char const *base)
 t_lluint	ft_atollu(char const *str)
 			__attribute__((nonnull));
 t_lluint	ft_atollu_base(char const *str, char const *base)
+			__attribute__((nonnull));
+
+size_t		ft_atosize(char const *str)
 			__attribute__((nonnull));
 
 ssize_t		ft_indexof(char const c, char const *str)

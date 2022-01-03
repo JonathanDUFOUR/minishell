@@ -6,11 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:19:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/03 01:40:41 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "ft_io.h"
@@ -41,19 +42,23 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 {
 	t_token_lst	tokens;
 	char const	*line = readline(PROMPT);
-	int			ret;
 
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	while (line)
 	{
 		if (token_lst_get(&tokens, line, env))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		ret = token_lst_syntax_check(&tokens, program);
-		add_history(line);
+		if (*line)
+			add_history(line);
 		ft_memdel(&line);
-		if (!ret && (token_lst_here_doc(&tokens, env, program)))
+		if (token_lst_syntax_check(&tokens, program))
+			g_exit_status = 2;
+		else if (token_lst_here_doc(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		token_lst_print(&tokens);
+		if (g_exit_status == (1 << 7))
+			g_exit_status |= SIGINT;
+		else
+			token_lst_print(&tokens);
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);
 	}

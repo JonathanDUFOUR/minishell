@@ -6,20 +6,24 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:20:41 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 06:49:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/03 01:55:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include "ft_io.h"
 #include "ft_string.h"
 #include "minishell.h"
 #include "t_token.h"
+#include "g_exit_status.h"
 
 static int	__interrupt_end(char const *str, char const *program)
 {
+	if (g_exit_status == (1 << 7))
+		return (EXIT_SUCCESS);
 	ft_putchar_fd('\n', STDERR_FILENO);
 	ft_putstr_fd(program, STDERR_FILENO);
 	ft_putstr_fd(": warning: here-document delimited by end-of-file (wanted `",
@@ -62,19 +66,27 @@ int	token_here_doc(t_token *const node, t_env_lst *const env,
 	char const *program)
 {
 	char const	*str = ft_ctoa(0);
+	int			fd;
 
-	if (!str || sed_lst_add_back(&node->seds, str, DQUOTED))
+	fd = dup(STDIN_FILENO);
+	if (!str
+		|| fd == -1
+		|| sigint_here_doc()
+		|| sed_lst_add_back(&node->seds, str, DQUOTED))
 	{
+		ft_fddel(&fd);
 		ft_memdel(&str);
 		return (EXIT_FAILURE);
 	}
-	if (sigint_here_doc()
-		|| __get_content(node, program)
-		|| sigint_default())
+	if (__get_content(node, program))
 		return (EXIT_FAILURE);
 	ft_memdel(&node->str);
 	node->type = T_INPUT;
-	if (token_expand(node, env) || token_merge(node))
+	if (token_expand(node, env)
+		|| token_merge(node)
+		|| sigint_default()
+		|| dup2(fd, STDIN_FILENO) == -1
+		|| close(fd) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
