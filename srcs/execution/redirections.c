@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/23 11:24:21 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/06 20:42:31 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* DBG */
+#include <stdio.h>
 
 #include "redirections.h"
 #include "ft_string.h"
@@ -16,16 +19,15 @@
 
 static char	*__get_str_here_doc(t_token *token)
 {
-	char	*str;
+	char const	*str = NULL;
 
-	str = NULL;
 	while (token && token->type != T_PIPE)
 	{
 		if (token->type == T_INPUT)
 			str = token->str;
 		token = token->next;
 	}
-	return (str);
+	return ((char *)str);
 }
 
 static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
@@ -34,11 +36,11 @@ static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
 
 	if (fd == -1)
 	{
-		while (token && token->type == T_PIPE)
+		while (token && token->type != T_PIPE)
 			token = token->prev;
-		if (token)
-			if (dup2(tube_in[0], STDIN_FILENO) == -1)
-				return (EXIT_FAILURE);
+		if (token
+			&& (close(STDIN_FILENO) || dup2(tube_in[0], STDIN_FILENO) == -1))
+			return (EXIT_FAILURE);
 	}
 	else if (fd == STDIN_FILENO)
 	{
@@ -46,33 +48,48 @@ static int	__redirect_input(t_token *token, t_tube tube_in, int fd)
 		if (ft_putstr_fd(str_here_doc, fd) == -1)
 			return (EXIT_FAILURE);
 	}
-	else
-		if (dup2(fd, STDIN_FILENO) == -1)
-			return (EXIT_FAILURE);
+	else if (close(STDIN_FILENO) || dup2(fd, STDIN_FILENO) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	__redirect_output(t_token *token, t_tube tube_out, int fd)
 {
 	if (fd == -1)
 	{
-		while (token && token->type == T_PIPE)
+		while (token && token->type != T_PIPE)
 			token = token->next;
-		if (token)
-			if (dup2(tube_out[1], STDOUT_FILENO) == -1)
-				reutrn (EXIT_FAILURE);
-	}
-	else
-		if (dup2(fd, STDOUT_FILENO) == -1)
+		if (token
+			&& (close(STDOUT_FILENO) || dup2(tube_out[1], STDOUT_FILENO) == -1))
 			return (EXIT_FAILURE);
+	}
+	else if (close(STDOUT_FILENO) || dup2(fd, STDOUT_FILENO) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-int	redirections(t_token *token, t_exec_data *data)
+int	redirections(t_token_lst *const tokens, t_token *token, t_exec_data *data)
 {
-	if (__open_files(token, &data->fd_in, &data->fd_out))
+	t_token	*curr;
+	t_token	*next;
+
+	if (open_files(token, &data->fd_in, &data->fd_out))
 		return (EXIT_FAILURE);
 	if (__redirect_input(token, data->tubes[data->tube_in], data->fd_in))
 		return (EXIT_FAILURE);
 	if (__redirect_output(token, data->tubes[data->tube_out], data->fd_out))
 		return (EXIT_FAILURE);
+	curr = token;
+	while (curr && curr->type != T_PIPE)
+	{
+		if (curr->type == T_REDIRECT)
+		{
+			next = curr->next->next;
+			token_lst_delone(tokens, curr);
+			curr = next;
+		}
+		else
+			curr = curr->next;
+	}
 	return (EXIT_SUCCESS);
 }

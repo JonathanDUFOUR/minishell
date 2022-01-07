@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/02 23:57:44 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/06 20:22:40 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,16 @@ SRC				=	\
 						put_env.c							\
 						unset_env.c							\
 					}										\
+					${addprefix execution/,					\
+						close_unused_fd.c					\
+						data_clear.c						\
+						exec_cmd.c							\
+						open_files.c						\
+						pipeline.c							\
+						redirections.c						\
+						run_cmd.c							\
+						setup_fork.c						\
+					}										\
 					${addprefix sed/,						\
 						${addprefix lst/,					\
 							sed_lst_add_back.c				\
@@ -155,7 +165,7 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra# -Werror
+CFLAGS			=	-Wall -Wextra -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:11:26 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/21 15:01:47 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/06 20:10:02 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECTIONS_H
 # define REDIRECTIONS_H
 
-# include "minishell.h"
 # include <unistd.h>
+# include "minishell.h"
 
-typedef int	t_tube[2];
+typedef int					t_tube[2];
 
 typedef struct s_exec_data	t_exec_data;
 
@@ -29,15 +29,25 @@ struct s_exec_data
 	int		fd_out;
 	char	**envp;
 	char	**path;
-	
 };
 
-int		setup_fork(t_token *token, t_env_lst *env, t_exec_data *data)
+int		close_unused_fd(t_token *token, t_exec_data *data)
 		__attribute__((nonnull));
-int		exec_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
+int		exec_cmd(t_token_lst *const tokens, t_token *token, t_env_lst *env,
+			t_exec_data *data)
+		__attribute__((nonnull));
+int		open_files(t_token *token, int *fd_in, int *fd_out)
+		__attribute__((nonnull));
+int		redirections(t_token_lst *const tokens, t_token *token,
+			t_exec_data *data)
+		__attribute__((nonnull));
+int		run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
+		__attribute__((nonnull));
+int		setup_fork(t_token_lst *const tokens, t_token *token, t_env_lst *env,
+			t_exec_data *data)
 		__attribute__((nonnull));
 
-int	redirections(t_token *token, t_exec_data *data);
-int	__open_files(t_token *token, int *fd_in, int *fd_out);
+void	data_clear(t_exec_data *data)
+		__attribute__((nonnull));
 
 #endif

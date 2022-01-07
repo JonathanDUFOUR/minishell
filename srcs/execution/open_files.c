@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/23 10:45:07 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/06 20:24:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirections.h"
-#include "ft_string.h"
 #include <stdbool.h>
-#include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include "ft_string.h"
+#include "redirections.h"
+#include "g_exit_status.h"
 
-static bool	__is_redirect_in(char *str)
+static bool	__is_redirect_in(char const *str)
 {
 	if (ft_strcmp("<", str) == 0)
 		return (true);
@@ -25,7 +26,7 @@ static bool	__is_redirect_in(char *str)
 	return (false);
 }
 
-static bool	__is_redirect_out(char *str)
+static bool	__is_redirect_out(char const *str)
 {
 	if (ft_strcmp(">", str) == 0)
 		return (true);
@@ -46,8 +47,6 @@ static int	__open_in(t_token *token, int *fd)
 	}
 	else if (ft_strcmp("<<", token->str) == 0)
 		*fd = STDIN_FILENO;
-	// XXX voir s'il faudra utiliser fd_in au moment de se servir
-	// de ce qu'a recuperer le dernier here_doc
 	return (EXIT_SUCCESS);
 }
 
@@ -70,17 +69,24 @@ static int	__open_out(t_token *token, int *fd)
 	return (EXIT_SUCCESS);
 }
 
-int	__open_files(t_token *token, int *fd_in, int *fd_out)
+int	open_files(t_token *token, int *fd_in, int *fd_out)
 {
-	while (token && token->type == T_PIPE)
+	t_token	*curr;
+
+	curr = token;
+	while (curr && curr->type == T_PIPE)
 	{
-		if (token->type == T_REDIRECT && __is_redirect_in(token->str))
-			if (__open_in(token, fd_in) == EXIT_FAILURE)
+		if (curr->type == T_REDIRECT && __is_redirect_in(curr->str))
+		{
+			if (__open_in(curr, fd_in) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-		else if (token->type == T_REDIRECT && __is_redirect_out(token->str))
-			if (__open_out(token, fd_out) == EXIT_FAILURE)
+		}
+		else if (curr->type == T_REDIRECT && __is_redirect_out(curr->str))
+		{
+			if (__open_out(curr, fd_out) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-		token = token->next;
+		}
+		curr = curr->next;
 	}
 	return (EXIT_SUCCESS);
 }

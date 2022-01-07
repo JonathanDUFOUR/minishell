@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/23 11:35:30 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/06 20:49:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirections.h"
+/* DBG */
+#include <stdio.h>
 
+#include "ft_string.h"
+#include "redirections.h"
+#include "g_exit_status.h"
+
+/*
 static int	__count_cmd(t_token_lst *tokens)
 {
 	int		count;
@@ -25,7 +31,9 @@ static int	__count_cmd(t_token_lst *tokens)
 			count++;
 		elem = elem->next;
 	}
+	return (count);
 }
+*/
 
 static t_token	*__next_command(t_token *elem)
 {
@@ -36,7 +44,7 @@ static t_token	*__next_command(t_token *elem)
 	return (elem);
 }
 
-static char **__get_path_env(t_env_lst *env)
+static char	**__get_path_env(t_env_lst *env)
 {
 	char	**path;
 	char	*env_path;
@@ -54,55 +62,52 @@ static int	__init_data(t_exec_data *data, t_env_lst *env)
 	data->fd_out = -1;
 	data->tube_in = 0;
 	data->tube_out = 1;
-	if (pipe(data->tubes[data->tube_in]) == -1)
+	if (pipe(data->tubes[0]) == -1)
 		return (EXIT_FAILURE);
-	if (pipe(data->tubes[data->tube_out]) == -1)
+	if (pipe(data->tubes[1]) == -1)
+	{
+		close(data->tubes[0][0]);
+		close(data->tubes[0][1]);
 		return (EXIT_FAILURE);
+	}
 	data->path = __get_path_env(env);
 	if (data->path == NULL)
 		return (EXIT_FAILURE);
 	data->envp = env_to_envp(env);
 	if (data->envp == NULL)
 	{
+		close(data->tubes[0][0]);
+		close(data->tubes[0][1]);
+		close(data->tubes[1][0]);
+		close(data->tubes[1][1]);
 		free(data->path);
 		return (EXIT_FAILURE);
 	}
-}
-
-static void	__clean_data(t_exec_data *data)
-{
-	if (data->fd_in > 2)
-		close(data->fd_in);
-	if (data->fd_out > 2)
-		close(data->fd_out);
-	free(data->envp);
-	free(data->path);
+	return (EXIT_SUCCESS);
 }
 
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
-	t_token	*elem;
+	t_token		*elem;
 	t_exec_data	data;
-	int		cmd_n;
-	int		i;
 
 	elem = tokens->head;
-	cmd_n = __count_cmd(tokens);
-	i = 0;
 	if (__init_data(&data, env) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	while (i < cmd_n) // XXX while (elem) ?
+		return (g_exit_status = EXIT_FAILURE);
+	while (elem)
 	{
-		if (setup_fork(elem, env, &data) == EXIT_FAILURE)
+		puts("foo");fflush(stdout);
+		if (setup_fork(tokens, elem, env, &data) == EXIT_FAILURE)
 		{
-			__clean_data(&data);
-			return (EXIT_FAILURE);
+			puts("muf");fflush(stdout);
+			data_clear(&data);
+			return (g_exit_status = EXIT_FAILURE);
 		}
+		puts("bar");fflush(stdout);
 		data.tube_in ^= 1;
 		data.tube_out ^= 1;
 		elem = __next_command(elem);
-		i++;
 	}
-	__clean_data(&data);
+	data_clear(&data);
 	return (EXIT_SUCCESS);
 }

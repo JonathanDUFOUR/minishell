@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   data_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 21:04:25 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/06 19:23:45 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/06 19:24:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* DBG */
-#include <stdio.h>
-
 #include "redirections.h"
 
-int	exec_cmd(t_token_lst *const tokens, t_token *token, t_env_lst *env,
-	t_exec_data *data)
+void	data_clear(t_exec_data *data)
 {
-	printf("I am the pid %i\n", getpid());
-	if (redirections(tokens, token, data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (close_unused_fd(token, data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (run_cmd(token, env, data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if (data->fd_in > 2)
+		close(data->fd_in);
+	if (data->fd_out > 2)
+		close(data->fd_out);
+	close(data->tubes[0][0]);
+	close(data->tubes[0][1]);
+	close(data->tubes[1][0]);
+	close(data->tubes[1][1]);
+	free(data->envp);
+	free(data->path);
 }

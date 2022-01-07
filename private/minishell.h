@@ -6,16 +6,16 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/02 23:54:03 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/06 19:24:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "t_token_lst.h"
-# include "t_env_lst.h"
 # include <stdlib.h>
+# include "t_env_lst.h"
+# include "t_token_lst.h"
 
 # ifndef PROMPT
 #  define PROMPT "minishell$> "

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lookup_builtin.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:05:46 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/14 19:43:54 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:47:10 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		msh_cd(t_env_lst *env, t_token *args)
 int		msh_echo(__attribute__((unused))t_env_lst *env, t_token *args);
 int		msh_env(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
-void	msh_exit(t_env_lst *env, t_token_lst *tokens)
+int		msh_exit(t_env_lst *env, t_token *args)
 		__attribute__((nonnull));
 int		msh_export(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
@@ -39,13 +39,12 @@ int		msh_unset(t_env_lst *env, t_token *args)
 static t_builtin const		g_builtin[] = {
 {"cd", msh_cd},
 {"echo", msh_echo},
+{"exit", msh_exit},
 {"env", msh_env},
 {"export", msh_export},
 {"pwd", msh_pwd},
 {"unset", msh_unset},
 {0}
 };
-// FIX il faudra faire une exeption pour exit 
-// ou faire un token_lst_clear qui prend en parametre un 't_token *'
 
 #endif

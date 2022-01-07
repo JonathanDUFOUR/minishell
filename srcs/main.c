@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/03 01:40:41 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/06 20:30:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		if (g_exit_status == (1 << 7))
 			g_exit_status |= SIGINT;
-		else
-			token_lst_print(&tokens);
+		else if (pipeline(&tokens, env))
+		{
+			perror("pipeline");
+			return (__clear_quit(line, &tokens, EXIT_FAILURE));
+		}
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);
 	}
