@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lookup_builtin.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:05:46 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 16:47:10 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:18:30 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		msh_echo(__attribute__((unused))t_env_lst *env, t_token *args);
 int		msh_env(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 int		msh_exit(t_env_lst *env, t_token *args)
-		__attribute__((nonnull));
+		__attribute__((nonnull (1)));
 int		msh_export(t_env_lst *env, t_token *args)
 		__attribute__((nonnull (1)));
 int		msh_pwd(__attribute__((unused))t_env_lst *env, t_token *args);

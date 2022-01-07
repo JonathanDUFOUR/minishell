@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/06 20:30:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:12:16 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 		if (g_exit_status == (1 << 7))
 			g_exit_status |= SIGINT;
 		else if (pipeline(&tokens, env))
-		{
-			perror("pipeline");
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		}
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);
 	}

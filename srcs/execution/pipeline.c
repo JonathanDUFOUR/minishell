@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 20:49:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:11:55 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "ft_string.h"
 #include "redirections.h"
 #include "g_exit_status.h"
+#include <sys/wait.h>
+#include <sys/types.h>
 
 /*
 static int	__count_cmd(t_token_lst *tokens)
@@ -44,70 +46,69 @@ static t_token	*__next_command(t_token *elem)
 	return (elem);
 }
 
-static char	**__get_path_env(t_env_lst *env)
+int	__count_fork(t_token *token)
 {
-	char	**path;
-	char	*env_path;
+	int	count;
 
-	env_path = get_env("PATH", env);
-	if (env_path == NULL)
-		return (NULL);
-	path = ft_split(env_path, ':');
-	return (path);
+	count = 0;
+	while (token)
+	{
+		if (token->type == T_PIPE)
+			count++;
+		token = token->next;
+	}
+	return (count + 1);
 }
 
-static int	__init_data(t_exec_data *data, t_env_lst *env)
+static unsigned int	__calculate_exit_status(unsigned int status)
 {
-	data->fd_in = -1;
-	data->fd_out = -1;
-	data->tube_in = 0;
-	data->tube_out = 1;
-	if (pipe(data->tubes[0]) == -1)
-		return (EXIT_FAILURE);
-	if (pipe(data->tubes[1]) == -1)
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (WTERMSIG(status));
+	else if (WIFSTOPPED(status))
+		return (WSTOPSIG(status));
+	else
+		return (status);
+}
+
+static int	__wait_all_forks(t_token *head)
+{
+	int	status;
+	int	fork_n;
+
+	fork_n = __count_fork(head);
+	status = 0;
+	while (fork_n)
 	{
-		close(data->tubes[0][0]);
-		close(data->tubes[0][1]);
-		return (EXIT_FAILURE);
+		wait(&status);
+		fork_n--;
 	}
-	data->path = __get_path_env(env);
-	if (data->path == NULL)
-		return (EXIT_FAILURE);
-	data->envp = env_to_envp(env);
-	if (data->envp == NULL)
-	{
-		close(data->tubes[0][0]);
-		close(data->tubes[0][1]);
-		close(data->tubes[1][0]);
-		close(data->tubes[1][1]);
-		free(data->path);
-		return (EXIT_FAILURE);
-	}
+	g_exit_status = __calculate_exit_status(status);
 	return (EXIT_SUCCESS);
 }
 
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
-	t_token		*elem;
-	t_exec_data	data;
+	t_token			*elem;
+	t_exec_data		data;
 
 	elem = tokens->head;
-	if (__init_data(&data, env) == EXIT_FAILURE)
+	if (data_init(&data, env) == EXIT_FAILURE)
 		return (g_exit_status = EXIT_FAILURE);
 	while (elem)
 	{
-		puts("foo");fflush(stdout);
 		if (setup_fork(tokens, elem, env, &data) == EXIT_FAILURE)
 		{
-			puts("muf");fflush(stdout);
 			data_clear(&data);
 			return (g_exit_status = EXIT_FAILURE);
 		}
-		puts("bar");fflush(stdout);
 		data.tube_in ^= 1;
 		data.tube_out ^= 1;
 		elem = __next_command(elem);
 	}
+	close_tubes(&data);
+	__wait_all_forks(tokens->head);
 	data_clear(&data);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:11:26 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 20:10:02 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/07 23:59:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ int		setup_fork(t_token_lst *const tokens, t_token *token, t_env_lst *env,
 			t_exec_data *data)
 		__attribute__((nonnull));
 
+int		data_init(t_exec_data *data, t_env_lst *env)
+		__attribute__((nonnull));
+int		close_tubes(t_exec_data *data)
+		__attribute__((nonnull));
 void	data_clear(t_exec_data *data)
 		__attribute__((nonnull));
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
+#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/06 20:22:40 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/08 00:07:14 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ SRC				=	\
 					${addprefix execution/,					\
 						close_unused_fd.c					\
 						data_clear.c						\
+						data_init.c							\
 						exec_cmd.c							\
 						open_files.c						\
 						pipeline.c							\
