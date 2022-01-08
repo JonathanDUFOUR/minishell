@@ -3,39 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 00:11:55 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:24:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* DBG */
-#include <stdio.h>
-
+#include <sys/wait.h>
+#include <sys/types.h>
 #include "ft_string.h"
 #include "redirections.h"
 #include "g_exit_status.h"
-#include <sys/wait.h>
-#include <sys/types.h>
-
-/*
-static int	__count_cmd(t_token_lst *tokens)
-{
-	int		count;
-	t_token	*elem;
-
-	count = 0;
-	elem = tokens->head;
-	while (elem)
-	{
-		if (elem->type == T_COMMAND || elem->type == T_BUILTIN)
-			count++;
-		elem = elem->next;
-	}
-	return (count);
-}
-*/
 
 static t_token	*__next_command(t_token *elem)
 {
@@ -88,6 +67,9 @@ static int	__wait_all_forks(t_token *head)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	Setup a pipeline, and execute each command/builtin in using forks
+*/
 int	pipeline(t_token_lst *tokens, t_env_lst *env)
 {
 	t_token			*elem;

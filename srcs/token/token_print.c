@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 01:10:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:48:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:57:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	token_print(t_token const *const node)
 	if (0)
 		printf("%15s: %p\n", "node", node);
 	if (1)
-		printf("%15s: %s\n", "node->str", node->str);
+		printf("%15s: [%s]\n", "node->str", node->str);
 	i = 0;
 	while (g_token_type_name[i].name && node->type != g_token_type_name[i].type)
 		++i;

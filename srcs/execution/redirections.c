@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/06 20:42:31 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:34:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ static int	__redirect_output(t_token *token, t_tube tube_out, int fd)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	Apply the input and output redirections of the first command/builtin
+	encountered from the given `token`
+*/
 int	redirections(t_token_lst *const tokens, t_token *token, t_exec_data *data)
 {
 	t_token	*curr;
@@ -85,6 +89,7 @@ int	redirections(t_token_lst *const tokens, t_token *token, t_exec_data *data)
 		if (curr->type == T_REDIRECT)
 		{
 			next = curr->next->next;
+			token_lst_delone(tokens, curr->next);
 			token_lst_delone(tokens, curr);
 			curr = next;
 		}

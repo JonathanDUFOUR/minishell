@@ -6,9 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 20:24:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:23:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* DBG */
+#include <stdio.h>
 
 #include <stdbool.h>
 #include <fcntl.h>
@@ -69,6 +72,9 @@ static int	__open_out(t_token *token, int *fd)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	Open every files concerned by an input redirection or an output redirection
+*/
 int	open_files(t_token *token, int *fd_in, int *fd_out)
 {
 	t_token	*curr;

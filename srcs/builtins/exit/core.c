@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/06 20:14:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 01:07:02 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	msh_exit(t_env_lst *env, t_token *args)
 		else
 			__nonumeric_err(args->str);
 		ft_memdel(&str);
+		token_clear(args);
 	}
 	env_clear(env);
-	token_clear(args);
 	exit(g_exit_status);
 	return (EXIT_SUCCESS);
 }

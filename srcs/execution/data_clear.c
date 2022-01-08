@@ -6,12 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:23:45 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/06 19:24:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:10:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirections.h"
 
+/*
+	Release the resources of the given struct `data`
+*/
 void	data_clear(t_exec_data *data)
 {
 	if (data->fd_in > 2)

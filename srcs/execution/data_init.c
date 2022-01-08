@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 23:49:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 00:08:13 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:13:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int	close_tubes(t_exec_data *data)
 	return (EXIT_FAILURE);
 }
 
+/*
+	Initialize the given struct `data`, opening two pipes, and setting up
+	others variables in
+*/
 int	data_init(t_exec_data *data, t_env_lst *env)
 {
 	data->fd_in = -1;

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 20:24:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:00:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:11:44 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "ft_string.h"
 #include "t_token_lst.h"
 
-static void	__update(t_token_lst *const tokens, t_token *const node,
+static int	__update(t_token_lst *const tokens, t_token *const node,
 	t_token *const next)
 {
 	next->next = node->next;
@@ -24,6 +24,7 @@ static void	__update(t_token_lst *const tokens, t_token *const node,
 	if (node == tokens->tail)
 		tokens->tail = next;
 	++tokens->size;
+	return (EXIT_SUCCESS);
 }
 
 static int	__split(t_token_lst *const tokens, t_token *const node,
@@ -32,7 +33,8 @@ static int	__split(t_token_lst *const tokens, t_token *const node,
 	t_token *const	next = token_new(NULL, T_WORD, (t_sed_lst){0});
 	t_sed *const	cut = sed_new(NULL, UQUOTED);
 	char const		*str0 = ft_strdup(ptr);
-	char const		*str1 = ft_strndup(sed->str, ptr - sed->str);
+	char const		*str1 = ft_strndup(sed->str,
+			ft_strchr(sed->str, ' ') - sed->str);
 
 	if (!next || !cut || !str0 || !str1)
 	{
@@ -52,8 +54,7 @@ static int	__split(t_token_lst *const tokens, t_token *const node,
 	next->seds.size = sed_size(cut);
 	node->seds.tail = sed;
 	node->seds.size -= next->seds.size - 1;
-	__update(tokens, node, next);
-	return (EXIT_SUCCESS);
+	return (__update(tokens, node, next));
 }
 
 static int	__evaluate(t_token_lst *const tokens, t_token *const node,

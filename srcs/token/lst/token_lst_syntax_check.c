@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:45:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/03 01:25:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:01:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static int	__error_msg(t_token const *const node, char const *program)
 /*
 	Check the good syntax of the given list `tokens`
 	Print an error message on the first syntax error encountered
-	Return EXIT_SUCCESS if no any error were found
-	Return EXIT_FAILURE else
 */
 int	token_lst_syntax_check(t_token_lst *const tokens, char const *program)
 {

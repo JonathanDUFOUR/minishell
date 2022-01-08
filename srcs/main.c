@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 00:12:16 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 02:30:00 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,11 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "ft_io.h"
 #include "ft_string.h"
-#include "ft_colors.h"
 #include "minishell.h"
+#include "redirections.h"
 
 unsigned int	g_exit_status;
-
-static int	__usage_error(char const *program)
-{
-	ft_putendl_fd(RED "Error: Wrong usage" RESET, STDERR_FILENO);
-	ft_putstr_fd("Usage: ./", STDERR_FILENO);
-	ft_putendl_fd(program, STDERR_FILENO);
-	return (EXIT_FAILURE);
-}
 
 static int	__clear_quit(char const *line, t_token_lst *const tokens,
 	int const ret)
@@ -35,6 +26,22 @@ static int	__clear_quit(char const *line, t_token_lst *const tokens,
 	ft_memdel(&line);
 	rl_clear_history();
 	token_lst_clear(tokens);
+	return (ret);
+}
+
+static int	__run(t_token_lst *const tokens, t_env_lst *const env)
+{
+	t_exec_data	data;
+	int			ret;
+
+	token_lst_print(tokens);
+	if (token_lst_type_count(tokens, T_PIPE)
+		|| token_lst_type_count(tokens, T_COMMAND))
+		return (pipeline(tokens, env));
+	if (data_init(&data, env))
+		return (EXIT_FAILURE);
+	ret = exec_cmd(tokens, tokens->head, env, &data);
+	data_clear(&data);
 	return (ret);
 }
 
@@ -55,9 +62,9 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 			g_exit_status = 2;
 		else if (token_lst_here_doc(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		if (g_exit_status == (1 << 7))
+		else if (g_exit_status == (1 << 7))
 			g_exit_status |= SIGINT;
-		else if (pipeline(&tokens, env))
+		else if (__run(&tokens, env))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);
@@ -71,7 +78,7 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 	t_env_lst	env;
 
 	if (ac != 1)
-		return (__usage_error(av[0]));
+		return (usage_err(av[0]));
 	g_exit_status = 0;
 	ft_bzero(&env, sizeof(t_env_lst));
 	if (sigint_default()

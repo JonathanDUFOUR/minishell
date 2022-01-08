@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:08:37 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 16:00:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:22:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static bool	__is_pipe_after(t_token *token)
 	return (false);
 }
 
+/*
+	Close unused pipe entries
+*/
 int	close_unused_fd(t_token *token, t_exec_data *data)
 {
 	int	ret_close;

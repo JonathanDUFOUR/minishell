@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 03:38:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:45:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	token_print(t_token const *const node)
 char	**token_get_cmd_opt_arg(t_token const *const node)
 		__attribute__((nonnull));
 
-t_uint	count_args(t_token *args);
+t_uint	token_args_count(t_token *args);
 
 t_token	*token_get(char const *line)
 		__attribute__((nonnull));

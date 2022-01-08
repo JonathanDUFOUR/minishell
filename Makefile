@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/08 00:07:14 by majacque         ###   ########.fr        #
+#    Updated: 2022/01/08 00:55:36 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,11 +133,12 @@ SRC				=	\
 							token_lst_sed.c					\
 							token_lst_split.c				\
 							token_lst_syntax_check.c		\
+							token_lst_type_count.c			\
 							token_lst_which_word.c			\
 							token_lst_word_or_operator.c	\
 						}									\
-						count_args.c						\
 						error_option.c						\
+						token_args_count.c					\
 						token_clear.c						\
 						token_delone.c						\
 						token_expand.c						\
@@ -152,6 +153,7 @@ SRC				=	\
 					${addprefix util/,						\
 						msh_str3join.c						\
 						namelen.c							\
+						usage_err.c							\
 					}										\
 					main.c
 

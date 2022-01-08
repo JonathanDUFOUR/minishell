@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 00:13:35 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 03:37:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/* DBG */
-#include <stdio.h>
 
 #include "ft_string.h"
 #include "redirections.h"
@@ -88,9 +85,12 @@ static int	__command(t_token *const token, t_exec_data *const data)
 	return (EXIT_SUCCESS);
 }
 
+/*
+	Run the command/builtin the given `token` is refering
+*/
 int	run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
 {
-	int		i;
+	int	i;
 
 	if (token->type == T_COMMAND && __command(token, data))
 		return (EXIT_FAILURE);

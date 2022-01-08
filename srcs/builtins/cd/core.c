@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:42:43 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 00:46:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "msh_cd.h"
 
-static char	*__getdirectory(t_env_lst *env, t_token *args, int nb_arg)
+static char	*__getdirectory(t_env_lst *env, t_token *args, t_uint nb_arg)
 {
 	char	*directory;
 
@@ -92,7 +92,7 @@ static char	*__setcurpath(t_env_lst *env, t_token *args, bool *is_cdpath)
 	char	*directory;
 	char	*curpath;
 
-	directory = __getdirectory(env, args, count_args(args));
+	directory = __getdirectory(env, args, token_args_count(args));
 	if (directory == NULL)
 		return (NULL);
 	*is_cdpath = false;
@@ -118,7 +118,7 @@ int	msh_cd(t_env_lst *env, t_token *args)
 
 	if (args && args->type == T_OPTION)
 		return (error_option("cd: ", args));
-	if (count_args(args) > 1)
+	if (token_args_count(args) > 1)
 	{
 		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
 		return (EXIT_SUCCESS);
