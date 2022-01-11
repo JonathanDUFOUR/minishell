@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 18:49:31 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/09 02:52:01 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	msh_env(t_env_lst *const env, t_token *args)
 		if (args->type == T_ARGUMENT)
 		{
 			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
+			// TODO g_exit_status = ?
 			return (EXIT_SUCCESS);
 		}
 	}

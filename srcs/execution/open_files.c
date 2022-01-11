@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 03:23:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/09 02:41:12 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include "ft_io.h"
 #include "ft_string.h"
 #include "redirections.h"
 #include "g_exit_status.h"
@@ -42,6 +43,21 @@ static int	__open_in(t_token *token, int *fd)
 {
 	if (*fd > 2)
 		close(*fd);
+	if (token->next->type == T_FILE)
+	{
+		if (access(token->next->str, F_OK))
+		{
+			ft_putstr_fd("minishell: no such file or directory: ", STDERR_FILENO);
+			ft_putendl_fd(token->next->str, STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
+		else if (access(token->next->str, R_OK))
+		{
+			ft_putstr_fd("minishell: permission denied: ", STDERR_FILENO);
+			ft_putendl_fd(token->next->str, STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
+	}
 	if (ft_strcmp("<", token->str) == 0)
 	{
 		*fd = open(token->next->str, O_RDONLY);
@@ -57,6 +73,15 @@ static int	__open_out(t_token *token, int *fd)
 {
 	if (*fd > 2)
 		close(*fd);
+	if (!access(token->next->str, F_OK))
+	{
+		if (access(token->next->str, W_OK))
+		{
+			ft_putstr_fd("minishell: permission denied: ", STDERR_FILENO);
+			ft_putendl_fd(token->next->str, STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
+	}
 	if (ft_strcmp(">", token->str) == 0)
 	{
 		*fd = open(token->next->str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
@@ -80,7 +105,7 @@ int	open_files(t_token *token, int *fd_in, int *fd_out)
 	t_token	*curr;
 
 	curr = token;
-	while (curr && curr->type == T_PIPE)
+	while (curr && curr->type != T_PIPE)
 	{
 		if (curr->type == T_REDIRECT && __is_redirect_in(curr->str))
 		{

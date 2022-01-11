@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   close_unused_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:08:37 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 03:22:51 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:38:17 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* DBG */
+#include <stdio.h>
+#include "ft_io.h"
+#include <sys/types.h>
 
 #include "redirections.h"
 #include <stdbool.h>

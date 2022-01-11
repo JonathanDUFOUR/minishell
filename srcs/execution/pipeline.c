@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 03:24:49 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/08 20:23:42 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// DBG
+#include <stdio.h>
 
 #include <sys/wait.h>
 #include <sys/types.h>

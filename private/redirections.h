@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:11:26 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/07 23:59:43 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/08 19:29:12 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ struct s_exec_data
 };
 
 int		close_unused_fd(t_token *token, t_exec_data *data)
-		__attribute__((nonnull));
+		__attribute__((nonnull (2)));
 int		exec_cmd(t_token_lst *const tokens, t_token *token, t_env_lst *env,
 			t_exec_data *data)
 		__attribute__((nonnull));
@@ -42,7 +42,7 @@ int		redirections(t_token_lst *const tokens, t_token *token,
 			t_exec_data *data)
 		__attribute__((nonnull));
 int		run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
-		__attribute__((nonnull));
+		__attribute__((nonnull (2, 3)));
 int		setup_fork(t_token_lst *const tokens, t_token *token, t_env_lst *env,
 			t_exec_data *data)
 		__attribute__((nonnull));

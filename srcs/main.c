@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 02:30:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/09 02:00:26 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,47 @@ static int	__clear_quit(char const *line, t_token_lst *const tokens,
 	return (ret);
 }
 
+static int	__backup_in_out(int fd_in_out[2])
+{
+	fd_in_out[0] = dup(STDIN_FILENO);
+	fd_in_out[1] = dup(STDOUT_FILENO);
+	if (fd_in_out[0] == -1 || fd_in_out[1] == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	__restore_in_out(int fd_in_out[2])
+{
+	int	ret;
+
+	ret = 0;
+	ret += dup2(fd_in_out[0], STDIN_FILENO);
+	ret += close(fd_in_out[0]);
+	ret += dup2(fd_in_out[1], STDOUT_FILENO);
+	ret += close(fd_in_out[1]);
+	if (ret < 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 static int	__run(t_token_lst *const tokens, t_env_lst *const env)
 {
 	t_exec_data	data;
 	int			ret;
+	int			fd_in_out[2];
 
-	token_lst_print(tokens);
 	if (token_lst_type_count(tokens, T_PIPE)
 		|| token_lst_type_count(tokens, T_COMMAND))
 		return (pipeline(tokens, env));
 	if (data_init(&data, env))
 		return (EXIT_FAILURE);
+	if (__backup_in_out(fd_in_out))
+	{
+		data_clear(&data);
+		return (EXIT_FAILURE);
+	}
 	ret = exec_cmd(tokens, tokens->head, env, &data);
+	ret += __restore_in_out(fd_in_out);
 	data_clear(&data);
 	return (ret);
 }
