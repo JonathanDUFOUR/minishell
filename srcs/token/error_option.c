@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 06:48:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:43:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	error_option(const char *str, t_token const *const args)
 	ft_putchar_fd(args->str[0], STDERR_FILENO);
 	ft_putchar_fd(args->str[1], STDERR_FILENO);
 	ft_putendl_fd(": invalid option", STDERR_FILENO);
-	g_exit_status = EXIT_FAILURE;
-	return (EXIT_SUCCESS);
+	g_exit_status = EXIT_FAILURE; // XXX 125 ?
+	return (EXIT_SUCCESS); // XXX du coup EXIT_FAILURE ?
 }

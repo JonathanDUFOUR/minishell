@@ -6,13 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:28:56 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:40:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include "ft_io.h"
 #include "ft_string.h"
 #include "execution.h"
 #include "g_exit_status.h"
