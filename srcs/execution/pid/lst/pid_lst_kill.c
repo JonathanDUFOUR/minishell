@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   pid_lst_kill.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 05:53:56 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 23:16:40 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/14 23:22:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include "t_env_lst.h"
-#include "t_token_lst.h"
-#include "ft_io.h"
+#include "t_pid_lst.h"
 
-int	msh_env(t_env_lst *const env, t_token *const token)
+int	pid_lst_kill(t_pid_lst *const lst, int const sig)
 {
-	t_env const	*curr;
+	t_pid const	*curr = lst->head;
 
-	if (token->next)
-	{
-		if (token->next->type == T_OPTION)
-			return (error_option("env: ", token->next));
-		if (token->next->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			return (EXIT_SUCCESS);
-		}
-	}
-	curr = env->head;
 	while (curr)
 	{
-		printf("%s=%s\n", curr->name, curr->value);
+		if (pid_kill(curr, sig))
+			return (EXIT_FAILURE);
 		curr = curr->next;
 	}
 	return (EXIT_SUCCESS);

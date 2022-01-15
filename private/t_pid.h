@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_sed.c                                    :+:      :+:    :+:   */
+/*   t_pid.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:03:28 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/15 00:19:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#ifndef T_PID_H
+# define T_PID_H
 
-/*
-	Sed the str of each token in the given tokens list
-*/
-int	token_lst_sed(t_token_lst *const tokens)
+# include <sys/types.h>
+
+typedef struct s_pid	t_pid;
+
+struct s_pid
 {
-	t_token	*curr;
+	pid_t	id;
+	t_pid	*next;
+	t_pid	*prev;
+};
 
-	curr = tokens->head;
-	while (curr)
-	{
-		if (curr->type != T_PIPE
-			&& curr->type != T_REDIRECTIN
-			&& curr->type != T_REDIRECTOUT
-			&& token_sed(curr))
-			return (EXIT_FAILURE);
-		curr = curr->next;
-	}
-	return (EXIT_SUCCESS);
-}
+int		pid_kill(t_pid const *const node, int const sig)
+		__attribute__((nonnull));
+int		pid_wait(t_pid const *const node)
+		__attribute__((nonnull));
+
+void	pid_delone(t_pid *node)
+		__attribute__((nonnull));
+
+t_pid	*pid_new(pid_t const id);
+
+#endif

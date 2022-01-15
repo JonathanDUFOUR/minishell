@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/06 18:34:03 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 06:48:09 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 	Set g_exit_status accordingly
 	Always return EXIT_SUCCESS
 */
-int	error_option(const char *str, t_token *args)
+int	error_option(const char *str, t_token const *const args)
 {
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putchar_fd(args->str[0], STDERR_FILENO);

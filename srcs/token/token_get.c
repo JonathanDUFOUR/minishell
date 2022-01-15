@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 03:18:09 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:01:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 07:40:52 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*__word_get(char const *line)
 			if (*ptr == quote)
 				quote = 0;
 		}
-		else if (ft_strchr(OPERATOR_CHARS, *ptr) || *ptr == ' ')
+		else if (ft_strchr(OPERATOR_CHARS, *ptr) || ft_strchr(" \t", *ptr))
 			break ;
 		else if (*ptr == '\'' || *ptr == '"')
 			quote = *ptr;

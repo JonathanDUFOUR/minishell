@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 00:56:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:53:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	token_lst_word_or_operator(t_token_lst *const tokens)
 		__attribute__((nonnull));
 
 t_uint	token_lst_type_count(t_token_lst *const tokens, t_token_type const type)
-		__attribute__((nonnull (1)));
+		__attribute__((nonnull));
 
 #endif

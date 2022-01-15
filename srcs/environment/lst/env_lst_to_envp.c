@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_to_envp.c                                      :+:      :+:    :+:   */
+/*   env_lst_to_envp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:08:16 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/20 20:59:03 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:15:45 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	**__populate(char **output, t_env_lst const *const env)
 	Return the address of the new array of pointers
 	Return NULL upon failure
 */
-char	**env_to_envp(t_env_lst const *const env)
+char	**env_lst_to_envp(t_env_lst const *const env)
 {
 	char	**output;
 	size_t	size;

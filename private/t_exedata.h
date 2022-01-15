@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_sed.c                                    :+:      :+:    :+:   */
+/*   t_exedata.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/12 17:21:07 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/15 09:04:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#ifndef T_EXEDATA_H
+# define T_EXEDATA_H
 
-/*
-	Sed the str of each token in the given tokens list
-*/
-int	token_lst_sed(t_token_lst *const tokens)
+# include "t_fds.h"
+# include "t_env_lst.h"
+# include "t_pid_lst.h"
+
+typedef struct s_exedata	t_exedata;
+
+struct s_exedata
 {
-	t_token	*curr;
+	t_fds		fds;
+	char		**envp;
+	char		**path;
+	t_pid_lst	pids;
+};
 
-	curr = tokens->head;
-	while (curr)
-	{
-		if (curr->type != T_PIPE
-			&& curr->type != T_REDIRECTIN
-			&& curr->type != T_REDIRECTOUT
-			&& token_sed(curr))
-			return (EXIT_FAILURE);
-		curr = curr->next;
-	}
-	return (EXIT_SUCCESS);
-}
+int	exedata_clear(t_exedata *const data)
+	__attribute__((nonnull));
+int	exedata_init(t_exedata *const data, t_env_lst *const env)
+	__attribute__((nonnull));
+
+#endif

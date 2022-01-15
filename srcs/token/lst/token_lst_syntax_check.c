@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:45:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 03:01:18 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 01:54:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	token_lst_syntax_check(t_token_lst *const tokens, char const *program)
 
 	while (curr)
 	{
-		if ((curr->prev && curr->prev->type == T_REDIRECT
+		if ((curr->prev && (curr->prev->type == T_REDIRECTIN
+					|| curr->prev->type == T_REDIRECTOUT)
 				&& curr->type != T_FILE
 				&& curr->type != T_DELIMITER)
 			|| (curr->prev && curr->prev->type == T_PIPE
@@ -44,7 +45,9 @@ int	token_lst_syntax_check(t_token_lst *const tokens, char const *program)
 			|| (curr == tokens->head
 				&& curr->type == T_PIPE)
 			|| (curr == tokens->tail
-				&& (curr->type == T_PIPE || curr->type == T_REDIRECT)))
+				&& (curr->type == T_PIPE
+					|| curr->type == T_REDIRECTIN
+					|| curr->type == T_REDIRECTOUT)))
 			return (__error_msg(curr, program));
 		curr = curr->next;
 	}

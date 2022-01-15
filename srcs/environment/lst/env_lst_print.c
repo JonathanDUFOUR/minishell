@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   env_lst_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 16:05:11 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 16:18:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:11:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	__print_one(t_env const *const node)
 	Print data of the env list
 	Print data of every variables in the list
 */
-void	env_print(t_env_lst *const env)
+void	env_lst_print(t_env_lst *const env)
 {
 	t_env	*node;
 	size_t	i;

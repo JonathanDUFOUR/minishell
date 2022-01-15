@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/02 21:10:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 07:34:45 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static char const	*__skip_spaces(char const *line)
 {
-	while (*line && *line == ' ')
+	while (*line && ft_strchr(" \t", *line))
 		++line;
 	return (line);
 }

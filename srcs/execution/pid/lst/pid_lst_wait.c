@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_clear.c                                        :+:      :+:    :+:   */
+/*   pid_lst_wait.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/01 18:49:33 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/20 20:58:22 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:13:06 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/14 19:44:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_env_lst.h"
+#include "t_pid_lst.h"
 
-/*
-	Release the resources of the given env list `env`
-*/
-void	env_clear(t_env_lst *const env)
+int	pid_lst_wait(t_pid_lst *const lst)
 {
-	while (env->head)
-		env_delone(env, env->head);
-	env->tail = NULL;
+	t_pid const	*curr = lst->head;
+
+	while (curr)
+	{
+		if (pid_wait(curr))
+			return (EXIT_FAILURE);
+		curr = curr->next;
+	}
+	return (EXIT_SUCCESS);
 }

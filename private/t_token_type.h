@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:19:19 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 04:01:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 00:25:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ enum	e_token_type
 	T_COMMAND,
 	T_ARGUMENT,
 	T_OPERATOR,
-	T_REDIRECT,
 	T_DELIMITER,
 	T_UNDEFINED,
+	T_REDIRECTIN,
+	T_REDIRECTOUT
 };
 
 #endif

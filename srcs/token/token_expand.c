@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/01 22:15:56 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:24:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*__append_value(char const *const str, char const **const ptr,
 		ft_memdel(&name);
 		return (__exit_status_value(str));
 	}
-	value = get_env(name, env);
+	value = env_lst_getone(env, name);
 	ft_memdel(&name);
 	if (!value)
 		return (ft_strdup(str));

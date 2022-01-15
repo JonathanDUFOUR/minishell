@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 19:02:43 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/29 02:14:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 00:57:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 #  define BUFF_SIZE 4096
 # endif
 
-int			ft_atoi_base(char const *str, char const *base)
-			__attribute__((nonnull));
 int			ft_atoi(char const *str)
+			__attribute__((nonnull));
+int			ft_atoi_base(char const *str, char const *base)
 			__attribute__((nonnull));
 int			ft_fddel(int *const fd)
 			__attribute__((nonnull));

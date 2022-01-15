@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_sed.c                                    :+:      :+:    :+:   */
+/*   pid_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:38:05 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/15 00:18:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#include "ft_string.h"
+#include "t_pid.h"
 
-/*
-	Sed the str of each token in the given tokens list
-*/
-int	token_lst_sed(t_token_lst *const tokens)
+void	pid_delone(t_pid *node)
 {
-	t_token	*curr;
-
-	curr = tokens->head;
-	while (curr)
-	{
-		if (curr->type != T_PIPE
-			&& curr->type != T_REDIRECTIN
-			&& curr->type != T_REDIRECTOUT
-			&& token_sed(curr))
-			return (EXIT_FAILURE);
-		curr = curr->next;
-	}
-	return (EXIT_SUCCESS);
+	if (node->prev)
+		node->prev->next = node->next;
+	if (node->next)
+		node->next->prev = node->prev;
+	ft_bzero(node, sizeof(t_pid));
+	ft_memdel(&node);
 }

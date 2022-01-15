@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   env_lst_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 05:53:56 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/06 16:29:30 by majacque          #+#    #+#             */
+/*   Updated: 2022/01/15 08:18:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "t_env_lst.h"
-#include "t_token_lst.h"
-#include "ft_io.h"
+#include "ft_string.h"
 
-int	msh_env(t_env_lst *const env, t_token *const token)
+/*
+	Remove the node containing the environment variable `name` if it exists
+*/
+void	env_lst_unset(const char *name, t_env_lst *const env)
 {
-	t_env const	*curr;
+	t_env	*curr;
 
-	if (token->next)
-	{
-		if (token->next->type == T_OPTION)
-			return (error_option("env: ", token->next));
-		if (token->next->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			return (EXIT_SUCCESS);
-		}
-	}
 	curr = env->head;
-	while (curr)
-	{
-		printf("%s=%s\n", curr->name, curr->value);
+	while (curr && ft_strcmp(curr->name, name))
 		curr = curr->next;
-	}
-	return (EXIT_SUCCESS);
+	if (curr)
+		env_lst_delone(env, curr);
 }

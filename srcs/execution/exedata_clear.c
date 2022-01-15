@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env.c                                          :+:      :+:    :+:   */
+/*   exedata_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 17:03:08 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/08 15:36:18 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/06 19:23:45 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/15 09:22:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_env_lst.h"
+#include <stdlib.h>
+#include "ft_io.h"
 #include "ft_string.h"
+#include "t_exedata.h"
 
 /*
-	Return the value of the variable `name`,
-	or NULL if a such variable is not set in the env list
+	Release the resources of the given `data`
 */
-char	*get_env(const char *name, t_env_lst *const env)
+int	exedata_clear(t_exedata *const data)
 {
-	t_env	*elem;
-	char	*value;
-
-	elem = env->head;
-	while (elem && ft_strcmp(name, elem->name))
-		elem = elem->next;
-	value = NULL;
-	if (elem)
-	{
-		value = elem->value;
-		if (value == NULL)
-			return (NULL);
-	}
-	return (value);
+	ft_memdel(&data->envp);
+	ft_memdel(&data->path);
+	pid_lst_clear(&data->pids);
+	if (fds_clear(&data->fds))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

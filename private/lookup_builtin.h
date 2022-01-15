@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lookup_builtin.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:05:46 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 00:18:30 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/15 06:11:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,28 @@
 # include "minishell.h"
 
 typedef struct s_builtin	t_builtin;
+typedef int					(*t_fct)(t_env_lst *const, t_token *const);
 
 struct s_builtin
 {
 	char const	*name;
-	int			(*f)(t_env_lst *, t_token *);
+	t_fct const	fct;
 };
 
-int		msh_cd(t_env_lst *env, t_token *args)
+int		msh_cd(t_env_lst *const env, t_token *const token)
+		__attribute__((nonnull));
+int		msh_echo(t_env_lst *env, t_token *const token)
+		__attribute__((nonnull));
+int		msh_env(t_env_lst *const env, t_token *const token)
+		__attribute__((nonnull));
+int		msh_exit(t_env_lst *const env, t_token *const token)
 		__attribute__((nonnull (1)));
-int		msh_echo(__attribute__((unused))t_env_lst *env, t_token *args);
-int		msh_env(t_env_lst *env, t_token *args)
+int		msh_export(t_env_lst *const env, t_token *const token)
+		__attribute__((nonnull));
+int		msh_pwd(t_env_lst *const env, t_token *const token)
 		__attribute__((nonnull (1)));
-int		msh_exit(t_env_lst *env, t_token *args)
-		__attribute__((nonnull (1)));
-int		msh_export(t_env_lst *env, t_token *args)
-		__attribute__((nonnull (1)));
-int		msh_pwd(__attribute__((unused))t_env_lst *env, t_token *args);
-int		msh_unset(t_env_lst *env, t_token *args)
-		__attribute__((nonnull (1)));
+int		msh_unset(t_env_lst *const env, t_token *const token)
+		__attribute__((nonnull));
 
 static t_builtin const		g_builtin[] = {
 {"cd", msh_cd},

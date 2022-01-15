@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_env.c                                        :+:      :+:    :+:   */
+/*   pid_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/06 16:29:30 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/08 15:38:45 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:11:39 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/14 19:15:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "t_env_lst.h"
-#include "ft_string.h"
+#include "t_pid.h"
 
-/*
-	Remove the node containing the environment variable `name` if it exists
-*/
-void	unset_env(const char *name, t_env_lst *env)
+t_pid	*pid_new(pid_t const id)
 {
-	t_env	*elem;
+	t_pid	*node;
 
-	elem = env->head;
-	while (elem && ft_strcmp(name, elem->name))
-		elem = elem->next;
-	if (elem)
-		env_delone(env, elem);
+	node = malloc(sizeof(t_pid));
+	if (!node)
+		return (NULL);
+	node->id = id;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }

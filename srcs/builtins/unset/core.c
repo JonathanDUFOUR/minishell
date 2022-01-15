@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:15 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:18:44 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:18:56 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_unset(t_env_lst *const env, t_token *args)
+int	msh_unset(t_env_lst *const env, t_token *const token)
 {
+	t_token const	*args = token->next;
+
 	if (args == NULL)
 		return (EXIT_SUCCESS);
 	if (args->type == T_OPTION)
@@ -49,7 +51,7 @@ int	msh_unset(t_env_lst *const env, t_token *args)
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		}
 		else
-			unset_env(args->str, env);
+			env_lst_unset(args->str, env);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);

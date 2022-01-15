@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 02:30:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:06:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "ft_io.h"
 #include "ft_string.h"
 #include "minishell.h"
-#include "redirections.h"
+#include "execution.h"
 
 unsigned int	g_exit_status;
 
@@ -29,20 +30,43 @@ static int	__clear_quit(char const *line, t_token_lst *const tokens,
 	return (ret);
 }
 
+static bool	__isexit(t_token const *node)
+{
+	while (node)
+	{
+		if (node->type == T_BUILTIN && !ft_strcmp(node->str, "exit"))
+			return (true);
+		node = node->next;
+	}
+	return (false);
+}
+
 static int	__run(t_token_lst *const tokens, t_env_lst *const env)
 {
-	t_exec_data	data;
-	int			ret;
+	t_exedata	data;
+	int			termin;
+	int			termout;
 
-	token_lst_print(tokens);
 	if (token_lst_type_count(tokens, T_PIPE)
 		|| token_lst_type_count(tokens, T_COMMAND))
 		return (pipeline(tokens, env));
-	if (data_init(&data, env))
+	if (exedata_init(&data, env))
 		return (EXIT_FAILURE);
-	ret = exec_cmd(tokens, tokens->head, env, &data);
-	data_clear(&data);
-	return (ret);
+	termin = dup(STDIN_FILENO);
+	termout = dup(STDOUT_FILENO);
+	if ((termin == -1 || termout == -1 || __isexit(tokens->head))
+		&& ft_fddel(&termin) | ft_fddel(&termout))
+		return (exedata_clear(&data) | EXIT_FAILURE);
+	if (exec_cmd(tokens, tokens->head, env, &data))
+		return (exedata_clear(&data) | ft_fddel(&termin) | ft_fddel(&termout)
+			| EXIT_FAILURE);
+	if ((close(STDIN_FILENO) | close(STDOUT_FILENO)) == -1
+		|| dup2(termin, STDIN_FILENO) == -1
+		|| dup2(termout, STDOUT_FILENO) == -1
+		|| (ft_fddel(&termin) | ft_fddel(&termout)))
+		return (ft_fddel(&termin) | ft_fddel(&termout) | exedata_clear(&data)
+			| EXIT_FAILURE);
+	return (exedata_clear(&data) | EXIT_SUCCESS);
 }
 
 static int	__get_command_line(t_env_lst *const env, char const *program)
@@ -82,16 +106,17 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 	g_exit_status = 0;
 	ft_bzero(&env, sizeof(t_env_lst));
 	if (sigint_default()
+		|| sigpipe_default()
 		|| sigquit_default()
 		|| sigterm_default()
-		|| init_env(&env, ep)
+		|| env_lst_init(&env, ep)
 		|| __get_command_line(&env, av[0]))
 	{
-		env_clear(&env);
+		env_lst_clear(&env);
 		perror(av[0]);
 		return (EXIT_FAILURE);
 	}
-	env_clear(&env);
-	printf("Bye Bye\n");
+	env_lst_clear(&env);
+	printf("exit\n");
 	return (EXIT_SUCCESS);
 }

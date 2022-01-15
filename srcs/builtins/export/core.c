@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:18:40 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:32:26 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "minishell.h"
-#include "ft_string.h"
-#include "ft_io.h"
 /* surprise */
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "get_next_line.h"
+/* ******** */
+#include <stdio.h>
+#include "ft_io.h"
+#include "ft_string.h"
+#include "minishell.h"
 
 int	__surprise(void)
 {
@@ -58,9 +58,11 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_export(t_env_lst *const env, t_token *args)
+int	msh_export(t_env_lst *const env, t_token *token)
 {
-	if (args == NULL)
+	t_token const	*args = token->next;
+
+	if (!args)
 		return (__surprise());
 	if (args->type == T_OPTION)
 		return (error_option("export: ", args));
@@ -74,7 +76,7 @@ int	msh_export(t_env_lst *const env, t_token *args)
 		}
 		else
 		{
-			if (put_env(args->str, env) == EXIT_FAILURE)
+			if (env_lst_putone(env, args->str) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		args = args->next;

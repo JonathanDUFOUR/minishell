@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   pid_lst_add_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:19:09 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 06:08:55 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:11:55 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/14 19:46:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include "t_env_lst.h"
-#include "t_token.h"
+#include "t_pid_lst.h"
 
-int	msh_pwd(t_env_lst *env __attribute__((unused)), t_token *token)
+int	pid_lst_add_back(t_pid_lst *const lst, pid_t const id)
 {
-	char	*buf;
+	t_pid *const	node = pid_new(id);
 
-	if (token && token->next && token->next->type == T_OPTION)
-		return (error_option("pwd: ", token->next));
-	buf = getcwd(NULL, 0);
-	if (buf == NULL)
+	if (!node)
 		return (EXIT_FAILURE);
-	if (printf("%s\n", buf) < 0)
-	{
-		free(buf);
-		return (EXIT_FAILURE);
-	}
-	free(buf);
+	pid_lst_push_back(lst, node);
 	return (EXIT_SUCCESS);
 }

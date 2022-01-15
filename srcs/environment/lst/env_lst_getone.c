@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_sed.c                                    :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/06 17:03:08 by majacque          #+#    #+#             */
+/*   Updated: 2022/01/15 08:24:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#include "t_env_lst.h"
+#include "ft_string.h"
 
 /*
-	Sed the str of each token in the given tokens list
+	Return the value of the variable `name`,
+	or NULL if a such variable is not set in the env list
 */
-int	token_lst_sed(t_token_lst *const tokens)
+char	*env_lst_getone(t_env_lst const *const env, char const *name)
 {
-	t_token	*curr;
+	t_env const	*curr = env->head;
 
-	curr = tokens->head;
-	while (curr)
-	{
-		if (curr->type != T_PIPE
-			&& curr->type != T_REDIRECTIN
-			&& curr->type != T_REDIRECTOUT
-			&& token_sed(curr))
-			return (EXIT_FAILURE);
+	while (curr && ft_strcmp(name, curr->name))
 		curr = curr->next;
-	}
-	return (EXIT_SUCCESS);
+	if (curr)
+		return ((char *)curr->value);
+	return (NULL);
 }

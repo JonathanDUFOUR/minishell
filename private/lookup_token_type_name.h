@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:17:52 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/21 04:01:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 01:55:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static t_token_type_name const		g_token_type_name[] = {
 {T_COMMAND, "COMMAND"},
 {T_ARGUMENT, "ARGUMENT"},
 {T_OPERATOR, "OPERATOR"},
-{T_REDIRECT, "REDIRECT"},
 {T_DELIMITER, "DELIMITER"},
 {T_UNDEFINED, "UNDEFINED"},
+{T_REDIRECTIN, "REDIRECTIN"},
+{T_REDIRECTOUT, "REDIRECTOUT"},
 {0}
 };
 

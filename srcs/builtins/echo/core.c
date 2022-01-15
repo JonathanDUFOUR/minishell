@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:47 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 19:45:13 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/15 07:33:21 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 #include "t_env_lst.h"
 #include "ft_string.h"
 
-int	msh_echo(__attribute__((unused))t_env_lst *env, t_token *args)
+int	msh_echo(t_env_lst *const env __attribute__((unused)), t_token *const token)
 {
-	bool	option_n;
+	t_token const	*args = token->next;
+	bool			option_n;
 
 	option_n = false;
 	if (args != NULL)
@@ -31,12 +32,17 @@ int	msh_echo(__attribute__((unused))t_env_lst *env, t_token *args)
 		}
 		while (args && (args->type == T_OPTION || args->type == T_ARGUMENT))
 		{
-			printf("%s ", args->str);
+			printf("%s", args->str);
 			args = args->next;
+			if (args && (args->type == T_OPTION || args->type == T_ARGUMENT))
+				printf(" ");
 		}
-		printf("\b");
 	}
 	if (option_n == false)
 		printf("\n");
 	return (EXIT_SUCCESS);
 }
+
+/*
+	echo	tutu
+*/

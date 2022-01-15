@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_delone.c                                       :+:      :+:    :+:   */
+/*   env_lst_delone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:25:59 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/20 20:58:47 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:10:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,26 @@
 #include "t_env_lst.h"
 
 /*
-	Release the resources of the given env node `elem`
+	Release the resources of the given env node `node`
 	Update the env list data accordingly
 */
-void	env_delone(t_env_lst *const env, t_env *elem)
+void	env_lst_delone(t_env_lst *const env, t_env *node)
 {
-	if (env->size == 0)
-		return ;
-	if (elem == env->head)
-	{
+	if (node == env->head)
 		env->head = env->head->next;
-		if (env->head != NULL)
-			env->head->prev = NULL;
-	}
-	else if (elem == env->tail)
-	{
+	if (node == env->tail)
 		env->tail = env->tail->prev;
-		if (env->tail != NULL)
-			env->tail->next = NULL;
-	}
-	else
-	{
-		elem->next->prev = elem->prev;
-		elem->prev->next = elem->next;
-	}
-	free((void *)elem->name);
-	free(elem->value);
-	ft_bzero(elem, sizeof(t_env));
-	ft_memdel(&elem);
+	if (node->next)
+		node->next->prev = node->prev;
+	if (node->prev)
+		node->prev->next = node->next;
+	if (env->head)
+		env->head->prev = NULL;
+	if (env->tail)
+		env->tail->next = NULL;
+	free((void *)node->name);
+	free((void *)node->value);
+	ft_bzero(node, sizeof(t_env));
+	ft_memdel(&node);
 	env->size--;
 }

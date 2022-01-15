@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/08 00:55:36 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/15 09:07:27 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,52 +51,71 @@ FT_STRING_A		:=	${addprefix ${FT_STRING_DIR}, ${FT_STRING_A}}
 #            SOURCE FILES            #
 ######################################
 SRC				=	\
-					${addprefix builtins/,	\
-						${addprefix cd/,	\
-							cleanpath.c		\
-							core.c			\
-							getcdpath.c		\
-							utils.c			\
-						}					\
-						${addprefix echo/,	\
-							core.c			\
-						}					\
-						${addprefix env/,	\
-							core.c			\
-						}					\
-						${addprefix exit/,	\
-							core.c			\
-						}					\
-						${addprefix export/,\
-							core.c			\
-						}					\
-						${addprefix pwd/,	\
-							core.c			\
-						}					\
-						${addprefix unset/,	\
-							core.c			\
-						}					\
-					}						\
+					${addprefix builtins/,					\
+						${addprefix cd/,					\
+							cleanpath.c						\
+							core.c							\
+							getcdpath.c						\
+							utils.c							\
+						}									\
+						${addprefix echo/,					\
+							core.c							\
+						}									\
+						${addprefix env/,					\
+							core.c							\
+						}									\
+						${addprefix exit/,					\
+							core.c							\
+						}									\
+						${addprefix export/,				\
+							core.c							\
+						}									\
+						${addprefix pwd/,					\
+							core.c							\
+						}									\
+						${addprefix unset/,					\
+							core.c							\
+						}									\
+					}										\
 					${addprefix environment/,				\
-						env_addback.c						\
-						env_clear.c							\
-						env_delone.c						\
+						${addprefix lst/,					\
+							env_lst_clear.c					\
+							env_lst_delone.c				\
+							env_lst_getone.c				\
+							env_lst_init.c					\
+							env_lst_print.c					\
+							env_lst_push_back.c				\
+							env_lst_putone.c				\
+							env_lst_to_envp.c				\
+							env_lst_unset.c					\
+						}									\
 						env_new.c							\
-						env_print.c							\
-						env_to_envp.c						\
-						get_env.c							\
-						init_env.c							\
-						put_env.c							\
-						unset_env.c							\
 					}										\
 					${addprefix execution/,					\
-						close_unused_fd.c					\
-						data_clear.c						\
-						data_init.c							\
+						${addprefix pid/,					\
+							${addprefix lst/,				\
+								pid_lst_add_back.c			\
+								pid_lst_clear.c				\
+								pid_lst_delone.c			\
+								pid_lst_kill.c				\
+								pid_lst_push_back.c			\
+								pid_lst_wait.c				\
+							}								\
+							pid_delone.c					\
+							pid_kill.c						\
+							pid_new.c						\
+							pid_wait.c						\
+						}									\
 						exec_cmd.c							\
+						exedata_clear.c						\
+						exedata_init.c						\
+						fds_clear.c							\
+						fds_init.c							\
 						open_files.c						\
 						pipeline.c							\
-						redirections.c						\
+						redirect_in.c						\
+						redirect_out.c						\
+						redirect.c							\
 						run_cmd.c							\
 						setup_fork.c						\
 					}										\
@@ -116,6 +135,7 @@ SRC				=	\
 					${addprefix signal/,					\
 						sigint_default.c					\
 						sigint_here_doc.c					\
+						sigpipe_default.c					\
 						sigquit_default.c					\
 						sigterm_default.c					\
 					}										\

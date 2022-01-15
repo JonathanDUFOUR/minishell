@@ -6,12 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/08 03:37:42 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:05:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_string.h"
-#include "redirections.h"
+#include "execution.h"
 #include "lookup_builtin.h"
 #include "g_exit_status.h"
 
@@ -62,7 +62,7 @@ static char	*__get_path_cmd(char **path, char const *cmd_name)
 	return (NULL);
 }
 
-static int	__command(t_token *const token, t_exec_data *const data)
+static int	__command(t_token *const token, t_exedata *const data)
 {
 	char	**cmd_opt_arg;
 	char	*cmd;
@@ -88,7 +88,7 @@ static int	__command(t_token *const token, t_exec_data *const data)
 /*
 	Run the command/builtin the given `token` is refering
 */
-int	run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
+int	run_cmd(t_token *const token, t_env_lst *const env, t_exedata *const data)
 {
 	int	i;
 
@@ -96,10 +96,12 @@ int	run_cmd(t_token *token, t_env_lst *env, t_exec_data *data)
 		return (EXIT_FAILURE);
 	else if (token->type == T_BUILTIN)
 	{
+		if (!ft_strcmp(token->str, "exit") && exedata_clear(data))
+			return (EXIT_FAILURE);
 		i = 0;
-		while (g_builtin[i].f && ft_strcmp(token->str, g_builtin[i].name))
+		while (g_builtin[i].fct && ft_strcmp(token->str, g_builtin[i].name))
 			++i;
-		if (g_builtin[i].f(env, token->next))
+		if (g_builtin[i].fct(env, token))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

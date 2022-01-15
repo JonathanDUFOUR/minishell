@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_lst_sed.c                                    :+:      :+:    :+:   */
+/*   pid_lst_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/14 19:12:16 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/15 00:18:11 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "t_token_lst.h"
+#include <stddef.h>
+#include "t_pid_lst.h"
 
-/*
-	Sed the str of each token in the given tokens list
-*/
-int	token_lst_sed(t_token_lst *const tokens)
+void	pid_lst_clear(t_pid_lst *const lst)
 {
-	t_token	*curr;
+	t_pid	*next;
 
-	curr = tokens->head;
-	while (curr)
+	while (lst->head)
 	{
-		if (curr->type != T_PIPE
-			&& curr->type != T_REDIRECTIN
-			&& curr->type != T_REDIRECTOUT
-			&& token_sed(curr))
-			return (EXIT_FAILURE);
-		curr = curr->next;
+		next = lst->head->next;
+		pid_lst_delone(lst, lst->head);
+		lst->head = next;
 	}
-	return (EXIT_SUCCESS);
+	lst->tail = NULL;
+	lst->size = 0;
 }

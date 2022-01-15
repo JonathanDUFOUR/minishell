@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getcdpath.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:59:06 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 17:28:18 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/15 08:23:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*__getcdpath(t_env_lst *env, char *directory, bool *is_cdpath)
 	int		i;
 
 	i = 0;
-	if (get_env("CDPATH", env) == NULL)
+	if (env_lst_getone(env, "CDPATH") == NULL)
 		return (directory);
-	cdpath = ft_split(get_env("CDPATH", env), ':');
+	cdpath = ft_split(env_lst_getone(env, "CDPATH"), ':');
 	if (cdpath == NULL)
 		return (__error(directory, cdpath));
 	while (cdpath[i])
