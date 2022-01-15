@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 09:39:11 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 23:10:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env)
 		return (exedata_clear(&data) | EXIT_FAILURE);
 	if (exec_cmd(tokens, tokens->head, env, &data))
 		return (exedata_clear(&data) | ft_fddel(&termin) | ft_fddel(&termout)
-			| EXIT_FAILURE);
+			| EXIT_SUCCESS);
 	if ((close(STDIN_FILENO) | close(STDOUT_FILENO)) == -1
 		|| dup2(termin, STDIN_FILENO) == -1
 		|| dup2(termout, STDOUT_FILENO) == -1
 		|| (ft_fddel(&termin) | ft_fddel(&termout)))
-		return (ft_fddel(&termin) | ft_fddel(&termout) | exedata_clear(&data)
+		return (exedata_clear(&data) | ft_fddel(&termin) | ft_fddel(&termout)
 			| EXIT_FAILURE);
 	return (exedata_clear(&data) | EXIT_SUCCESS);
 }
