@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:43:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 09:48:38 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	run_cmd(t_token *const token, t_env_lst *const env, t_exedata *const data)
 {
 	int	i;
 
-	if (token && token->type == T_COMMAND && __command(token, data))
+	if (token->type == T_COMMAND && __command(token, data))
 		return (EXIT_FAILURE);
-	else if (token && token->type == T_BUILTIN)
+	else if (token->type == T_BUILTIN)
 	{
 		if (!ft_strcmp(token->str, "exit") && exedata_clear(data))
 			return (EXIT_FAILURE);
