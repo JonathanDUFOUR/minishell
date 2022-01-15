@@ -6,16 +6,15 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:47 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 07:33:21 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:23:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "t_token_lst.h"
-#include "t_env_lst.h"
 #include "ft_string.h"
+#include "t_token_lst.h"
 
 int	msh_echo(t_env_lst *const env __attribute__((unused)), t_token *const token)
 {
@@ -42,7 +41,3 @@ int	msh_echo(t_env_lst *const env __attribute__((unused)), t_token *const token)
 		printf("\n");
 	return (EXIT_SUCCESS);
 }
-
-/*
-	echo	tutu
-*/

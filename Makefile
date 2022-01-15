@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/15 09:07:27 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/15 10:17:38 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,7 +157,6 @@ SRC				=	\
 							token_lst_which_word.c			\
 							token_lst_word_or_operator.c	\
 						}									\
-						error_option.c						\
 						token_args_count.c					\
 						token_clear.c						\
 						token_delone.c						\
@@ -171,6 +170,8 @@ SRC				=	\
 						token_sed.c							\
 					}										\
 					${addprefix util/,						\
+						error_argument.c					\
+						error_option.c						\
 						msh_str3join.c						\
 						namelen.c							\
 						usage_err.c							\

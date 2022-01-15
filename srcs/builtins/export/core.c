@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:32:26 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:25:04 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ static bool	__is_valid(const char *str)
 	return (true);
 }
 
-int	msh_export(t_env_lst *const env, t_token *token)
+int	msh_export(t_env_lst *const env, t_token *const token)
 {
 	t_token const	*args = token->next;
 
 	if (!args)
 		return (__surprise());
 	if (args->type == T_OPTION)
-		return (error_option("export: ", args));
+		return (error_option("export: ", args->str));
 	while (args && args->type == T_ARGUMENT)
 	{
 		if (__is_valid(args->str) == false)

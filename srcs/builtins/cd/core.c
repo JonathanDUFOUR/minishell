@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:32:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:16:48 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,9 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 	bool	is_cdpath;
 
 	if (token->next && token->next->type == T_OPTION)
-		return (error_option("cd: ", token->next));
+		return (error_option("cd: ", token->next->str));
 	if (token_args_count(token->next) != 1)
-	{
-		ft_putendl_fd("cd: wrong number of arguments", STDERR_FILENO);
-		return (EXIT_SUCCESS);
-	}
+		return (error_argument("cd: wrong number of arguments"));
 	curpath = __setcurpath(env, token->next, &is_cdpath);
 	if (curpath == NULL)
 		return (EXIT_FAILURE);

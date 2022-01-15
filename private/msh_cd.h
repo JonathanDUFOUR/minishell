@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 08:02:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:20:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "minishell.h"
-# include "lookup_builtin.h"
 # include "ft_io.h"
 # include "ft_string.h"
+# include "minishell.h"
+# include "lookup_builtin.h"
 
 bool	__is_ending_slash(const char *str)
 		__attribute__((nonnull));

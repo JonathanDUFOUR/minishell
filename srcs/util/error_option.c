@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   error_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 10:25:44 by jodufour         ###   ########.fr       */
+/*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
+/*   Updated: 2022/01/15 10:14:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "ft_io.h"
-#include "minishell.h"
 #include "g_exit_status.h"
 
-int	msh_env(t_env_lst *const env, t_token *const token)
+/*
+	Output an invalid option error message on stderr
+	Set g_exit_status accordingly
+	Always return EXIT_SUCCESS
+*/
+int	error_option(const char *str, char const *opt)
 {
-	t_env const	*curr;
-
-	if (token->next)
-	{
-		if (token->next->type == T_OPTION)
-			return (error_option("env: ", token->next->str));
-		if (token->next->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			g_exit_status = 125;
-			return (EXIT_SUCCESS);
-		}
-	}
-	curr = env->head;
-	while (curr)
-	{
-		printf("%s=%s\n", curr->name, curr->value);
-		curr = curr->next;
-	}
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putchar_fd(opt[0], STDERR_FILENO);
+	ft_putchar_fd(opt[1], STDERR_FILENO);
+	ft_putendl_fd(": invalid option", STDERR_FILENO);
+	g_exit_status = 125;
 	return (EXIT_SUCCESS);
 }

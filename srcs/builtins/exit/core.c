@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:23:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:24:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "ft_io.h"
 #include "ft_string.h"
 #include "t_token.h"
-#include "t_env_lst.h"
 #include "g_exit_status.h"
 
 static bool	__is_numeric(char const *str)

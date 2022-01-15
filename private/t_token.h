@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:59:19 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:24:23 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define T_TOKEN_H
 
 # include "type/t_int.h"
-# include "t_token_type.h"
-# include "t_sed_lst.h"
 # include "t_env_lst.h"
+# include "t_sed_lst.h"
+# include "t_token_type.h"
 
 typedef struct s_token	t_token;
 
@@ -29,8 +29,6 @@ struct	s_token
 	t_token			*prev;
 };
 
-int		error_option(const char *str, t_token const *const args)
-		__attribute__((nonnull));
 int		token_expand(t_token *const node, t_env_lst *const env)
 		__attribute__((nonnull));
 int		token_here_doc(t_token *const node, t_env_lst *const env,

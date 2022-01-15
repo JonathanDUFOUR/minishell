@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 07:59:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/15 10:15:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 _"
 # endif
 
+int		error_argument(char const *str)
+		__attribute__((nonnull));
+int		error_option(char const *str, char const *opt)
+		__attribute__((nonnull));
 int		pipeline(t_token_lst *const tokens, t_env_lst *const env)
 		__attribute__((nonnull));
 int		sigint_default(void);
