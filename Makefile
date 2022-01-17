@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/17 15:58:24 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/17 23:03:42 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,6 +126,7 @@ SRC				=	\
 							sed_lst_delone.c				\
 							sed_lst_print.c					\
 							sed_lst_push_back.c				\
+							sed_lst_type_count.c			\
 						}									\
 						sed_new.c							\
 						sed_prev.c							\

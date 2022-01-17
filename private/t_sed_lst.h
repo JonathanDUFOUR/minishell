@@ -6,13 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:36:36 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:54:16 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:01:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_SED_LST_H
 # define T_SED_LST_H
 
+# include "type/t_int.h"
 # include "t_sed.h"
 
 typedef struct s_sed_lst	t_sed_lst;
@@ -35,6 +36,9 @@ void	sed_lst_delone(t_sed_lst *const seds, t_sed *node)
 void	sed_lst_print(t_sed_lst const *const seds)
 		__attribute__((nonnull));
 void	sed_lst_push_back(t_sed_lst *const seds, t_sed *const node)
+		__attribute__((nonnull));
+
+t_uint	sed_lst_type_count(t_sed_lst const *const lst, t_sed_type const type)
 		__attribute__((nonnull));
 
 #endif

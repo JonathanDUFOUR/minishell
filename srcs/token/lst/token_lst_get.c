@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 07:34:45 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 22:57:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	__release_sed_resources(t_token_lst *const tokens)
 	curr = tokens->head;
 	while (curr)
 	{
-		sed_lst_clear(&curr->seds);
+		if (curr->type != T_DELIMITER)
+			sed_lst_clear(&curr->seds);
 		curr = curr->next;
 	}
 }

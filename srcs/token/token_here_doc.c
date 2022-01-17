@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:20:41 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/03 01:55:54 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:11:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,28 @@ int	token_here_doc(t_token *const node, t_env_lst *const env,
 	char const *program)
 {
 	char const	*str = ft_ctoa(0);
+	bool const	exp = !sed_lst_type_count(&node->seds, SQUOTED)
+		&& !sed_lst_type_count(&node->seds, DQUOTED);
 	int			fd;
 
+	sed_lst_clear(&node->seds);
 	fd = dup(STDIN_FILENO);
 	if (!str
 		|| fd == -1
 		|| sigint_here_doc()
 		|| sed_lst_add_back(&node->seds, str, DQUOTED))
 	{
-		ft_fddel(&fd);
 		ft_memdel(&str);
-		return (EXIT_FAILURE);
+		return (ft_fddel(&fd) | EXIT_FAILURE);
 	}
 	if (__get_content(node, program))
 		return (EXIT_FAILURE);
 	ft_memdel(&node->str);
 	node->type = T_INPUT;
-	if (token_expand(node, env)
+	if ((exp && token_expand(node, env))
 		|| token_merge(node)
 		|| sigint_default()
-		|| dup2(fd, STDIN_FILENO) == -1
-		|| close(fd) == -1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		|| dup2(fd, STDIN_FILENO) == -1)
+		return (ft_fddel(&fd) | EXIT_FAILURE);
+	return (ft_fddel(&fd) | EXIT_SUCCESS);
 }
