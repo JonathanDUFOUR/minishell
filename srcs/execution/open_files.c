@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 16:06:45 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:58:15 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <errno.h>
 #include <sys/stat.h>
 #include "ft_io.h"
 #include "ft_string.h"
 #include "execution.h"
 #include "g_exit_status.h"
 
-static int	__error(char const *program, char const *str, char const *file)
+static int	__error(char const *program, char const *file, char const *str)
 {
 	ft_putstr_fd(program, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putendl_fd(file, STDERR_FILENO);
-	return (EXIT_FAILURE);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	g_exit_status = 1 << 7;
+	return (EXIT_SUCCESS);
 }
 
 static int	__open_in(t_token const *const token, int *const fd,
@@ -36,10 +40,9 @@ static int	__open_in(t_token const *const token, int *const fd,
 	if (token->next->type == T_FILE)
 	{
 		if (access(token->next->str, F_OK))
-			return (__error(program, "No such file or directory",
-					token->next->str));
+			return (__error(program, token->next->str, strerror(errno)));
 		else if (access(token->next->str, R_OK))
-			return (__error(program, "Permission denied", token->next->str));
+			return (__error(program, token->next->str, strerror(errno)));
 	}
 	if (!ft_strcmp("<", token->str))
 	{
@@ -60,19 +63,19 @@ static int	__open_out(t_token const *const token, int *const fd,
 	if (!access(token->next->str, F_OK))
 	{
 		if (access(token->next->str, W_OK))
-			return (__error(program, "Permission denied", token->next->str));
+			return (__error(program, token->next->str, strerror(errno)));
 	}
 	if (!ft_strcmp(">", token->str))
 	{
 		*fd = open(token->next->str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (*fd == -1)
-			return (EXIT_FAILURE);
+			return (__error(program, token->next->str, strerror(errno)));
 	}
 	else if (!ft_strcmp(">>", token->str))
 	{
 		*fd = open(token->next->str, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (*fd == -1)
-			return (EXIT_FAILURE);
+			return (__error(program, token->next->str, strerror(errno)));
 	}
 	return (EXIT_SUCCESS);
 }

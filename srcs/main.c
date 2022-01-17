@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 16:37:35 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:43:25 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 		return (EXIT_FAILURE);
 	}
 	env_lst_clear(&env);
-	printf("exit\n");
+	printf("Bye Bye\n");
 	return (EXIT_SUCCESS);
 }

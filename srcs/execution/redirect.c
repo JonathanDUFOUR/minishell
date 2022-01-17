@@ -6,13 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 14:24:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:45:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "ft_string.h"
 #include "ft_io.h"
+#include "g_exit_status.h"
 
 /*
 	Apply the input and output redirections for the current command/builtin
@@ -26,6 +27,8 @@ int	redirect(t_token_lst *const tokens, t_token *const token,
 
 	if (open_files(token, &data->fds.in, &data->fds.out, data->program))
 		return (EXIT_FAILURE);
+	if (g_exit_status == 1 << 7)
+		return (EXIT_SUCCESS);
 	if (redirect_in(token, &data->fds))
 		return (EXIT_FAILURE);
 	if (redirect_out(token, &data->fds))
