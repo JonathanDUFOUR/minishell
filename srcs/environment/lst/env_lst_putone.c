@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_putone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:28:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:14:28 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_env	*__get_env_var(const char *str, t_env_lst *env)
 	t_env	*elem;
 
 	elem = env->head;
-	while (elem && ft_strncmp(str, elem->name, ft_strlen(elem->name)))
+	while (elem && ft_strncmp(str, elem->name, ft_strlen(str)))
 		elem = elem->next;
 	return (elem);
 }

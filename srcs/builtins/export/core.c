@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 10:25:04 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:20:18 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static bool	__is_valid(const char *str)
 	while (tmp[len] && tmp[len] != '=')
 		len++;
 	if (len == 0)
+		return (false);
+	if (*tmp && ft_strchr(VAR_FIRST_CHARS, *tmp) == NULL)
 		return (false);
 	while (*tmp && *tmp != '=')
 	{
