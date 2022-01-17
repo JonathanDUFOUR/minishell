@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 14:09:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:55:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,22 @@ int		error_argument(char const *str)
 		__attribute__((nonnull));
 int		error_option(char const *str, char const *opt)
 		__attribute__((nonnull));
+int		sigall_default(void);
+int		sigall_mute(void);
+int		sigall_reset(void);
 int		sigint_default(void);
 int		sigint_here_doc(void);
+int		sigint_mute(void);
+int		sigint_reset(void);
 int		sigpipe_default(void);
+int		sigpipe_mute(void);
+int		sigpipe_reset(void);
 int		sigquit_default(void);
+int		sigquit_mute(void);
+int		sigquit_reset(void);
 int		sigterm_default(void);
+int		sigterm_mute(void);
+int		sigterm_reset(void);
 int		usage_err(char const *program);
 
 size_t	namelen(char const *str)

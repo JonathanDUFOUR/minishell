@@ -6,11 +6,12 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:40:05 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:26:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "g_exit_status.h"
 
 /*
 	Execute the first command/builtin encountered from the given `token`
@@ -33,5 +34,5 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 		torun = NULL;
 	if (redirect(tokens, token, data) || (torun && run_cmd(torun, env, data)))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (g_exit_status = EXIT_SUCCESS);
 }

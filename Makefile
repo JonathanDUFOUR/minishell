@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/15 23:00:39 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/17 15:58:24 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,11 +133,22 @@ SRC				=	\
 						sed_size.c							\
 					}										\
 					${addprefix signal/,					\
+						sigall_default.c					\
+						sigall_mute.c						\
+						sigall_reset.c						\
 						sigint_default.c					\
 						sigint_here_doc.c					\
+						sigint_mute.c						\
+						sigint_reset.c						\
 						sigpipe_default.c					\
+						sigpipe_mute.c						\
+						sigpipe_reset.c						\
 						sigquit_default.c					\
+						sigquit_mute.c						\
+						sigquit_reset.c						\
 						sigterm_default.c					\
+						sigterm_mute.c						\
+						sigterm_reset.c						\
 					}										\
 					${addprefix token/,						\
 						${addprefix lst/,					\
