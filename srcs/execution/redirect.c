@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 09:27:45 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:24:35 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	redirect(t_token_lst *const tokens, t_token *const token,
 	t_token	*curr;
 	t_token	*next;
 
-	if (open_files(token, &data->fds.in, &data->fds.out))
+	if (open_files(token, &data->fds.in, &data->fds.out, data->program))
 		return (EXIT_FAILURE);
 	if (redirect_in(token, &data->fds))
 		return (EXIT_FAILURE);

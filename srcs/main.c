@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 23:10:28 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:16:17 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,18 @@ static bool	__isexit(t_token const *node)
 	return (false);
 }
 
-static int	__run(t_token_lst *const tokens, t_env_lst *const env)
+static int	__run(t_token_lst *const tokens, t_env_lst *const env,
+	char const *program)
 {
 	t_exedata	data;
 	int			termin;
 	int			termout;
 
+	if (exedata_init(&data, env, program))
+		return (EXIT_FAILURE);
 	if (token_lst_type_count(tokens, T_PIPE)
 		|| token_lst_type_count(tokens, T_COMMAND))
-		return (pipeline(tokens, env));
-	if (exedata_init(&data, env))
-		return (EXIT_FAILURE);
+		return (pipeline(tokens, env, &data) | exedata_clear(&data));
 	termin = dup(STDIN_FILENO);
 	termout = dup(STDOUT_FILENO);
 	if ((termin == -1 || termout == -1 || __isexit(tokens->head))
@@ -88,7 +89,7 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		else if (g_exit_status == (1 << 7))
 			g_exit_status |= SIGINT;
-		else if (__run(&tokens, env))
+		else if (__run(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		token_lst_clear(&tokens);
 		line = readline(PROMPT);

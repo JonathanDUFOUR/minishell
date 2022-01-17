@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:41:10 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:20:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,23 @@ static t_token	*__next_command(t_token *elem)
 /*
 	Setup a pipeline, and execute each command/builtin in using forks
 */
-int	pipeline(t_token_lst *const tokens, t_env_lst *const env)
+int	pipeline(t_token_lst *const tokens, t_env_lst *const env,
+	t_exedata *const data)
 {
-	t_token		*curr;
-	t_exedata	data;
+	t_token	*curr;
 
-	if (exedata_init(&data, env))
-		return (g_exit_status = EXIT_FAILURE);
 	curr = tokens->head;
 	while (curr)
 	{
-		if ((__next_command(curr) && pipe(data.fds.tube))
-			|| setup_fork(tokens, curr, env, &data)
-			|| (data.fds.tube[0] != -1
-				&& dup2(data.fds.tube[0], data.fds.save) == -1)
-			|| ft_fddel(&data.fds.tube[0]) | ft_fddel(&data.fds.tube[1]))
-			return (pid_lst_kill(&data.pids, SIGKILL) | exedata_clear(&data)
+		if ((__next_command(curr) && pipe(data->fds.tube))
+			|| setup_fork(tokens, curr, env, data)
+			|| (data->fds.tube[0] != -1
+				&& dup2(data->fds.tube[0], data->fds.save) == -1)
+			|| ft_fddel(&data->fds.tube[0]) | ft_fddel(&data->fds.tube[1]))
+			return (pid_lst_kill(&data->pids, SIGKILL)
 				| (g_exit_status = EXIT_FAILURE));
 		curr = __next_command(curr);
 	}
-	ft_fddel(&data.fds.save);
-	pid_lst_wait(&data.pids);
-	exedata_clear(&data);
-	return (EXIT_SUCCESS);
+	ft_fddel(&data->fds.save);
+	return (pid_lst_wait(&data->pids));
 }

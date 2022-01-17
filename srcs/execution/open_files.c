@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 23:59:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:36:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,28 @@
 #include "execution.h"
 #include "g_exit_status.h"
 
-static int	__error(char const *str, char const *file)
+static int	__error(char const *program, char const *str, char const *file)
 {
+	ft_putstr_fd(program, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(file, STDERR_FILENO);
 	return (EXIT_FAILURE);
 }
 
-static int	__open_in(t_token const *const token, int *const fd)
+static int	__open_in(t_token const *const token, int *const fd,
+	char const *program)
 {
 	if (*fd > 2)
 		close(*fd);
 	if (token->next->type == T_FILE)
 	{
 		if (access(token->next->str, F_OK))
-			return (__error("minishell: no such file or directory: ",
+			return (__error(program, "no such file or directory",
 					token->next->str));
 		else if (access(token->next->str, R_OK))
-			return (__error("minishell: permission denied: ",
-					token->next->str));
+			return (__error(program, "permission denied", token->next->str));
 	}
 	if (!ft_strcmp("<", token->str))
 	{
@@ -49,15 +52,15 @@ static int	__open_in(t_token const *const token, int *const fd)
 	return (EXIT_SUCCESS);
 }
 
-static int	__open_out(t_token const *const token, int *const fd)
+static int	__open_out(t_token const *const token, int *const fd,
+	char const *program)
 {
 	if (*fd > 2)
 		close(*fd);
 	if (!access(token->next->str, F_OK))
 	{
 		if (access(token->next->str, W_OK))
-			return (__error("minishell: permission denied: ",
-					token->next->str));
+			return (__error(program, "permission denied", token->next->str));
 	}
 	if (!ft_strcmp(">", token->str))
 	{
@@ -77,7 +80,8 @@ static int	__open_out(t_token const *const token, int *const fd)
 /*
 	Open the infile and the outfile, if there are, for the current command
 */
-int	open_files(t_token const *const token, int *const fd_in, int *const fd_out)
+int	open_files(t_token const *const token, int *const fd_in, int *const fd_out,
+	char const *program)
 {
 	t_token const	*curr = token;
 
@@ -85,12 +89,12 @@ int	open_files(t_token const *const token, int *const fd_in, int *const fd_out)
 	{
 		if (curr->type == T_REDIRECTIN)
 		{
-			if (__open_in(curr, fd_in) == EXIT_FAILURE)
+			if (__open_in(curr, fd_in, program) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		else if (curr->type == T_REDIRECTOUT)
 		{
-			if (__open_out(curr, fd_out) == EXIT_FAILURE)
+			if (__open_out(curr, fd_out, program) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		curr = curr->next;
