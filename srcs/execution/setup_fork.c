@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:09:42 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:43:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:13:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ int	setup_fork(t_token_lst *const tokens, t_token *const token,
 		return (EXIT_FAILURE);
 	else if (!id)
 	{
+		if (sigall_reset())
+			return (EXIT_FAILURE);
 		pid_lst_clear(&data->pids);
 		exec_cmd(tokens, token, env, data);
 		token_lst_clear(tokens);
 		exedata_clear(data);
 		msh_exit(env, NULL);
 	}
-	return (pid_lst_add_back(&data->pids, id));
+	if (pid_lst_add_back(&data->pids, id))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

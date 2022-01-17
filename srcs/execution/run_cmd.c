@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:48:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:06:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static char	*__get_absolute_path(char const *cmd_name)
 	return (cmd);
 }
 
-static char	*__get_path_cmd(char **path, char const *cmd_name)
+static char	*__get_path_cmd(char **path, char const *cmd_name,
+	char const *program)
 {
 	char	*cmd;
 	int		i;
@@ -50,18 +51,20 @@ static char	*__get_path_cmd(char **path, char const *cmd_name)
 		ft_memdel(&cmd);
 		i++;
 	}
-	ft_putstr_fd("minishell: command not found: ", STDERR_FILENO);
+	ft_putstr_fd(program, STDERR_FILENO);
+	ft_putstr_fd(": command not found: ", STDERR_FILENO);
 	ft_putendl_fd(cmd_name, STDERR_FILENO);
 	g_exit_status = 127;
 	return (NULL);
 }
 
 static bool	__is_executable(const char *cmd_name, char *cmd_tofree,
-			char **cmd_opt_arg)
+			char **cmd_opt_arg, char const *program)
 {
 	if (access(cmd_tofree, F_OK))
 	{
-		ft_putstr_fd("minishell: no such file or directory: ", STDERR_FILENO);
+		ft_putstr_fd(program, STDERR_FILENO);
+		ft_putstr_fd(": no such file or directory: ", STDERR_FILENO);
 		ft_putendl_fd(cmd_name, STDERR_FILENO);
 		g_exit_status = 127;
 		ft_memdel(&cmd_tofree);
@@ -70,7 +73,8 @@ static bool	__is_executable(const char *cmd_name, char *cmd_tofree,
 	}
 	else if (access(cmd_tofree, X_OK))
 	{
-		ft_putstr_fd("minishell: permission denied: ", STDERR_FILENO);
+		ft_putstr_fd(program, STDERR_FILENO);
+		ft_putstr_fd(": permission denied: ", STDERR_FILENO);
 		ft_putendl_fd(cmd_name, STDERR_FILENO);
 		g_exit_status = 126;
 		ft_memdel(&cmd_tofree);
@@ -88,13 +92,13 @@ static int	__command(t_token *const token, t_exedata *const data)
 	cmd_opt_arg = token_get_cmd_opt_arg(token);
 	if (!cmd_opt_arg)
 		return (g_exit_status = EXIT_FAILURE);
-	cmd = __get_path_cmd(data->path, token->str);
+	cmd = __get_path_cmd(data->path, token->str, data->program);
 	if (!cmd)
 	{
 		ft_memdel(&cmd_opt_arg);
 		return (EXIT_FAILURE);
 	}
-	if (!__is_executable(token->str, cmd, cmd_opt_arg))
+	if (!__is_executable(token->str, cmd, cmd_opt_arg, data->program))
 		return (EXIT_FAILURE);
 	if (execve(cmd, cmd_opt_arg, data->envp) == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 14:16:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:23:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env,
 	int			termin;
 	int			termout;
 
-	if (exedata_init(&data, env, program))
+	if (sigall_mute() || exedata_init(&data, env, program))
 		return (EXIT_FAILURE);
 	if (token_lst_type_count(tokens, T_PIPE)
 		|| token_lst_type_count(tokens, T_COMMAND))
@@ -67,7 +67,7 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env,
 		|| (ft_fddel(&termin) | ft_fddel(&termout)))
 		return (exedata_clear(&data) | ft_fddel(&termin) | ft_fddel(&termout)
 			| EXIT_FAILURE);
-	return (exedata_clear(&data) | EXIT_SUCCESS);
+	return (exedata_clear(&data) | sigall_default() | EXIT_SUCCESS);
 }
 
 static int	__get_command_line(t_env_lst *const env, char const *program)
@@ -106,10 +106,7 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 		return (usage_err(av[0]));
 	g_exit_status = 0;
 	ft_bzero(&env, sizeof(t_env_lst));
-	if (sigint_default()
-		|| sigpipe_default()
-		|| sigquit_default()
-		|| sigterm_default()
+	if (sigall_default()
 		|| env_lst_init(&env, ep)
 		|| __get_command_line(&env, av[0]))
 	{
