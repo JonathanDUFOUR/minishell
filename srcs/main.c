@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 14:16:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:39:36 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env,
 		return (exedata_clear(&data) | EXIT_FAILURE);
 	if (exec_cmd(tokens, tokens->head, env, &data))
 		return (exedata_clear(&data) | ft_fddel(&termin) | ft_fddel(&termout)
-			| EXIT_SUCCESS);
+			| EXIT_FAILURE);
 	if ((close(STDIN_FILENO) | close(STDOUT_FILENO)) == -1
 		|| dup2(termin, STDIN_FILENO) == -1
 		|| dup2(termout, STDOUT_FILENO) == -1

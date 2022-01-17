@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 09:48:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:06:53 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// DBG
+#include <stdio.h>
 
 #include "ft_io.h"
 #include "ft_string.h"
@@ -61,7 +64,7 @@ static bool	__is_executable(const char *cmd_name, char *cmd_tofree,
 {
 	if (access(cmd_tofree, F_OK))
 	{
-		ft_putstr_fd("minishell: no such file or directory: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: No such file or directory: ", STDERR_FILENO);
 		ft_putendl_fd(cmd_name, STDERR_FILENO);
 		g_exit_status = 127;
 		ft_memdel(&cmd_tofree);
@@ -70,7 +73,7 @@ static bool	__is_executable(const char *cmd_name, char *cmd_tofree,
 	}
 	else if (access(cmd_tofree, X_OK))
 	{
-		ft_putstr_fd("minishell: permission denied: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: Permission denied: ", STDERR_FILENO);
 		ft_putendl_fd(cmd_name, STDERR_FILENO);
 		g_exit_status = 126;
 		ft_memdel(&cmd_tofree);
@@ -121,8 +124,7 @@ int	run_cmd(t_token *const token, t_env_lst *const env, t_exedata *const data)
 		i = 0;
 		while (g_builtin[i].fct && ft_strcmp(token->str, g_builtin[i].name))
 			++i;
-		if (g_builtin[i].fct(env, token))
-			return (EXIT_FAILURE);
+		g_exit_status = g_builtin[i].fct(env, token);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 14:36:51 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:06:45 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	__open_in(t_token const *const token, int *const fd,
 	if (token->next->type == T_FILE)
 	{
 		if (access(token->next->str, F_OK))
-			return (__error(program, "no such file or directory",
+			return (__error(program, "No such file or directory",
 					token->next->str));
 		else if (access(token->next->str, R_OK))
-			return (__error(program, "permission denied", token->next->str));
+			return (__error(program, "Permission denied", token->next->str));
 	}
 	if (!ft_strcmp("<", token->str))
 	{
@@ -60,7 +60,7 @@ static int	__open_out(t_token const *const token, int *const fd,
 	if (!access(token->next->str, F_OK))
 	{
 		if (access(token->next->str, W_OK))
-			return (__error(program, "permission denied", token->next->str));
+			return (__error(program, "Permission denied", token->next->str));
 	}
 	if (!ft_strcmp(">", token->str))
 	{
