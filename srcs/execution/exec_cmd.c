@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 18:48:07 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:04:09 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 		torun = NULL;
 	if (redirect(tokens, token, data))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7)
+	if (g_exit_status == 1 << 7) // FIX 128 --> 125
 	{
-		g_exit_status = EXIT_FAILURE;
+		g_exit_status = EXIT_FAILURE; // FIX pourquoi ?
 		return (EXIT_SUCCESS);
 	}
 	if (torun && run_cmd(torun, env, data))

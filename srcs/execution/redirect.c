@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 18:45:34 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:05:24 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	redirect(t_token_lst *const tokens, t_token *const token,
 
 	if (open_files(token, &data->fds.in, &data->fds.out, data->program))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7)
+	if (g_exit_status == 1 << 7) // FIX 128 --> 125
 		return (EXIT_SUCCESS);
 	if (redirect_in(token, &data->fds))
 		return (EXIT_FAILURE);

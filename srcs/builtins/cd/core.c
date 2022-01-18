@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 15:49:04 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:38:51 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	__updatepwd(t_env_lst *env, char *curpath)
 
 static char	*__setcurpath(t_env_lst *env, t_token *args, bool *is_cdpath)
 {
-	char	*directory;
+	char	*directory = NULL;
 	char	*curpath;
 
 	directory = __getdirectory(env, args, token_args_count(args));
@@ -125,8 +125,10 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 		return (EXIT_FAILURE);
 	if (chdir(curpath) == -1)
 	{
-		printf("[%s]\n", curpath);
-		perror("cd"); // FIX cd / --> curpath est vide; cd /minishell n'existe pas
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putendl_fd(token->next->str, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (__updatepwd(env, curpath) == EXIT_FAILURE)

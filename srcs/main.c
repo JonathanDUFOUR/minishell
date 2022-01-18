@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 21:43:25 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:05:06 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 {
 	t_token_lst	tokens;
 	char const	*line = readline(PROMPT);
+	char	*tmp = NULL; // DBG
+	char	*tmp2 = NULL; // DBG
 
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	while (line)
@@ -87,12 +89,16 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 			g_exit_status = 2;
 		else if (token_lst_here_doc(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		else if (g_exit_status == (1 << 7))
+		else if (g_exit_status == (1 << 7)) // FIX 128 --> 125
 			g_exit_status |= SIGINT;
 		else if (__run(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		token_lst_clear(&tokens);
-		line = readline(PROMPT);
+		tmp = ft_lutoa(g_exit_status); // DBG ->
+		tmp2 = msh_str3join("minishell[", tmp, "]$> ");
+		free(tmp);
+		line = readline(tmp2); // PROMPT
+		free(tmp2); // DBG <-
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);

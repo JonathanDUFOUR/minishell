@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_argument.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 10:18:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 10:19:37 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:15:03 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ int	error_argument(const char *str)
 {
 	ft_putendl_fd(str, STDERR_FILENO);
 	g_exit_status = 125;
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS); // FIX return (EXIT_FAILURE) ?
 }

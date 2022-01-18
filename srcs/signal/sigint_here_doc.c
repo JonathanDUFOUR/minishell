@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sigint_here_doc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 23:49:08 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 16:04:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:06:13 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void	__handler(int const sig __attribute__((unused)))
 {
-	g_exit_status = 1 << 7;
+	g_exit_status = 1 << 7; // FIX 128 --> 125
 	if (write(1, "\n", 1) == -1)
 		perror(__func__);
 	rl_replace_line("", 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:20:41 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 23:11:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:06:32 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static int	__interrupt_end(char const *str, char const *program)
 {
-	if (g_exit_status == (1 << 7))
+	if (g_exit_status == (1 << 7)) // FIX 128 --> 125
 		return (EXIT_SUCCESS);
 	ft_putchar_fd('\n', STDERR_FILENO);
 	ft_putstr_fd(program, STDERR_FILENO);

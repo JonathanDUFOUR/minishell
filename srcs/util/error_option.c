@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 19:09:20 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 10:14:08 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:15:07 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int	error_option(const char *str, char const *opt)
 	ft_putchar_fd(opt[1], STDERR_FILENO);
 	ft_putendl_fd(": invalid option", STDERR_FILENO);
 	g_exit_status = 125;
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE); // FIX return (EXIT_FAILURE) ?
 }

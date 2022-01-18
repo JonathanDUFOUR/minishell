@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 14:57:06 by majacque          #+#    #+#             */
-/*   Updated: 2021/12/13 17:41:47 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:08:45 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,20 @@ static void	__del_consecutive_slash(char *curpath)
 
 static void	__cleanslash(char *curpath)
 {
-	if (*curpath == '/' && *(curpath + 1) == '/' && *(curpath + 2) != '/')
-		curpath += 2;
-	while (*curpath)
+	char	*cursor;
+
+	cursor = curpath;
+	if (*cursor == '/' && *(cursor + 1) == '/' && *(cursor + 2) != '/')
+		cursor += 2;
+	while (*cursor)
 	{
-		if (*curpath == '/' && *(curpath + 1) == '/')
-			__del_consecutive_slash(curpath);
-		curpath++;
+		if (*cursor == '/' && *(cursor + 1) == '/')
+			__del_consecutive_slash(cursor);
+		cursor++;
 	}
-	curpath--;
-	if (*curpath == '/')
-		*curpath = '\0';
+	cursor--;
+	if (*cursor == '/' && cursor != curpath)
+		*cursor = '\0';
 }
 
 static int	__del_name_dotdot(char *curpath, char *tmp_curpath, char *cursor)
@@ -46,12 +49,7 @@ static int	__del_name_dotdot(char *curpath, char *tmp_curpath, char *cursor)
 	if (tmp == NULL)
 		return (EXIT_FAILURE);
 	if (__isdirectory(tmp) == false)
-	{
-		ft_putstr_fd("cd: '", STDERR_FILENO);
-		ft_putstr_fd(tmp, STDERR_FILENO);
-		ft_putendl_fd("': not a directory", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
+		return (__error_cd(tmp));
 	ft_memdel(&tmp);
 	tmp = cursor;
 	if (tmp != curpath)
@@ -60,7 +58,10 @@ static int	__del_name_dotdot(char *curpath, char *tmp_curpath, char *cursor)
 		tmp--;
 	if (*tmp == '/')
 		tmp++;
-	ft_memmove(tmp, cursor + 4, ft_strlen(cursor + 4) + 1);
+	if (ft_strlen(cursor) > 3)
+		ft_memmove(tmp, cursor + 4, ft_strlen(cursor + 4) + 1);
+	else
+		ft_memmove(tmp, cursor + 3, ft_strlen(cursor + 3) + 1);
 	return (EXIT_SUCCESS);
 }
 
@@ -71,6 +72,8 @@ static int	__del_dotdot(char *curpath)
 
 	tmp_curpath = curpath;
 	cursor = ft_strstr(tmp_curpath, "/../");
+	if (!cursor)
+		cursor = ft_strstr(tmp_curpath, "/..");
 	while (cursor)
 	{
 		if (cursor != curpath && *(cursor - 1) == '.' && *(cursor - 2) == '.')
@@ -79,6 +82,8 @@ static int	__del_dotdot(char *curpath)
 			if (__del_name_dotdot(curpath, tmp_curpath, cursor) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		cursor = ft_strstr(tmp_curpath, "/../");
+		if (!cursor)
+			cursor = ft_strstr(tmp_curpath, "/..");
 	}
 	return (EXIT_SUCCESS);
 }

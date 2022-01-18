@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   msh_cd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 10:20:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:05:50 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <errno.h>
 # include "ft_io.h"
 # include "ft_string.h"
 # include "minishell.h"
@@ -26,6 +27,8 @@
 bool	__is_ending_slash(const char *str)
 		__attribute__((nonnull));
 bool	__isdirectory(const char *pathname)
+		__attribute__((nonnull));
+int		__error_cd(const char *str)
 		__attribute__((nonnull));
 
 char	*__getcdpath(t_env_lst *const env, char *directory,

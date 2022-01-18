@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sigint_default.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:40:33 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/01 21:49:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:06:00 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void	__handler(int const sig __attribute__((unused)))
 {
-	g_exit_status = (1 << 7) | SIGINT;
+	g_exit_status = (1 << 7) | SIGINT; // FIX 128 --> 125
 	if (write(1, "\n", 1) == -1)
 		perror(__func__);
 	rl_replace_line("", 0);
