@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:52 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 10:25:44 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:19:43 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ int	msh_env(t_env_lst *const env, t_token *const token)
 		if (token->next->type == T_OPTION)
 			return (error_option("env: ", token->next->str));
 		if (token->next->type == T_ARGUMENT)
-		{
-			ft_putendl_fd("env: too many arguments", STDERR_FILENO);
-			g_exit_status = 125;
-			return (EXIT_SUCCESS);
-		}
+			return (error_argument("env: too many arguments"));
 	}
 	curr = env->head;
 	while (curr)

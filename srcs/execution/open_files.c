@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 18:13:28 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:43:18 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 #include "execution.h"
 #include "g_exit_status.h"
 
-static int	__error(char const *program, char const *file, char const *str)
+static int	__error(char const *program, char const *file, char const *str, 
+					int exit_status)
 {
 	ft_putstr_fd(program, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
@@ -28,7 +29,7 @@ static int	__error(char const *program, char const *file, char const *str)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
-	g_exit_status = 1 << 7; // FIX 128 --> 126, 127, 128
+	g_exit_status = exit_status;
 	return (EXIT_SUCCESS);
 }
 
@@ -40,9 +41,9 @@ static int	__open_in(t_token const *const token, int *const fd,
 	if (token->next->type == T_FILE)
 	{
 		if (access(token->next->str, F_OK))
-			return (__error(program, token->next->str, strerror(errno)));
+			return (__error(program, token->next->str, strerror(errno), 127));
 		else if (access(token->next->str, R_OK))
-			return (__error(program, token->next->str, strerror(errno)));
+			return (__error(program, token->next->str, strerror(errno), 126));
 	}
 	if (!ft_strcmp("<", token->str))
 	{
@@ -63,19 +64,19 @@ static int	__open_out(t_token const *const token, int *const fd,
 	if (!access(token->next->str, F_OK))
 	{
 		if (access(token->next->str, W_OK))
-			return (__error(program, token->next->str, strerror(errno)));
+			return (__error(program, token->next->str, strerror(errno), 126));
 	}
 	if (!ft_strcmp(">", token->str))
 	{
 		*fd = open(token->next->str, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (*fd == -1)
-			return (__error(program, token->next->str, strerror(errno)));
+			return (__error(program, token->next->str, strerror(errno), 128));
 	}
 	else if (!ft_strcmp(">>", token->str))
 	{
 		*fd = open(token->next->str, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		if (*fd == -1)
-			return (__error(program, token->next->str, strerror(errno)));
+			return (__error(program, token->next->str, strerror(errno), 128));
 	}
 	return (EXIT_SUCCESS);
 }

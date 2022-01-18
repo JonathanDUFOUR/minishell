@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 18:06:38 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:41:03 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 		return (EXIT_FAILURE);
 	}
 	env_lst_clear(&env);
-	printf("Bye Bye\n");
+	printf("Bye Bye\n"); // TODO penser à écrire 'exit' ou appeler msh_exit ou exit en cas de Ctrl-d
 	return (EXIT_SUCCESS);
 }

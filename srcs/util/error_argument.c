@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 10:18:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 18:14:42 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:46:35 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 /*
 	Output an invalid argument error message on stderr
 	Set g_exit_status accordingly
-	Always return EXIT_SUCCESS
+	Always return 125
 */
 int	error_argument(const char *str)
 {
 	ft_putendl_fd(str, STDERR_FILENO);
-	g_exit_status = 125;
-	return (EXIT_SUCCESS);
+	return (125);
 }

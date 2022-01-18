@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 17:57:46 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:54:23 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 {
 	t_token	*torun;
 
+	g_exit_status = 0; // DBG
 	torun = token;
 	while (torun
 		&& torun->type != T_COMMAND
@@ -37,12 +38,13 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 		torun = NULL;
 	if (redirect(tokens, token, data))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7)
+	if (g_exit_status == 1 << 7 || g_exit_status == 127 || g_exit_status == 126)
 	{
-		g_exit_status = EXIT_FAILURE;
+		if (g_exit_status == 1 << 7)
+			g_exit_status = EXIT_FAILURE;
 		return (EXIT_SUCCESS);
 	}
 	if (torun && run_cmd(torun, env, data))
 		return (EXIT_FAILURE);
-	return (g_exit_status = EXIT_SUCCESS); // FIX non on fait pas ca
+	return (EXIT_SUCCESS);
 }

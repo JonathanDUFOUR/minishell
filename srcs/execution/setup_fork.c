@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:09:42 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 17:37:57 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:23:32 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	setup_fork(t_token_lst *const tokens, t_token *const token,
 {
 	pid_t	id;
 
+	env_lst_putone(env, "EXIT_DONT_PRINT=true");
 	id = fork();
 	if (id == -1)
 		return (EXIT_FAILURE);

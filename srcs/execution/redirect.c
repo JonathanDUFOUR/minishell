@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:45:55 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 18:11:49 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:43:26 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	redirect(t_token_lst *const tokens, t_token *const token,
 
 	if (open_files(token, &data->fds.in, &data->fds.out, data->program))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7)
+	if (g_exit_status == 1 << 7 || g_exit_status == 127 || g_exit_status == 126)
 		return (EXIT_SUCCESS);
 	if (redirect_in(token, &data->fds))
 		return (EXIT_FAILURE);

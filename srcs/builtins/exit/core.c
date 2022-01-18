@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 17:45:10 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 20:22:54 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ static void	__nonumeric_err(char const *str)
 
 int	msh_exit(t_env_lst *const env, t_token *const token)
 {
+	char const	*print = env_lst_getone(env, "EXIT_DONT_PRINT");
 	char const	*str;
 
-	ft_putendl_fd("exit", STDERR_FILENO);
-	if (token && token->next)
+	if(!print)
+		ft_putendl_fd("exit", STDERR_FILENO);
+	if (token && token->next && token->next->type != T_PIPE)
 	{
 		str = ft_strtrim(token->next->str, " ");
 		if (!str)
