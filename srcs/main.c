@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 15:05:06 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:06:38 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 			g_exit_status = 2;
 		else if (token_lst_here_doc(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
-		else if (g_exit_status == (1 << 7)) // FIX 128 --> 125
+		else if (g_exit_status == (1 << 7))
 			g_exit_status |= SIGINT;
 		else if (__run(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));

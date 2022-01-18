@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_fork.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:09:42 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 16:13:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:37:57 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	setup_fork(t_token_lst *const tokens, t_token *const token,
 		exec_cmd(tokens, token, env, data);
 		token_lst_clear(tokens);
 		exedata_clear(data);
-		msh_exit(env, NULL);
+		env_lst_clear(env);
+		exit(g_exit_status);
 	}
 	if (pid_lst_add_back(&data->pids, id))
 		return (EXIT_FAILURE);

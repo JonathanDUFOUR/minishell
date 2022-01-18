@@ -6,9 +6,12 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 15:04:09 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:57:46 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// DBG
+#include <stdio.h>
 
 #include "execution.h"
 #include "g_exit_status.h"
@@ -34,12 +37,12 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 		torun = NULL;
 	if (redirect(tokens, token, data))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7) // FIX 128 --> 125
+	if (g_exit_status == 1 << 7)
 	{
-		g_exit_status = EXIT_FAILURE; // FIX pourquoi ?
+		g_exit_status = EXIT_FAILURE;
 		return (EXIT_SUCCESS);
 	}
 	if (torun && run_cmd(torun, env, data))
 		return (EXIT_FAILURE);
-	return (g_exit_status = EXIT_SUCCESS);
+	return (g_exit_status = EXIT_SUCCESS); // FIX non on fait pas ca
 }

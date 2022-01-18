@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:35 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 15:05:42 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:11:09 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	pid_wait(t_pid const *const node)
 		g_exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 	{
-		g_exit_status = (1 << 7) | WTERMSIG(status); // FIX 128 --> 125
+		g_exit_status = (1 << 7) | WTERMSIG(status);
 		if (g_exit_status == ((1 << 7) | SIGQUIT)
 			&& ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO) == -1)
 			return (EXIT_FAILURE);
