@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
+#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/19 13:33:19 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/19 16:11:29 by majacque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,6 +116,7 @@ SRC				=	\
 						redirect_in.c						\
 						redirect_out.c						\
 						redirect.c							\
+						run_cmd_utils.c						\
 						run_cmd.c							\
 						setup_fork.c						\
 					}										\

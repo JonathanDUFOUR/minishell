@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/19 14:52:37 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:12:36 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@
 #include "lookup_builtin.h"
 #include "g_exit_status.h"
 
-static char	*__get_absolute_path(char const *cmd_name)
+char	*__cnf_error(char const *cmd_name, char const *program);
+char	*__usage_error(char const *cmd_name, char const *program);
+bool	__is_executable(const char *cmd_name, char *cmd_tofree,
+			char **cmd_opt_arg, char const *program);
+bool	__is_directory(const char *cmd_name, char *cmd_tofree,
+			char **cmd_opt_arg, char const *program);
+
+char	*__get_absolute_path(char const *cmd_name)
 {
 	char	*cmd;
 	char	*pwd;
@@ -41,7 +48,11 @@ static char	*__get_path_cmd(char **path, char const *cmd_name,
 
 	if (cmd_name[0] == '/')
 		return (ft_strdup(cmd_name));
-	else if (cmd_name[0] == '.') // FIX
+	else if (!ft_strcmp(cmd_name, "."))
+		return (__usage_error(cmd_name, program));
+	else if (!ft_strcmp(cmd_name, ".."))
+		return (__cnf_error(cmd_name, program));
+	else if (cmd_name[0] == '.' && ft_strchr(cmd_name, '/'))
 		return (__get_absolute_path(cmd_name));
 	i = 0;
 	while (*cmd_name && path && path[i])
@@ -53,40 +64,7 @@ static char	*__get_path_cmd(char **path, char const *cmd_name,
 			return (cmd);
 		ft_memdel(&cmd);
 	}
-	ft_putstr_fd(program, STDERR_FILENO);
-	ft_putstr_fd(": command not found: ", STDERR_FILENO);
-	if (!*cmd_name)
-		ft_putendl_fd("''", STDERR_FILENO);
-	else
-		ft_putendl_fd(cmd_name, STDERR_FILENO);
-	g_exit_status = 127;
-	return (NULL);
-}
-
-static bool	__is_executable(const char *cmd_name, char *cmd_tofree,
-			char **cmd_opt_arg, char const *program)
-{
-	if (access(cmd_tofree, F_OK))
-	{
-		ft_putstr_fd(program, STDERR_FILENO);
-		ft_putstr_fd(": no such file or directory: ", STDERR_FILENO);
-		ft_putendl_fd(cmd_name, STDERR_FILENO);
-		g_exit_status = 127;
-		ft_memdel(&cmd_tofree);
-		ft_memdel(&cmd_opt_arg);
-		return (false);
-	}
-	else if (access(cmd_tofree, X_OK))
-	{
-		ft_putstr_fd(program, STDERR_FILENO);
-		ft_putstr_fd(": permission denied: ", STDERR_FILENO);
-		ft_putendl_fd(cmd_name, STDERR_FILENO);
-		g_exit_status = 126;
-		ft_memdel(&cmd_tofree);
-		ft_memdel(&cmd_opt_arg);
-		return (false);
-	}
-	return (true);
+	return (__cnf_error(cmd_name, program));
 }
 
 static int	__command(t_token *const token, t_exedata *const data)
@@ -104,6 +82,8 @@ static int	__command(t_token *const token, t_exedata *const data)
 		return (EXIT_FAILURE);
 	}
 	if (!__is_executable(token->str, cmd, cmd_opt_arg, data->program))
+		return (EXIT_FAILURE);
+	if (__is_directory(token->str, cmd, cmd_opt_arg, data->program))
 		return (EXIT_FAILURE);
 	if (execve(cmd, cmd_opt_arg, data->envp) == -1)
 	{
