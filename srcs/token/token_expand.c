@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:24:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/19 16:27:31 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ static char	*__append_literal(char const *const str, char const **const ptr)
 	char				*output;
 	char				*tmp;
 
-	while (*end && (*end != '$' || !ft_strchr(VAR_FIRST_CHARS "?", *(end + 1))))
+	while (*end && (*end != '$'
+			|| !*(end + 1)
+			|| !ft_strchr(VAR_FIRST_CHARS "?", *(end + 1))))
 		++end;
 	tmp = ft_strndup(*ptr, end - *ptr);
 	if (!tmp)
@@ -108,6 +110,7 @@ static int	__expand_str(t_sed *const node, t_env_lst *const env)
 int	token_expand(t_token *const node, t_env_lst *const env)
 {
 	t_sed	*curr;
+	size_t	len;
 
 	if (node->type == T_DELIMITER)
 		return (EXIT_SUCCESS);
@@ -117,6 +120,12 @@ int	token_expand(t_token *const node, t_env_lst *const env)
 		if ((curr->type == DQUOTED || curr->type == UQUOTED)
 			&& __expand_str(curr, env))
 			return (EXIT_FAILURE);
+		if (curr->type == UQUOTED && curr->next)
+		{
+			len = ft_strlen(curr->str);
+			if (curr->str[len - 1] == '$')
+				((char *)curr->str)[len - 1] = 0;
+		}
 		curr = curr->next;
 	}
 	return (EXIT_SUCCESS);

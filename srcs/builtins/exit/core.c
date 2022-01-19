@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 14:33:37 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:35:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	msh_exit(t_env_lst *const env, t_token *const token)
 	char const	*print = env_lst_getone(env, "EXIT_DONT_PRINT");
 	char const	*str;
 
-	if(!print)
+	if (!print)
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if (token && token->next && token->next->type != T_PIPE)
 	{
