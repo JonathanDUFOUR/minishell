@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 19:43:18 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:41:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "execution.h"
 #include "g_exit_status.h"
 
-static int	__error(char const *program, char const *file, char const *str, 
+static int	__error(char const *program, char const *file, char const *str,
 					int exit_status)
 {
 	ft_putstr_fd(program, STDERR_FILENO);

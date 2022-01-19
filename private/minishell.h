@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:01 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 15:55:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:38:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 # include "t_env_lst.h"
 # include "t_token_lst.h"
 
@@ -60,12 +61,16 @@ int		sigquit_reset(void);
 int		sigterm_default(void);
 int		sigterm_mute(void);
 int		sigterm_reset(void);
-int		usage_err(char const *program);
-
-size_t	namelen(char const *str)
+int		usage_err(char const *program)
 		__attribute__((nonnull));
 
 char	*msh_str3join(char const *s1, char const *s2, char const *s3)
+		__attribute__((nonnull));
+
+bool	is_numeric(char const *str)
+		__attribute__((nonnull));
+
+size_t	namelen(char const *str)
 		__attribute__((nonnull));
 
 #endif

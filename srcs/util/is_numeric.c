@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_args_count.c                                 :+:      :+:    :+:   */
+/*   is_numeric.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 18:52:12 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/19 13:42:38 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/19 13:27:31 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/19 14:30:08 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_token_lst.h"
+#include <stdbool.h>
+#include "ft_io.h"
 
 /*
-	Return the number of arguments given to the calling command
+	Check if the whole content of the given string `str` is numeric
 */
-t_uint	token_args_count(t_token const *node)
+bool	is_numeric(char const *str)
 {
-	t_uint	nb_arg;
-
-	nb_arg = 0;
-	node = node->next;
-	while (node && node->type == T_OPTION)
-		node = node->next;
-	while (node && node->type == T_ARGUMENT)
+	while (ft_isspace(*str))
+		++str;
+	if ((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
+		++str;
+	while (*str)
 	{
-		node = node->next;
-		++nb_arg;
+		if (!ft_isdigit(*str))
+			return (false);
+		++str;
 	}
-	return (nb_arg);
+	return (true);
 }

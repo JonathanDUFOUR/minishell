@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 20:41:03 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:37:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,24 @@ static int	__clear_quit(char const *line, t_token_lst *const tokens,
 	return (ret);
 }
 
-static bool	__isexit(t_token const *node)
+static bool	__will_exit(t_token const *node)
 {
+	t_uint	arg_count;
+
 	while (node)
 	{
 		if (node->type == T_BUILTIN && !ft_strcmp(node->str, "exit"))
-			return (true);
+			break ;
 		node = node->next;
 	}
-	return (false);
+	if (!node)
+		return (false);
+	arg_count = token_args_count(node);
+	while (node && node->type != T_ARGUMENT)
+		node = node->next;
+	if (arg_count > 1 && is_numeric(node->str))
+		return (false);
+	return (true);
 }
 
 static int	__run(t_token_lst *const tokens, t_env_lst *const env,
@@ -55,7 +64,7 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env,
 		return (pipeline(tokens, env, &data) | exedata_clear(&data));
 	termin = dup(STDIN_FILENO);
 	termout = dup(STDOUT_FILENO);
-	if ((termin == -1 || termout == -1 || __isexit(tokens->head))
+	if ((termin == -1 || termout == -1 || __will_exit(tokens->head))
 		&& ft_fddel(&termin) | ft_fddel(&termout))
 		return (exedata_clear(&data) | EXIT_FAILURE);
 	if (exec_cmd(tokens, tokens->head, env, &data))
@@ -74,8 +83,6 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 {
 	t_token_lst	tokens;
 	char const	*line = readline(PROMPT);
-	char	*tmp = NULL; // DBG
-	char	*tmp2 = NULL; // DBG
 
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	while (line)
@@ -94,11 +101,7 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 		else if (__run(&tokens, env, program))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		token_lst_clear(&tokens);
-		tmp = ft_lutoa(g_exit_status); // DBG ->
-		tmp2 = msh_str3join("minishell[", tmp, "]$> ");
-		free(tmp);
-		line = readline(tmp2); // PROMPT
-		free(tmp2); // DBG <-
+		line = readline(PROMPT);
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);
@@ -121,6 +124,6 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 		return (EXIT_FAILURE);
 	}
 	env_lst_clear(&env);
-	printf("Bye Bye\n"); // TODO penser à écrire 'exit' ou appeler msh_exit ou exit en cas de Ctrl-d
-	return (EXIT_SUCCESS);
+	printf("exit\n");
+	return (g_exit_status);
 }
