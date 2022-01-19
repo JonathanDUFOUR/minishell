@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 16:37:23 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:52:37 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,24 @@ static char	*__get_path_cmd(char **path, char const *cmd_name,
 
 	if (cmd_name[0] == '/')
 		return (ft_strdup(cmd_name));
-	else if (cmd_name[0] == '.')
+	else if (cmd_name[0] == '.') // FIX
 		return (__get_absolute_path(cmd_name));
 	i = 0;
-	while (path[i])
+	while (*cmd_name && path && path[i])
 	{
-		cmd = msh_str3join(path[i], "/", cmd_name);
+		cmd = msh_str3join(path[i++], "/", cmd_name);
 		if (cmd == NULL)
 			return (NULL);
 		if (access(cmd, F_OK) == 0)
 			return (cmd);
 		ft_memdel(&cmd);
-		i++;
 	}
 	ft_putstr_fd(program, STDERR_FILENO);
 	ft_putstr_fd(": command not found: ", STDERR_FILENO);
-	ft_putendl_fd(cmd_name, STDERR_FILENO);
+	if (!*cmd_name)
+		ft_putendl_fd("''", STDERR_FILENO);
+	else
+		ft_putendl_fd(cmd_name, STDERR_FILENO);
 	g_exit_status = 127;
 	return (NULL);
 }

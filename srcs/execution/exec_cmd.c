@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 19:54:23 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:18:31 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 {
 	t_token	*torun;
 
-	g_exit_status = 0; // DBG
+	g_exit_status = 0;
 	torun = token;
 	while (torun
 		&& torun->type != T_COMMAND

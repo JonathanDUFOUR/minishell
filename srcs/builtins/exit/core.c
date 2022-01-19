@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 20:22:54 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:33:37 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ static bool	__is_numeric(char const *str)
 {
 	if (*str == '+' || *str == '-')
 		++str;
+	if (!*str)
+		return (false);
 	while (ft_isdigit(*str))
 		++str;
 	return (!*str);
 }
 
-static int	__multiple_arg_err(void)
+static int	__multiple_arg_err(char const *str)
 {
 	ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 	g_exit_status = EXIT_FAILURE;
+	ft_memdel(&str);
 	return (EXIT_SUCCESS);
 }
 
@@ -58,7 +61,7 @@ int	msh_exit(t_env_lst *const env, t_token *const token)
 		if (__is_numeric(str))
 		{
 			if (token->next->next && token->next->next->type != T_PIPE)
-				return (__multiple_arg_err());
+				return (__multiple_arg_err(str));
 			g_exit_status = (t_hhuint)ft_atohhi(str);
 		}
 		else
