@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 15:38:51 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:42:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	__updatepwd(t_env_lst *env, char *curpath)
 
 static char	*__setcurpath(t_env_lst *env, t_token *args, bool *is_cdpath)
 {
-	char	*directory = NULL;
+	char	*directory;
 	char	*curpath;
 
 	directory = __getdirectory(env, args, token_args_count(args));
@@ -118,7 +118,7 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 
 	if (token->next && token->next->type == T_OPTION)
 		return (error_option("cd: ", token->next->str));
-	if (token_args_count(token->next) != 1)
+	if (token_args_count(token) != 1)
 		return (error_argument("cd: wrong number of arguments"));
 	curpath = __setcurpath(env, token->next, &is_cdpath);
 	if (curpath == NULL)
