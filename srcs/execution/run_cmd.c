@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:27:53 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/19 16:12:36 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:51:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// DBG
-#include <stdio.h>
 
 #include "ft_io.h"
 #include "ft_string.h"

@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_putone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 19:42:03 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:51:28 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// DBG
-#include <stdio.h>
 
 #include <stdlib.h>
 #include "t_env_lst.h"

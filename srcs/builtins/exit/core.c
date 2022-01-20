@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 17:11:58 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:51:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// DBG
-#include <stdio.h>
 
 #include <stdlib.h>
 #include "ft_io.h"
