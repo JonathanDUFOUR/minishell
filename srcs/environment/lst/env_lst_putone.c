@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 18:56:47 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:42:03 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ static size_t	__value_len(const char *variable)
 static t_env	*__get_env_var(const char *str, t_env_lst *lst)
 {
 	t_env	*node;
+	size_t	str_name_len;
 
+	str_name_len = ft_strchr(str, '=') - str;
 	node = lst->head;
-	while (node && ft_strncmp(str, node->name,
-		(ft_strchr(node->name, '=') - node->name)))
+	while (node
+		&& (ft_strncmp(str, node->name, str_name_len)
+			|| node->name[str_name_len]))
 		node = node->next;
 	return (node);
 }

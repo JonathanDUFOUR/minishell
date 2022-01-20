@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 18:20:47 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:23:33 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static int	__updatepwd(t_env_lst *env, char *curpath)
 			return (EXIT_FAILURE);
 		if (env_lst_putone(env, tmp_path) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
+		puts("foo");
 		free(tmp_path);
 	}
 	else
