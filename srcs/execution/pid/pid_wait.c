@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pid_wait.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:35 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/18 18:11:09 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 09:57:39 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "t_pid.h"
 #include "g_exit_status.h"
 
+/*
+	Wait for the pid contained in the given `node`
+*/
 int	pid_wait(t_pid const *const node)
 {
 	int	status;

@@ -6,12 +6,10 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:39:21 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/19 14:41:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:16:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/stat.h>

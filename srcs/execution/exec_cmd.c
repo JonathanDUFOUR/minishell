@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/19 14:18:31 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:14:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// DBG
-#include <stdio.h>
 
 #include "execution.h"
 #include "g_exit_status.h"

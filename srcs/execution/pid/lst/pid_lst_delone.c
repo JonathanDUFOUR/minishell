@@ -6,13 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:26 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 00:18:25 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:07:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "t_pid_lst.h"
 
+/*
+	Release the resources of the given `node`
+	Update the env list data accordingly
+*/
 void	pid_lst_delone(t_pid_lst *const lst, t_pid *const node)
 {
 	if (node == lst->head)

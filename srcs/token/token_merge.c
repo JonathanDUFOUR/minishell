@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:36:46 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/22 07:22:36 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:36:29 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 /*
 	Merge every seds of the given node to get the final `str` attribute
-	of the given node
+	of the given `node`
 */
 int	token_merge(t_token *const node)
 {

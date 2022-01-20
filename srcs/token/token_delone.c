@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:42:37 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:00:32 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:12:37 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "t_token.h"
 
 /*
-	Release all the resources of the given token `node`
-	Relink its prev/next if needed
+	Release all the resources of the given `node`
+	Relink its next/prev if needed
 */
 void	token_delone(t_token *node)
 {

@@ -6,13 +6,19 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:13:06 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/14 19:44:55 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 09:54:51 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "minishell.h"
 #include "t_pid_lst.h"
 
+/*
+	Wait for every pid contained in the given `lst`
+	+
+	Restore the shell signals handling
+*/
 int	pid_lst_wait(t_pid_lst *const lst)
 {
 	t_pid const	*curr = lst->head;
@@ -23,5 +29,5 @@ int	pid_lst_wait(t_pid_lst *const lst)
 			return (EXIT_FAILURE);
 		curr = curr->next;
 	}
-	return (EXIT_SUCCESS);
+	return (sigall_default());
 }

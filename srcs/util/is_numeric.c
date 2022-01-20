@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 13:27:31 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 14:30:08 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:53:05 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ bool	is_numeric(char const *str)
 {
 	while (ft_isspace(*str))
 		++str;
+	if (!*str)
+		return (false);
 	if ((*str == '+' || *str == '-') && ft_isdigit(*(str + 1)))
 		++str;
 	while (*str)
@@ -28,5 +30,9 @@ bool	is_numeric(char const *str)
 			return (false);
 		++str;
 	}
+	while (ft_isspace(*str))
+		++str;
+	if (*str)
+		return (false);
 	return (true);
 }

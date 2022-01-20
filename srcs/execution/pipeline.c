@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 11:16:28 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/17 14:20:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:17:42 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <signal.h>
 #include "ft_io.h"
-#include "ft_string.h"
 #include "execution.h"
 #include "g_exit_status.h"
 
@@ -35,6 +34,8 @@ int	pipeline(t_token_lst *const tokens, t_env_lst *const env,
 {
 	t_token	*curr;
 
+	if (sigall_mute())
+		return (EXIT_FAILURE);
 	curr = tokens->head;
 	while (curr)
 	{

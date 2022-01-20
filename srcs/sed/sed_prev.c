@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:06:48 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/09 17:18:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:29:14 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	Return the previous node of `node` if it exists
 	starting searching at `start`
-	If a such previous is not found, returns NULL
+	If a such previous is not found, NULL is returned
 */
 t_sed	*sed_prev(t_sed const *start, t_sed const *const node)
 {

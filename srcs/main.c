@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 14:59:29 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 09:43:54 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	__run(t_token_lst *const tokens, t_env_lst *const env,
 	int			termin;
 	int			termout;
 
-	if (sigall_mute() || exedata_init(&data, env, program))
+	if (exedata_init(&data, env, program))
 		return (EXIT_FAILURE);
 	if (token_lst_type_count(tokens, T_PIPE)
 		|| token_lst_type_count(tokens, T_COMMAND))

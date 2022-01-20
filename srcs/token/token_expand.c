@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:10:07 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 16:27:31 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:34:31 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static int	__expand_str(t_sed *const node, t_env_lst *const env)
 }
 
 /*
-	Expand each sed node of the given token node
+	Expand each sed node of the given token `node`
 */
 int	token_expand(t_token *const node, t_env_lst *const env)
 {

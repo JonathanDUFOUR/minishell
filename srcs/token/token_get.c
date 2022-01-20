@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 03:18:09 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 07:40:52 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:35:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*__word_get(char const *line)
 	- contains the appropriated str with no expansion
 	- has the type T_UNDEFINED
 	- has an empty seds list
-	Upon failure, return NULL
+	Upon failure, NULL is returned
 */
 t_token	*token_get(char const *line)
 {

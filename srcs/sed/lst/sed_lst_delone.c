@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:50:33 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 20:59:25 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:25:47 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "t_sed_lst.h"
 
 /*
-	Release the resources of one sed node from the seds list
-	and update the list's data
+	Release the resources of the given env node `node`
+	Update the given `seds` list data accordingly
 */
 void	sed_lst_delone(t_sed_lst *const seds, t_sed *node)
 {

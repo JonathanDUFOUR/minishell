@@ -6,13 +6,16 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:11:39 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/14 19:15:38 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:13:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "t_pid.h"
 
+/*
+	Allocate a new pid node and set its attributes accordingly
+*/
 t_pid	*pid_new(pid_t const id)
 {
 	t_pid	*node;

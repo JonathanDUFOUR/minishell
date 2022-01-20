@@ -6,12 +6,11 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 19:23:45 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 14:18:36 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:15:03 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "ft_io.h"
 #include "ft_string.h"
 #include "t_exedata.h"
 
