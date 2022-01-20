@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 14:42:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:27:09 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*__getdirectory(t_env_lst *env, t_token *args, t_uint nb_arg)
 	}
 	else
 	{
-		directory = ft_strdup(args->str);
+		directory = ft_strdup(args->next->str);
 		if (directory == NULL)
 			return (NULL);
 	}
@@ -43,23 +43,29 @@ static char	*__getpwd(t_env_lst *env, char *curpath)
 {
 	char	*pwd_path;
 	char	*tmp_path;
-	char	*dest;
 
-	dest = curpath;
-	if (*dest != '/')
+	if (*curpath != '/')
 	{
-		if (__is_ending_slash(env_lst_getone(env, "PWD")) == false)
+		if (!env_lst_getone(env, "PWD"))
+		{
+			tmp_path = getcwd(NULL, 0);
+			if (!tmp_path)
+				return (__error_getpwd(curpath));
+			pwd_path = ft_strjoin(tmp_path, "/");
+			ft_memdel(&tmp_path);
+		}
+		else if (__is_ending_slash(env_lst_getone(env, "PWD")) == false)
 			pwd_path = ft_strjoin(env_lst_getone(env, "PWD"), "/");
 		else
 			pwd_path = ft_strdup(env_lst_getone(env, "PWD"));
 		if (pwd_path == NULL)
-			return (NULL);
-		tmp_path = dest;
-		dest = ft_strjoin(pwd_path, tmp_path);
+			return (__error_getpwd(curpath));
+		tmp_path = curpath;
+		curpath = ft_strjoin(pwd_path, tmp_path);
 		free(pwd_path);
 		free(tmp_path);
 	}
-	return (dest);
+	return (curpath);
 }
 
 static int	__updatepwd(t_env_lst *env, char *curpath)
@@ -78,6 +84,8 @@ static int	__updatepwd(t_env_lst *env, char *curpath)
 			return (EXIT_FAILURE);
 		free(tmp_path);
 	}
+	else
+		env_lst_unset(env, "OLDPWD");
 	tmp_path = ft_strjoin("PWD=", curpath);
 	if (tmp_path == NULL)
 		return (EXIT_FAILURE);
@@ -120,7 +128,7 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 		return (error_option("cd: ", token->next->str));
 	if (token_args_count(token) != 1)
 		return (error_argument("cd: wrong number of arguments"));
-	curpath = __setcurpath(env, token->next, &is_cdpath);
+	curpath = __setcurpath(env, token, &is_cdpath);
 	if (curpath == NULL)
 		return (EXIT_FAILURE);
 	if (chdir(curpath) == -1)
@@ -129,6 +137,7 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		ft_putendl_fd(token->next->str, STDERR_FILENO);
+		free(curpath);
 		return (EXIT_FAILURE);
 	}
 	if (__updatepwd(env, curpath) == EXIT_FAILURE)

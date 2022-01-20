@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:19:40 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 16:05:38 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:06:41 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ int	__error_cd(const char *str)
 	ft_putendl_fd("': Not a directory", STDERR_FILENO);
 	ft_memdel(&str);
 	return (EXIT_FAILURE);
+}
+
+char	*__error_getpwd(char *curpath)
+{
+	ft_memdel(&curpath);
+	return (NULL);
 }
