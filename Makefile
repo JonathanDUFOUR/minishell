@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: majacque <majacque@student.42.fr>          +#+  +:+       +#+         #
+#    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/19 16:11:29 by majacque         ###   ########.fr        #
+#    Updated: 2022/01/20 11:31:11 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -177,6 +177,7 @@ SRC				=	\
 						token_get_cmd_opt_arg.c				\
 						token_get.c							\
 						token_here_doc.c					\
+						token_last_input_str.c				\
 						token_merge.c						\
 						token_new.c							\
 						token_print.c						\

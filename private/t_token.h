@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 13:42:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:31:58 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	token_delone(t_token *node)
 void	token_print(t_token const *const node)
 		__attribute__((nonnull));
 
-char	*token_last_here_doc_str(t_token const *const node)
+char	*token_last_input_str(t_token const *const node)
 		__attribute__((nonnull));
 
 char	**token_get_cmd_opt_arg(t_token const *const node)

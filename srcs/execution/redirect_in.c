@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 00:52:52 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 22:06:42 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:30:34 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,15 @@ static int	__from_pipe(t_fds *const fds)
 
 static int	__from_here_doc(t_token const *const token, t_fds *const fds)
 {
-	int				tube[2];
-	t_token const	*curr = token;
+	int	tube[2];
 
 	fds->in = -1;
-	while (curr->type != T_INPUT)
-		curr = curr->next;
 	if (pipe(tube) == -1)
 		return (EXIT_FAILURE);
 	if (close(STDIN_FILENO) == -1
 		|| dup2(tube[0], STDIN_FILENO) == -1
 		|| ft_fddel(&fds->save) | ft_fddel(&tube[0])
-		|| ft_putstr_fd(curr->str, tube[1]) == -1
+		|| ft_putstr_fd(token_last_input_str(token), tube[1]) == -1
 		|| ft_fddel(&tube[1]))
 		return (ft_fddel(&fds->save) | ft_fddel(&tube[0]) | ft_fddel(&tube[1])
 			| EXIT_FAILURE);
