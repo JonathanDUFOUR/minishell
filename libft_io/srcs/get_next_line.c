@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 23:55:08 by jodufour          #+#    #+#             */
-/*   Updated: 2021/11/15 01:28:54 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:19:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ void	gnl_clear(void)
 	lst->tail = NULL;
 }
 
+/*
+	Read the next line from the given file descriptor `fd`, and
+	store it in the given pointer `line`
+	Return 1 if a line has been read
+	Return 0 if the last line has been read
+	Return -1 upon failure
+*/
 int	get_next_line(int fd, char **line)
 {
 	t_fd_lst *const	lst = get_fd_lst();

@@ -6,13 +6,17 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/21 06:21:42 by jdufour           #+#    #+#             */
-/*   Updated: 2021/11/15 20:06:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:03:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "ft_io.h"
 
+/*
+	Print the contents of files described by the given strings `files`
+	If one fails, it is skiped and the next comes
+*/
 void	ft_cat(char const **files)
 {
 	char	output[BUFF_SIZE];
