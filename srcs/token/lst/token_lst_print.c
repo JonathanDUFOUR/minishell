@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 00:50:50 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 16:20:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:12:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 #include "t_token_lst.h"
 
 /*
-	Print data of the given tokens list
-	Print data of every node in the list
+	Print the given token `lst` data
 */
-void	token_lst_print(t_token_lst const *const tokens)
+void	token_lst_print(t_token_lst const *const lst)
 {
 	t_token const	*curr;
 
 	printf("%s:\n", __func__);
 	if (1)
-		printf("%15s: %p\n", "tokens->head", tokens->head);
+		printf("%15s: %p\n", "lst->head", lst->head);
 	if (1)
-		printf("%15s: %p\n", "tokens->tail", tokens->tail);
+		printf("%15s: %p\n", "lst->tail", lst->tail);
 	if (1)
-		printf("%15s: %zu\n\n", "tokens->size", tokens->size);
-	curr = tokens->head;
+		printf("%15s: %zu\n\n", "lst->size", lst->size);
+	curr = lst->head;
 	if (curr)
 		printf("==========================================\n");
 	while (curr)

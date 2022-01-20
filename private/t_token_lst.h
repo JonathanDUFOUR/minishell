@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 16:26:41 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 08:53:59 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:13:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ struct s_token_lst
 
 int		token_lst_expand(t_token_lst *const tokens, t_env_lst *const env)
 		__attribute__((nonnull));
-int		token_lst_get(t_token_lst *const tokens, char const *line,
-			t_env_lst *const env)
+int		token_lst_get(t_token_lst *const tokens, t_env_lst *const env,
+			char const *line)
 		__attribute__((nonnull));
 int		token_lst_here_doc(t_token_lst *const tokens, t_env_lst *const env,
 			char const *program)
 		__attribute__((nonnull));
-int		token_lst_merge(t_token_lst *const tokens)
+int		token_lst_merge(t_token_lst *const lst)
 		__attribute__((nonnull));
 int		token_lst_sed(t_token_lst *const tokens)
 		__attribute__((nonnull));
@@ -41,11 +41,11 @@ int		token_lst_split(t_token_lst *const tokens)
 int		token_lst_syntax_check(t_token_lst *const tokens, char const *program)
 		__attribute__((nonnull));
 
-void	token_lst_clear(t_token_lst *const tokens)
+void	token_lst_clear(t_token_lst *const lst)
 		__attribute__((nonnull));
-void	token_lst_delone(t_token_lst *const tokens, t_token *const node)
+void	token_lst_delone(t_token_lst *const lst, t_token *const node)
 		__attribute__((nonnull));
-void	token_lst_print(t_token_lst const *const tokens)
+void	token_lst_print(t_token_lst const *const lst)
 		__attribute__((nonnull));
 void	token_lst_push_back(t_token_lst *const tokens, t_token *const node)
 		__attribute__((nonnull));

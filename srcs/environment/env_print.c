@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sed_lst_type_count.c                               :+:      :+:    :+:   */
+/*   env_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 21:50:32 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 12:43:04 by jodufour         ###   ########.fr       */
+/*   Created: 2022/01/20 12:21:09 by jodufour          #+#    #+#             */
+/*   Updated: 2022/01/20 12:27:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_sed_lst.h"
+#include <stdio.h>
+#include "t_env.h"
 
 /*
-	Return the number of sed nodes that have the given `type` attribute
-	in the given sed `lst`
+	Print the given env `node` data
 */
-t_uint	sed_lst_type_count(t_sed_lst const *const lst, t_sed_type const type)
+void	env_print(t_env const *const node)
 {
-	t_sed const	*curr = lst->head;
-	t_uint		count;
-
-	count = 0;
-	while (curr)
-	{
-		if (curr->type == type)
-			++count;
-		curr = curr->next;
-	}
-	return (count);
+	if (0)
+		printf("%15s: %p\n", "node", node);
+	if (1)
+		printf("%15s: %s\n", "node->name", node->name);
+	if (1)
+		printf("%15s: %s\n", "node->value", node->value);
+	if (1)
+		printf("%15s: %p\n", "node->next", node->next);
+	if (1)
+		printf("%15s: %p\n", "node->prev", node->prev);
 }

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:44:07 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/10 18:09:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:44:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 /*
 	Allocate a new sed node and set its attributes accordingly
+	Return the address of the created node
+	Return NULL upon failure
 */
 t_sed	*sed_new(char const *str, t_sed_type const type)
 {

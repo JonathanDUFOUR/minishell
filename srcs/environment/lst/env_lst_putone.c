@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_putone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/18 14:43:02 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:04:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,41 @@ static size_t	__value_len(const char *variable)
 	return (len);
 }
 
-static t_env	*__get_env_var(const char *str, t_env_lst *env)
+static t_env	*__get_env_var(const char *str, t_env_lst *lst)
 {
-	t_env	*elem;
+	t_env	*node;
 
-	elem = env->head;
-	while (elem && ft_strncmp(str, elem->name, (ft_strchr(str, '=') - str)))
-		elem = elem->next;
-	return (elem);
+	node = lst->head;
+	while (node && ft_strncmp(str, node->name, (ft_strchr(str, '=') - str)))
+		node = node->next;
+	return (node);
 }
 
 /*
-	Create a new node in env list
-	where name and value are those given in str ("name=value"),
+	Create a new node in the given env `lst`
+	where name and value are those given in `str` ("name=value"),
 	or reassign the value of the node with the name
 	given in str if it already exists
 */
-int	env_lst_putone(t_env_lst *const env, char const *str)
+int	env_lst_putone(t_env_lst *const lst, char const *str)
 {
-	t_env	*elem;
+	t_env	*node;
 
 	if (ft_strchr(str, '=') == NULL)
 		return (EXIT_SUCCESS);
-	elem = __get_env_var(str, env);
-	if (elem == NULL)
+	node = __get_env_var(str, lst);
+	if (node == NULL)
 	{
-		elem = env_new(str);
-		if (elem == NULL)
+		node = env_new(str);
+		if (node == NULL)
 			return (EXIT_FAILURE);
-		env_lst_push_back(env, elem);
+		env_lst_push_back(lst, node);
 	}
 	else
 	{
-		free((void *)elem->value);
-		elem->value = ft_strndup(ft_strchr(str, '=') + 1, __value_len(str));
-		if (elem->value == NULL)
+		free((void *)node->value);
+		node->value = ft_strndup(ft_strchr(str, '=') + 1, __value_len(str));
+		if (node->value == NULL)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

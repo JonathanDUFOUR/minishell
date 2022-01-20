@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:06:49 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/13 20:20:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:05:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "t_token_lst.h"
 
 /*
-	Expand each sed node contained in each token of the given tokens lst
+	Expand each sed node contained in each token of the given `tokens` list
 */
 int	token_lst_expand(t_token_lst *const tokens, t_env_lst *const env)
 {

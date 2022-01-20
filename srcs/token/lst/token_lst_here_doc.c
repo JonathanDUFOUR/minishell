@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 01:00:13 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/02 21:10:28 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:08:19 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "g_exit_status.h"
 
 /*
-	Proceed to each here-doc contained in the given token list
+	Proceed to each here-doc contained in the given `tokens` list
 	Each T_DELIMITER token is changed to a T_INPUT token
 	Each here-doc input is stored in the `str` atribute of the T_INPUT token
 */

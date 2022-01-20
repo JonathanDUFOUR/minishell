@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 10:26:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:15:40 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	msh_unset(t_env_lst *const env, t_token *const token)
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		}
 		else
-			env_lst_unset(args->str, env);
+			env_lst_unset(env, args->str);
 		args = args->next;
 	}
 	return (EXIT_SUCCESS);

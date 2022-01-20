@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:18:56 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/10 18:09:27 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:18:55 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "lookup_sed_type_name.h"
 
 /*
-	Print data of a sed node
+	Print the given sed `node` data
 */
 void	sed_print(t_sed const *const node)
 {

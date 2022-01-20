@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 14:01:16 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/18 16:37:17 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:48:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "t_token_lst.h"
 
 /*
-	Release all resources contained in the given tokens list
-	and update the list's data
+	Release all resources contained in the given token `lst`
+	Update `lst` data accordingly
 */
-void	token_lst_clear(t_token_lst *const tokens)
+void	token_lst_clear(t_token_lst *const lst)
 {
 	t_token	*next;
 
-	while (tokens->size)
+	while (lst->size)
 	{
-		next = tokens->head->next;
-		token_lst_delone(tokens, tokens->head);
-		tokens->head = next;
+		next = lst->head->next;
+		token_lst_delone(lst, lst->head);
+		lst->head = next;
 	}
-	tokens->tail = NULL;
+	lst->tail = NULL;
 }

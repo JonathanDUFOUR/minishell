@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 09:43:54 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:14:49 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	__get_command_line(t_env_lst *const env, char const *program)
 	ft_bzero(&tokens, sizeof(t_token_lst));
 	while (line)
 	{
-		if (token_lst_get(&tokens, line, env))
+		if (token_lst_get(&tokens, env, line))
 			return (__clear_quit(line, &tokens, EXIT_FAILURE));
 		if (*line)
 			add_history(line);
@@ -125,5 +125,8 @@ int	main(int const ac, char const *const *av, char const *const *ep)
 	}
 	env_lst_clear(&env);
 	printf("exit\n");
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 	return (g_exit_status);
 }

@@ -6,27 +6,27 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:47:35 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 10:26:43 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:42:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_sed_lst.h"
 
 /*
-	Append the given `node` to the end of the given `seds` list
-	Update the list's data accordingly
+	Append the given sed `node` to the end of the given sed `lst`
+	Update `lst` data accordingly
 */
-void	sed_lst_push_back(t_sed_lst *const seds, t_sed *const node)
+void	sed_lst_push_back(t_sed_lst *const lst, t_sed *const node)
 {
-	if (!seds->size)
+	if (!lst->size)
 	{
-		seds->head = node;
-		seds->tail = node;
+		lst->head = node;
+		lst->tail = node;
 	}
 	else
 	{
-		seds->tail->next = node;
-		seds->tail = node;
+		lst->tail->next = node;
+		lst->tail = node;
 	}
-	++seds->size;
+	++lst->size;
 }

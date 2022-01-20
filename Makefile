@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/20 11:31:11 by jodufour         ###   ########.fr        #
+#    Updated: 2022/01/20 12:27:52 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRC				=	\
 							env_lst_unset.c					\
 						}									\
 						env_new.c							\
+						env_print.c							\
 					}										\
 					${addprefix execution/,					\
 						${addprefix pid/,					\

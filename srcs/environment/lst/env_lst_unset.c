@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 16:29:30 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/15 08:18:40 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:15:16 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 #include "ft_string.h"
 
 /*
-	Remove the node containing the environment variable `name` if it exists
+	Remove from the given env `lst` the node containing the variable `name`
+	if it exists
 */
-void	env_lst_unset(const char *name, t_env_lst *const env)
+void	env_lst_unset(t_env_lst *const lst, char const *name)
 {
 	t_env	*curr;
 
-	curr = env->head;
+	curr = lst->head;
 	while (curr && ft_strcmp(curr->name, name))
 		curr = curr->next;
 	if (curr)
-		env_lst_delone(env, curr);
+		env_lst_delone(lst, curr);
 }

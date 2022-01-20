@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/19 16:35:09 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:26:20 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ static void	__nonumeric_err(char const *str)
 	g_exit_status = 2;
 }
 
+static int	__bye_bye(void)
+{
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+	exit(g_exit_status);
+	return (EXIT_FAILURE);
+}
+
 int	msh_exit(t_env_lst *const env, t_token *const token)
 {
 	char const	*print = env_lst_getone(env, "EXIT_DONT_PRINT");
@@ -71,6 +80,5 @@ int	msh_exit(t_env_lst *const env, t_token *const token)
 	if (token)
 		token_clear(token);
 	env_lst_clear(env);
-	exit(g_exit_status);
-	return (EXIT_SUCCESS);
+	return (__bye_bye());
 }

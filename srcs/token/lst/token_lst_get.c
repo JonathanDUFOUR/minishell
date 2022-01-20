@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:56:36 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 22:57:59 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:07:24 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void	__release_sed_resources(t_token_lst *const tokens)
 /*
 	Parse line to get tokens and store them into a list
 */
-int	token_lst_get(t_token_lst *const tokens, char const *line,
-	t_env_lst *const env)
+int	token_lst_get(t_token_lst *const tokens, t_env_lst *const env,
+	char const *line)
 {
 	t_token	*node;
 

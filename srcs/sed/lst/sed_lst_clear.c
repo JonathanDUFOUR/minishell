@@ -13,18 +13,18 @@
 #include "t_sed_lst.h"
 
 /*
-	Release all resources contained in a seds list
-	and update the list's data
+	Release all resources contained in the given sed `lst`
+	Update `lst` data accordingly
 */
-void	sed_lst_clear(t_sed_lst *const seds)
+void	sed_lst_clear(t_sed_lst *const lst)
 {
 	t_sed	*next;
 
-	while (seds->size)
+	while (lst->size)
 	{
-		next = seds->head->next;
-		sed_lst_delone(seds, seds->head);
-		seds->head = next;
+		next = lst->head->next;
+		sed_lst_delone(lst, lst->head);
+		lst->head = next;
 	}
-	seds->tail = NULL;
+	lst->tail = NULL;
 }
