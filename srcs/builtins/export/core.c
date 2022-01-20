@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/17 20:20:18 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:18:18 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static bool	__is_valid(const char *str)
 int	msh_export(t_env_lst *const env, t_token *const token)
 {
 	t_token const	*args = token->next;
+	int				ret_value;
 
+	ret_value = EXIT_SUCCESS;
 	if (!args)
 		return (__surprise());
 	if (args->type == T_OPTION)
@@ -75,6 +77,7 @@ int	msh_export(t_env_lst *const env, t_token *const token)
 			ft_putstr_fd("export: '", STDERR_FILENO);
 			ft_putstr_fd(args->str, STDERR_FILENO);
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+			ret_value = EXIT_FAILURE;
 		}
 		else
 		{
@@ -83,5 +86,5 @@ int	msh_export(t_env_lst *const env, t_token *const token)
 		}
 		args = args->next;
 	}
-	return (EXIT_SUCCESS);
+	return (ret_value);
 }

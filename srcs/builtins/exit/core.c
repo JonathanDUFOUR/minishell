@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:00 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 14:26:20 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:11:58 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	__multiple_arg_err(char const *str)
 	ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 	g_exit_status = EXIT_FAILURE;
 	ft_memdel(&str);
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 static void	__nonumeric_err(char const *str)

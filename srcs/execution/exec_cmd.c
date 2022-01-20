@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:20:31 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 10:14:33 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 17:10:06 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// DBG
+#include <stdio.h>
+
 #include "execution.h"
 #include "g_exit_status.h"
+#include "ft_string.h"
 
 /*
 	Execute the first command/builtin encountered from the given `token`
@@ -24,7 +28,6 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 {
 	t_token	*torun;
 
-	g_exit_status = 0;
 	torun = token;
 	while (torun
 		&& torun->type != T_COMMAND
@@ -33,9 +36,13 @@ int	exec_cmd(t_token_lst *const tokens, t_token *const token,
 		torun = torun->next;
 	if (torun && torun->type == T_PIPE)
 		torun = NULL;
+	if (!torun || ft_strcmp(torun->str, "exit"))
+		g_exit_status = 0;
 	if (redirect(tokens, token, data))
 		return (EXIT_FAILURE);
-	if (g_exit_status == 1 << 7 || g_exit_status == 127 || g_exit_status == 126)
+	if ((!torun || ft_strcmp(torun->str, "exit"))
+		&& (g_exit_status == 1 << 7 || g_exit_status == 127
+			|| g_exit_status == 126))
 	{
 		if (g_exit_status == 1 << 7)
 			g_exit_status = EXIT_FAILURE;
