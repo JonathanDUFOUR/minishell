@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:12 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 16:07:05 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:20:12 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ bool	__isdirectory(const char *pathname)
 		__attribute__((nonnull));
 int		__error_cd(const char *str)
 		__attribute__((nonnull));
+int		__error_chdir(const char *str, char *curpath)
+		__attribute__((nonnull (1)));
 
 char	*__getcdpath(t_env_lst *const env, char *directory,
 			bool *const is_cdpath)

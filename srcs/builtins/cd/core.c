@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:18:42 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 16:27:09 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:20:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,14 +132,7 @@ int	msh_cd(t_env_lst *const env, t_token *const token)
 	if (curpath == NULL)
 		return (EXIT_FAILURE);
 	if (chdir(curpath) == -1)
-	{
-		ft_putstr_fd("cd: ", STDERR_FILENO);
-		ft_putstr_fd(strerror(errno), STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putendl_fd(token->next->str, STDERR_FILENO);
-		free(curpath);
-		return (EXIT_FAILURE);
-	}
+		return (__error_chdir(token->next->str, curpath));
 	if (__updatepwd(env, curpath) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	free(curpath);

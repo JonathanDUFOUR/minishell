@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 18:02:35 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:39:01 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,31 @@ static int	__clear_quit(char const *prompt, char const *line,
 	return (ret);
 }
 
+static int	__process_one(t_env_lst *const env, char const *program,
+	t_token_lst *tokens, char const **line)
+{
+	char const	*prompt = NULL;
+
+	if (token_lst_get(tokens, env, *line))
+		return (__clear_quit(prompt, *line, tokens, EXIT_FAILURE));
+	if (**line)
+		add_history(*line);
+	ft_memdel(line);
+	if (token_lst_syntax_check(tokens, program))
+		g_exit_status = 2;
+	else if (token_lst_here_doc(tokens, env, program))
+		return (__clear_quit(prompt, *line, tokens, EXIT_FAILURE));
+	else if (g_exit_status == (1 << 7))
+		g_exit_status |= SIGINT;
+	else if (tokens->size && token_lst_exec(tokens, env, program))
+		return (__clear_quit(prompt, *line, tokens, EXIT_FAILURE));
+	token_lst_clear(tokens);
+	prompt = prompt_get(env, program);
+	*line = readline(prompt);
+	ft_memdel(&prompt);
+	return (EXIT_SUCCESS);
+}
+
 static int	__command_line(t_env_lst *const env, char const *program)
 {
 	t_token_lst	tokens;
@@ -37,26 +62,10 @@ static int	__command_line(t_env_lst *const env, char const *program)
 	char const	*line = readline(prompt);
 
 	ft_bzero(&tokens, sizeof(t_token_lst));
+	ft_memdel(&prompt);
 	while (line)
-	{
-		free((void *)prompt);
-		if (token_lst_get(&tokens, env, line))
-			return (__clear_quit(prompt, line, &tokens, EXIT_FAILURE));
-		if (*line)
-			add_history(line);
-		ft_memdel(&line);
-		if (token_lst_syntax_check(&tokens, program))
-			g_exit_status = 2;
-		else if (token_lst_here_doc(&tokens, env, program))
-			return (__clear_quit(prompt, line, &tokens, EXIT_FAILURE));
-		else if (g_exit_status == (1 << 7))
-			g_exit_status |= SIGINT;
-		else if (token_lst_exec(&tokens, env, program))
-			return (__clear_quit(prompt, line, &tokens, EXIT_FAILURE));
-		token_lst_clear(&tokens);
-		prompt = prompt_get(env, program);
-		line = readline(prompt);
-	}
+		if (__process_one(env, program, &tokens, &line))
+			return (EXIT_FAILURE);
 	return (__clear_quit(prompt, line, &tokens, EXIT_SUCCESS));
 }
 

@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_putone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 11:57:25 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 12:04:24 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:56:47 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// DBG
+#include <stdio.h>
 
 #include <stdlib.h>
 #include "t_env_lst.h"
@@ -30,7 +33,8 @@ static t_env	*__get_env_var(const char *str, t_env_lst *lst)
 	t_env	*node;
 
 	node = lst->head;
-	while (node && ft_strncmp(str, node->name, (ft_strchr(str, '=') - str)))
+	while (node && ft_strncmp(str, node->name,
+		(ft_strchr(node->name, '=') - node->name)))
 		node = node->next;
 	return (node);
 }

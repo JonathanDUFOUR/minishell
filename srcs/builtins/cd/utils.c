@@ -6,7 +6,7 @@
 /*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:19:40 by majacque          #+#    #+#             */
-/*   Updated: 2022/01/20 16:06:41 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:21:08 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,14 @@ char	*__error_getpwd(char *curpath)
 {
 	ft_memdel(&curpath);
 	return (NULL);
+}
+
+int	__error_chdir(const char *str, char *curpath)
+{
+	ft_putstr_fd("cd: ", STDERR_FILENO);
+	ft_putstr_fd(strerror(errno), STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(str, STDERR_FILENO);
+	free(curpath);
+	return (EXIT_FAILURE);
 }
