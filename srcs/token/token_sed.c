@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 18:16:40 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/20 21:02:30 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:08:53 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,13 @@ int	token_sed(t_token *const node)
 			if (__sed_squoted(node, ptr))
 				return (EXIT_FAILURE);
 		}
-		else
-		{
-			if (__sed_uquoted(node, ptr))
-				return (EXIT_FAILURE);
-		}
-		ptr += *ptr == '"' || *ptr == '\'';
+		else if (__sed_uquoted(node, ptr))
+			return (EXIT_FAILURE);
+		ptr += !!ft_strchr("\"'", *ptr);
 		ptr += ft_strlen(node->seds.tail->str);
-		ptr += (*ptr == '"' && node->seds.tail->type == DQUOTED)
-			|| (*ptr == '\'' && node->seds.tail->type == SQUOTED);
+		if ((*ptr == '"' && node->seds.tail->type == DQUOTED)
+			|| (*ptr == '\'' && node->seds.tail->type == SQUOTED))
+			++ptr;
 	}
 	return (EXIT_SUCCESS);
 }
