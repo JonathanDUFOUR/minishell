@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:13:06 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 09:54:51 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:14:18 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "t_pid_lst.h"
 
 /*
-	Wait for every pid contained in the given `lst`
+	Wait for every pid contained in the given pid `lst`
 	+
 	Restore the shell signals handling
 */

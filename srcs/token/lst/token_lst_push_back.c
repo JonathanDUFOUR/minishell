@@ -6,28 +6,28 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 18:40:08 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/08 19:29:59 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:37:27 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_token_lst.h"
 
 /*
-	Append `node` to the end of the tokens list
-	Update the list's data accordingly
+	Append the given token `node` to the end of the given token `lst`
+	Update `lst` data accordingly
 */
-void	token_lst_push_back(t_token_lst *const tokens, t_token *const node)
+void	token_lst_push_back(t_token_lst *const lst, t_token *const node)
 {
-	if (!tokens->size)
+	if (!lst->size)
 	{
-		tokens->head = node;
-		tokens->tail = node;
+		lst->head = node;
+		lst->tail = node;
 	}
 	else
 	{
-		node->prev = tokens->tail;
-		tokens->tail->next = node;
-		tokens->tail = node;
+		node->prev = lst->tail;
+		lst->tail->next = node;
+		lst->tail = node;
 	}
-	++tokens->size;
+	++lst->size;
 }

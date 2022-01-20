@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:45:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 09:34:14 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:45:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ static int	__error_msg(t_token const *const node, char const *program)
 }
 
 /*
-	Check the good syntax of the given list `tokens`
+	Check the good syntax of the given token `lst`
 	Print an error message on the first syntax error encountered
 */
-int	token_lst_syntax_check(t_token_lst *const tokens, char const *program)
+int	token_lst_syntax_check(t_token_lst *const lst, char const *program)
 {
-	t_token const	*curr = tokens->head;
+	t_token const	*curr = lst->head;
 
 	while (curr)
 	{
-		if (curr == tokens->head && curr->type == T_PIPE)
+		if (curr == lst->head && curr->type == T_PIPE)
 			return (__error_msg(curr, program));
-		else if ((curr == tokens->tail
+		else if ((curr == lst->tail
 				&& (curr->type == T_PIPE
 					|| curr->type == T_REDIRECTIN
 					|| curr->type == T_REDIRECTOUT))

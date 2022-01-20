@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 02:52:58 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/08 03:03:53 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:48:10 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static void	__option_or_argument(t_token *const node)
 	Determine which words are T_COMMAND, which ones are T_BUILTIN,
 	which ones are T_OPTION, and which ones are T_ARGUMENT
 */
-void	token_lst_which_word(t_token_lst *const tokens)
+void	token_lst_which_word(t_token_lst *const lst)
 {
 	t_token	*curr;
 	bool	cmd;
 
-	curr = tokens->head;
+	curr = lst->head;
 	cmd = false;
 	while (curr)
 	{

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:16 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 10:06:10 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:08:01 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "t_pid_lst.h"
 
 /*
-	Release the resources of the given `lst`
+	Release all resources of the given pid `lst`
 */
 void	pid_lst_clear(t_pid_lst *const lst)
 {

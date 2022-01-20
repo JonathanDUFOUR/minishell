@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:26 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 10:07:01 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:08:33 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "t_pid_lst.h"
 
 /*
-	Release the resources of the given `node`
-	Update the env list data accordingly
+	Release the resources of the given pid `node`
+	Update the pid `lst` data accordingly
 */
 void	pid_lst_delone(t_pid_lst *const lst, t_pid *const node)
 {

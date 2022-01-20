@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 18:32:23 by jodufour          #+#    #+#             */
-/*   Updated: 2021/12/14 03:37:48 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:51:12 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 #include "lookup_operator.h"
 
 /*
-	Determine which tokens are T_WORD and which ones are T_OPERATOR
+	Determine which token nodes are T_WORD and which ones are T_OPERATOR
 	Also determine the type of the next node of a T_OPERATOR
 	depending on which operator it is
 */
-void	token_lst_word_or_operator(t_token_lst *const tokens)
+void	token_lst_word_or_operator(t_token_lst *const lst)
 {
 	t_token	*curr;
 	int		i;
 
-	curr = tokens->head;
+	curr = lst->head;
 	while (curr)
 	{
 		i = 0;

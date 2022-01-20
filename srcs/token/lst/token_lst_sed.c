@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 17:37:30 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/15 01:51:32 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:39:31 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "t_token_lst.h"
 
 /*
-	Sed the str of each token in the given tokens list
+	Sed the str of each token node contained in the given token `lst`
 */
-int	token_lst_sed(t_token_lst *const tokens)
+int	token_lst_sed(t_token_lst *const lst)
 {
 	t_token	*curr;
 
-	curr = tokens->head;
+	curr = lst->head;
 	while (curr)
 	{
 		if (curr->type != T_PIPE

@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 01:10:46 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 10:37:15 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:01:13 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "lookup_token_type_name.h"
 
 /*
-	Print the given `node` data
+	Print the given token `node` data
 */
 void	token_print(t_token const *const node)
 {

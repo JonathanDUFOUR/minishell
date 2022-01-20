@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:35 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 09:57:39 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:06:50 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "g_exit_status.h"
 
 /*
-	Wait for the pid contained in the given `node`
+	Wait for the id contained in the given pid `node`
 */
 int	pid_wait(t_pid const *const node)
 {

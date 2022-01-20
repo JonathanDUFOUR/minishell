@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 23:16:40 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 10:08:00 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:13:36 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "t_pid_lst.h"
 
 /*
-	Send the given signal `sig` to every pid contained in the given `lst`
+	Send the given signal `sig` to every `id` contained in the given pid `lst`
 */
 int	pid_lst_kill(t_pid_lst *const lst, int const sig)
 {
