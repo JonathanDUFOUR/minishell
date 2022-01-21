@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_syntax_check.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
+/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:45:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/21 01:25:57 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:38:06 by majacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	token_lst_syntax_check(t_token_lst *const lst, char const *program)
 			|| (curr->type == T_REDIRECTIN
 				&& curr->next->type != T_FILE
 				&& curr->next->type != T_DELIMITER)
-			|| (curr->type == T_REDIRECTOUT
-				&& curr->next->type != T_FILE)
-			|| (curr->type == T_FILE && curr->next->type == T_FILE))
+			|| (curr->type == T_REDIRECTOUT && curr->next->type != T_FILE)
+			|| (curr->type == T_FILE
+				&& curr->next && curr->next->type == T_FILE))
 			return (__error_msg(curr->next, program));
 		curr = curr->next;
 	}
