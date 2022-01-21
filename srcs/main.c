@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:11:21 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 18:39:01 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:10:30 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	__process_one(t_env_lst *const env, char const *program,
 		add_history(*line);
 	ft_memdel(line);
 	if (token_lst_syntax_check(tokens, program))
-		g_exit_status = 2;
+		;
 	else if (token_lst_here_doc(tokens, env, program))
 		return (__clear_quit(prompt, *line, tokens, EXIT_FAILURE));
 	else if (g_exit_status == (1 << 7))

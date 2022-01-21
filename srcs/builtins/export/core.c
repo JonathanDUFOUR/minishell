@@ -3,40 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majacque <majacque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 11:19:04 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 18:57:22 by majacque         ###   ########.fr       */
+/*   Updated: 2022/01/20 23:25:22 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* surprise */
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-/* ******** */
 #include <stdio.h>
 #include "ft_io.h"
 #include "ft_string.h"
 #include "minishell.h"
-
-int	__surprise(void)
-{
-	char	*line;
-	int		fd;
-
-	fd = open("srcs/builtins/export/surprise", O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	if (line)
-		printf("%s\n", line);
-	free(line);
-	close(fd);
-	return (EXIT_SUCCESS);
-}
+#include "surprise.h"
 
 static bool	__is_valid(const char *str)
 {
@@ -67,7 +45,7 @@ int	msh_export(t_env_lst *const env, t_token *const token)
 
 	ret_value = EXIT_SUCCESS;
 	if (!args)
-		return (__surprise());
+		return (printf(g_surprise), EXIT_SUCCESS);
 	if (args->type == T_OPTION)
 		return (error_option("export: ", args->str));
 	while (args && args->type == T_ARGUMENT)

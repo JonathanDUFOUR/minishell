@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 20:24:40 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 14:42:23 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/20 22:42:32 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,15 @@ static int	__update(t_token_lst *const lst, t_token *const node,
 static int	__split(t_token_lst *const lst, t_token *const node,
 	t_sed *const sed, char const *ptr)
 {
-	t_token *const	next = token_new(NULL, T_WORD, (t_sed_lst){0});
+	t_token *const	next = token_new(NULL, node->type, (t_sed_lst){0});
 	t_sed *const	cut = sed_new(NULL, UQUOTED);
 	char const		*str0 = ft_strdup(ptr);
 	char const		*str1 = ft_strndup(sed->str,
 			ft_strchr(sed->str, ' ') - sed->str);
 
 	if (!next || !cut || !str0 || !str1)
-	{
-		ft_memdel((void *)&next);
-		ft_memdel((void *)&cut);
-		ft_memdel(&str0);
-		ft_memdel(&str1);
-		return (EXIT_FAILURE);
-	}
+		return (ft_memdel((void *)&next), ft_memdel((void *)&cut),
+			ft_memdel(&str0), ft_memdel(&str1), EXIT_FAILURE);
 	free((void *)sed->str);
 	cut->str = str0;
 	cut->next = sed->next;
