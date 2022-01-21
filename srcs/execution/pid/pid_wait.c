@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 19:12:35 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 15:06:50 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/21 01:23:59 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	pid_wait(t_pid const *const node)
 		g_exit_status = (1 << 7) | WTERMSIG(status);
 		if (g_exit_status == ((1 << 7) | SIGQUIT)
 			&& ft_putstr_fd("Quit (core dumped)\n", STDERR_FILENO) == -1)
+			return (EXIT_FAILURE);
+		else if (g_exit_status == ((1 << 7) | SIGSEGV)
+			&& ft_putstr_fd("Segmentation fault (core dumped)\n", STDERR_FILENO)
+			== -1)
 			return (EXIT_FAILURE);
 		else if (g_exit_status == ((1 << 7) | SIGINT)
 			&& ft_putchar_fd('\n', STDERR_FILENO) == -1)

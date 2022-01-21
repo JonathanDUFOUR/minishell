@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:45:15 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 14:45:22 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/01/21 01:25:57 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@
 
 static int	__error_msg(t_token const *const node, char const *program)
 {
-	g_exit_status = 2;
+	g_exit_status = EXIT_FAILURE;
 	ft_putstr_fd(program, STDERR_FILENO);
-	ft_putstr_fd(": syntax error near unexpected token `", STDERR_FILENO);
-	if (node)
-		ft_putstr_fd(node->str, STDERR_FILENO);
+	if (node && node->type == T_FILE)
+		ft_putstr_fd(": ambigous redirect\n", STDERR_FILENO);
 	else
-		ft_putstr_fd("newline", STDERR_FILENO);
-	ft_putstr_fd("'\n", STDERR_FILENO);
+	{
+		ft_putstr_fd(": syntax error near unexpected token `", STDERR_FILENO);
+		if (node)
+			ft_putstr_fd(node->str, STDERR_FILENO);
+		else
+			ft_putstr_fd("newline", STDERR_FILENO);
+		ft_putstr_fd("'\n", STDERR_FILENO);
+		g_exit_status = 2;
+	}
 	return (EXIT_FAILURE);
 }
 
@@ -53,7 +59,8 @@ int	token_lst_syntax_check(t_token_lst *const lst, char const *program)
 				&& curr->next->type != T_FILE
 				&& curr->next->type != T_DELIMITER)
 			|| (curr->type == T_REDIRECTOUT
-				&& curr->next->type != T_FILE))
+				&& curr->next->type != T_FILE)
+			|| (curr->type == T_FILE && curr->next->type == T_FILE))
 			return (__error_msg(curr->next, program));
 		curr = curr->next;
 	}
