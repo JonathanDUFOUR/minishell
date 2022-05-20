@@ -6,22 +6,22 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/24 11:10:02 by jodufour          #+#    #+#              #
-#    Updated: 2022/01/20 16:53:11 by jodufour         ###   ########.fr        #
+#    Updated: 2022/05/19 03:20:00 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC					=	clang -c -o
-LINK				=	clang -o
+CC					=	clang
+LINK				=	clang
 MKDIR				=	mkdir -p
 RM					=	rm -rf
 
 ######################################
 #             EXECUTABLE             #
 ######################################
-NAME				=	minishell
+NAME				=	minishell.out
 
 #######################################
 #             DIRECTORIES             #
@@ -206,7 +206,8 @@ DEP				=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-c
+CFLAGS			+=	-Wall -Wextra -Werror
 CFLAGS			+=	-MMD -MP
 CFLAGS			+=	-I${PRV_DIR}
 CFLAGS			+=	-I${FT_IO_INC_DIR}
@@ -223,8 +224,10 @@ endif
 #######################################
 #                RULES                #
 #######################################
+.PHONY: all clean fclean re fre
+
 ${NAME}: ${OBJ} ${FT_IO_A} ${FT_STRING_A}
-	${LINK} $@ ${OBJ} ${LDFLAGS}
+	${LINK} ${OBJ} ${LDFLAGS} ${OUTPUT_OPTION}
 
 all: ${NAME}
 
@@ -232,12 +235,9 @@ all: ${NAME}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${MKDIR} ${@D}
-	${CC} $@ ${CFLAGS} $<
+	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 
-${FT_IO_A}:
-	${MAKE} ${@F} -C ${@D}
-
-${FT_STRING_A}:
+${FT_IO_A} ${FT_STRING_A}:
 	${MAKE} ${@F} -C ${@D}
 
 clean:
@@ -252,9 +252,7 @@ re: clean all
 
 fre: fclean all
 
--include coffee.mk
--include norm.mk
 -include valgrind.mk
 -include update.mk
-
-.PHONY: all clean fclean re fre
+-include ${HOME}/Templates/mk_files/coffee.mk
+-include ${HOME}/Templates/mk_files/norm.mk
