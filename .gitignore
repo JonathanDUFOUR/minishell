@@ -2,6 +2,6 @@
 **.o
 **.d
 **.so
-minishell
+**.out
 .vscode/
 testfiles/

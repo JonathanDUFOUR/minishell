@@ -6,7 +6,7 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:39:49 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/21 01:26:06 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/10/06 18:42:43 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static char	*__get_pwd(t_env_lst *const env)
 	if (home && pwd)
 	{
 		if (ft_strncmp(home, pwd, ft_strlen(home)))
-			output = msh_str3join(" " GREEN, pwd, RESET " ");
+			output = msh_str3join(" " GREEN_FG, pwd, RESET " ");
 		else
-			output = msh_str3join(" "GREEN"~", pwd + ft_strlen(home), RESET" ");
+			output = msh_str3join(" "GREEN_FG"~", pwd + ft_strlen(home), RESET" ");
 	}
 	return (output);
 }
@@ -44,9 +44,9 @@ static char	*__get_status(void)
 		return (NULL);
 	tmp = output;
 	if (g_exit_status)
-		output = msh_str3join("["RED, output, RESET"]" "> ");
+		output = msh_str3join("["RED_FG, output, RESET"]" "> ");
 	else
-		output = msh_str3join("["CYAN, output, RESET"]" "> ");
+		output = msh_str3join("["CYAN_FG, output, RESET"]" "> ");
 	ft_memdel(&tmp);
 	return (output);
 }

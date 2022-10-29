@@ -6,14 +6,14 @@
 /*   By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 14:24:26 by jodufour          #+#    #+#             */
-/*   Updated: 2022/01/20 11:31:58 by jodufour         ###   ########.fr       */
+/*   Updated: 2022/10/29 06:58:46 by jodufour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_TOKEN_H
 # define T_TOKEN_H
 
-# include "type/t_int.h"
+# include "t_int.h"
 # include "t_env_lst.h"
 # include "t_sed_lst.h"
 # include "t_token_type.h"
